@@ -22,10 +22,13 @@
     <string name="delete">删除</string>
     <string name="all_select">全选</string>
 
+    <!--Big Card Today-->
     <string name="today_budget">今日收支</string>
     <string name="balance_money">结余：6666￥</string>
     <string name="income_today">180.5￥</string>
     <string name="expense_today">200.0￥</string>
+
+    <!--Account List Item Today-->
     <string name="hour_minute">16:57</string>
     <string name="money_type">网购</string>
     <string name="note">买了三件衣服</string>

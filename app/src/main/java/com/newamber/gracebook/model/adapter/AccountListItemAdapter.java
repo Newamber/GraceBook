@@ -21,12 +21,12 @@ import java.util.List;
  * Created by Newamber on 2017/4/28.
  */
 @SuppressWarnings("all")
-public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.ViewHolder> {
+public class AccountListItemAdapter extends RecyclerView.Adapter<AccountListItemAdapter.ViewHolder> {
 
     private List<AccountTable> mAccountTableList;
     private Context mContext;
 
-    public AccountListAdapter(List<AccountTable> accountTableslist) {
+    public AccountListItemAdapter(List<AccountTable> accountTableslist) {
         mAccountTableList = accountTableslist;
     }
 
