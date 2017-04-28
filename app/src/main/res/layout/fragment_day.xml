@@ -82,7 +82,9 @@
                     android:textColor="@color/colorWhiteTextOrIcon"
                     android:textSize="@dimen/hint_little_word"/>
             </android.support.v7.widget.CardView>
+
         </RelativeLayout>
+        
     </android.support.v7.widget.CardView>
 
     <com.tomer.fadingtextview.FadingTextView
