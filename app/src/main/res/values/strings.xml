@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Grace Book</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- NavigationView-->
+    <string name="like">好评</string>
+    <string name="share">分享</string>
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+    <string name="donation">捐赠</string>
+    <string name="this_is_a_background">这是一片背景.</string>
+    <string name="remind_time">记账时间：</string>
+
+    <!--Toolbar Main-->
+    <string name="search">搜索</string>
+    <string name="delete_all">删除全部账目</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="edit_book_name">更改账本名字</string>
+    <string name="exit_app">退出程序</string>
+    <string name="delete">删除</string>
+    <string name="all_select">全选</string>
+
+    <string name="today_budget">今日收支</string>
+    <string name="balance_money">结余：6666￥</string>
+    <string name="income_today">180.5￥</string>
+    <string name="expense_today">200.0￥</string>
+    <string name="hour_minute">16:57</string>
+    <string name="money_type">网购</string>
+    <string name="note">买了三件衣服</string>
+    <string name="amount">892.5￥</string>
+
+    <!--ViewPager Title-->
+    <string-array name="viewpager_title">
+        <item>今日</item>
+        <item>流水</item>
+        <item>图表</item>
+    </string-array>
+
+    <!--FadingText-->
+    <string-array name="fading_text">
+        <item>2017年4月28日</item>
+        <item>祝您有个好心情~</item>
+        <item>今天您记账了吗？</item>
+    </string-array>
+
+</resources>

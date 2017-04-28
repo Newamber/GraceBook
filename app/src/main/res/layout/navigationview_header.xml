@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:background="@color/colorPrimary"
+              android:layout_height="240dp">
+    <ImageView
+        android:id="@+id/imageview_navigation_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_navigationview"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/this_is_a_background"/>
+
+    <TextView
+        android:id="@+id/textview_navigationview_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/standard_margin"
+        android:textColor="@color/colorWhiteTextOrIcon"
+        android:textSize="14sp"
+        android:text="@string/remind_time"/>
+</RelativeLayout>

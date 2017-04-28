@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standard_margin">16dp</dimen>
+    <dimen name="basic_margin">8dp</dimen>
+
+    <dimen name="hint_little_word">12sp</dimen>
+    <dimen name="text_main">14sp</dimen>
+    <dimen name="title_little">16sp</dimen>
+    <dimen name="title_appbar">20sp</dimen>
+    <dimen name="title_big">24sp</dimen>
+    <dimen name="money_today">30sp</dimen>
+
+
+</resources>

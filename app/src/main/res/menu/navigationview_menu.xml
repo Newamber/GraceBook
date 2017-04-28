@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigationview_like"
+            android:icon="@drawable/ic_navigationview_like"
+            android:title="@string/like" />
+        <item
+            android:id="@+id/navigationview_share"
+            android:icon="@drawable/ic_navigationview_share"
+            android:title="@string/share" />
+        <item
+            android:id="@+id/navigationview_settings"
+            android:icon="@drawable/ic_navigationview_settings"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/navigationview_donation"
+            android:icon="@drawable/ic_navigationview_donation"
+            android:title="@string/donation" />
+        <item
+            android:id="@+id/navigationview_about"
+            android:icon="@drawable/ic_navigationview_about"
+            android:title="@string/about" />
+    </group>
+</menu>

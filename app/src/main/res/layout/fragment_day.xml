@@ -1,0 +1,104 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.newamber.gracebook.view.fragment.DayFragment">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_big"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/basic_margin"
+        app:cardBackgroundColor="#4da787"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="6dp">
+
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:id="@+id/textview_today_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/basic_margin"
+                android:text="@string/today_budget"
+                android:textSize="@dimen/title_big"
+                android:textColor="@color/colorWhiteTextOrIcon"/>
+
+            <View
+                android:id="@+id/view_vertical_line"
+                android:layout_height="120dp"
+                android:layout_width="3dp"
+                android:background="@color/colorWhiteTextOrIcon"
+                android:layout_below="@id/textview_today_budget"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/standard_margin"/>
+
+            <TextView
+                android:id="@+id/textview_today_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/view_vertical_line"
+                android:layout_margin="@dimen/standard_margin"
+                android:text="@string/income_today"
+                android:textSize="@dimen/money_today"
+                android:textColor="@color/colorIncome"/>
+
+            <TextView
+                android:id="@+id/textview_today_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/view_vertical_line"
+                android:layout_margin="@dimen/standard_margin"
+                android:text="@string/expense_today"
+                android:textSize="@dimen/money_today"
+                android:textColor="@color/colorExpense"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/basic_margin"
+                app:cardBackgroundColor="@color/colorWhiteDivider"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/textview_today_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/basic_margin"
+                    android:text="@string/balance_money"
+                    android:textColor="@color/colorWhiteTextOrIcon"
+                    android:textSize="@dimen/hint_little_word"/>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <com.tomer.fadingtextview.FadingTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/text_main"
+        android:layout_margin="@dimen/basic_margin"
+        app:timeout="4000"
+        app:texts="@array/fading_text"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_day"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/basic_margin"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+</LinearLayout>

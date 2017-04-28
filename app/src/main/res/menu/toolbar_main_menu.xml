@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/toolbar_main_editbookname"
+        android:visible="false"
+        android:title="@string/edit_book_name"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/toolbar_main_settings"
+        android:visible="false"
+        android:title="@string/settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/toolbar_main_delete"
+        android:title="@string/delete"
+        android:icon="@drawable/ic_toolbar_delete"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/toolbar_main_all_select"
+        android:title="@string/all_select"
+        android:icon="@drawable/ic_toolbar_all_select"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <group android:id="@+id/toolbar_group_stream">
+        <item
+            android:id="@+id/toolbar_main_search"
+            android:icon="@drawable/ic_toolbar_search"
+            android:visible="false"
+            android:title="@string/search"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/toolbar_main_delete_all"
+            android:title="@string/delete_all"
+            android:visible="false"
+            app:showAsAction="never" />
+    </group>
+
+    <item
+        android:id="@+id/toolbar_main_exit"
+        android:visible="true"
+        android:title="@string/exit_app"
+        app:showAsAction="never" />
+</menu>

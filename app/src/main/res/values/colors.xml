@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Base color-->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccentRipple">#930d3b</color>
+
+    <!--White Text Part-->
+    <color name="colorWhiteDivider">#1fffffff</color>
+    <color name="colorWhiteHintText">#4dffffff</color>
+    <color name="colorWhiteSecondaryText">#b3ffffff</color>
+    <color name="colorWhiteTextOrIcon">#ffffff</color>
+
+    <!--Black Text Part-->
+    <color name="colorBlackDivider">#1fffffff</color>
+    <color name="colorBlackHintText">#42000000</color>
+    <color name="colorBlackSecondaryText">#8a000000</color>
+    <color name="colorBlackTextOrIcon">#000000</color>
+
+    <!--Income and Expense-->
+    <color name="colorIncome">#1a8c99</color>
+    <color name="colorExpense">#f26049</color>
+</resources>
