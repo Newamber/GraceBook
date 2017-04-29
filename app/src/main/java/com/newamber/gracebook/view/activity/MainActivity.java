@@ -2,11 +2,11 @@ package com.newamber.gracebook.view.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -17,8 +17,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BasePresenter;
@@ -48,6 +50,8 @@ public class MainActivity extends BaseActivity {
     private FloatingActionButton fab;
     private List<Fragment> fragmentList;
 
+    private ImageView mImageViewHeader;
+
     // State bit to control the fab's appearance.
     private boolean isFromFirstTab;
 
@@ -59,11 +63,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public void processClick(View v) {
         switch (v.getId()) {
-            case R.id.fab_record:
-                Snackbar.make(v, "fab",  Snackbar.LENGTH_SHORT)
-                        .setAction("Undo", v1 ->
-                                Toast.makeText(this, "fab", Toast.LENGTH_SHORT).show()).show();
-                break;
+            case R.id.fab_add:
+                startActivity(new Intent(this, AddAccountActivity.class));
             default:
                 break;
         }
@@ -78,9 +79,12 @@ public class MainActivity extends BaseActivity {
         mToolbarMain = (Toolbar) findViewById(R.id.toolbar_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-        fab = (FloatingActionButton) findViewById(R.id.fab_record);
+        fab = (FloatingActionButton) findViewById(R.id.fab_add);
         mTabLayout = (TabLayout) findViewById(R.id.tablayout_main);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        View navigationHeaderView = mNavigationView.getHeaderView(0);
+        mImageViewHeader = (ImageView) navigationHeaderView.findViewById(R.id.imageview_navigation_header);
+        Glide.with(this).load(R.drawable.bg_navigationview).into(mImageViewHeader);
 
         // --------------------------setOnClickListener---------------------------------------------
         fab.setOnClickListener(this);
@@ -175,7 +179,7 @@ public class MainActivity extends BaseActivity {
 
     // The activity has no business logic so there is no presenter.
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter getAttachedPresenter() {
         return null;
     }
 

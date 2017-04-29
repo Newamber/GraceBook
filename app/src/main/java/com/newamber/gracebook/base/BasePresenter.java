@@ -13,25 +13,25 @@ import java.lang.ref.WeakReference;
 @SuppressWarnings("all")
 public abstract class BasePresenter<V> {
 
-    private Reference<V> mViewWeakReference;
+    private Reference<V> attachedView;
 
     public void attachView(V view) {
-        mViewWeakReference = new WeakReference<>(view);
+        attachedView = new WeakReference<>(view);
     }
 
     public void detachView() {
-        if (mViewWeakReference != null) {
-            mViewWeakReference.clear();
-            mViewWeakReference = null;
+        if (attachedView != null) {
+            attachedView.clear();
+            attachedView = null;
         }
     }
 
     protected V getView() {
-        return  mViewWeakReference.get();
+        return  attachedView.get();
     }
 
     protected boolean isViewAttached() {
-        return mViewWeakReference != null && mViewWeakReference.get() != null;
+        return attachedView != null && attachedView.get() != null;
     }
 
 }

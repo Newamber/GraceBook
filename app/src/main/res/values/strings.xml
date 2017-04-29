@@ -31,8 +31,13 @@
     <!--Account List Item Today-->
     <string name="hour_minute">16:57</string>
     <string name="money_type">网购</string>
-    <string name="note">买了三件衣服</string>
+    <string name="note_list_item">买了三件衣服</string>
     <string name="amount">892.5￥</string>
+
+    <!--AddAccountActivity-->
+    <string name="record_an_account">记一笔账</string>
+    <string name="hint_amount">收支金额</string>
+    <string name="hint_note">摘要</string>
 
     <!--ViewPager Title-->
     <string-array name="viewpager_title">
@@ -43,7 +48,7 @@
 
     <!--FadingText-->
     <string-array name="fading_text">
-        <item>2017年4月28日</item>
+        <item>2017年4月28日，星期五</item>
         <item>祝您有个好心情~</item>
         <item>今天您记账了吗？</item>
     </string-array>

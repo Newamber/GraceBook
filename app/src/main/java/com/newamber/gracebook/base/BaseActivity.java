@@ -18,7 +18,7 @@ import com.newamber.gracebook.util.ActivityCollectorUtil;
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity
         implements View.OnClickListener {
 
-    protected T mPresenter;
+    protected T attachedPresenter;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -26,8 +26,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onCreate(savedInstanceState);
         initView();
         ActivityCollectorUtil.addActivity(this);
-        mPresenter = getPresenter();
-        if (mPresenter != null) mPresenter.attachView((V) this);
+        attachedPresenter = getAttachedPresenter();
+        if (attachedPresenter != null) attachedPresenter.attachView((V) this);
     }
 
     /**
@@ -53,13 +53,13 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      *
      * @return A presenter that implements BasePresenter.
      */
-    protected abstract T getPresenter();
+    protected abstract T getAttachedPresenter();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ActivityCollectorUtil.removeActivity(this);
         // Detach the presenter from this Activity.
-        if (mPresenter != null) mPresenter.detachView();
+        if (attachedPresenter != null) attachedPresenter.detachView();
     }
 }

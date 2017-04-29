@@ -59,16 +59,16 @@
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_record"
+            android:id="@+id/fab_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/standard_margin"
+            android:src="@drawable/ic_fab_add"
             app:fabSize="normal"
             app:elevation="6dp"
             app:backgroundTintMode="multiply"
-            app:rippleColor="@color/colorAccentRipple"
-            android:src="@drawable/ic_fab_add"/>
+            app:rippleColor="@color/colorAccentRipple"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

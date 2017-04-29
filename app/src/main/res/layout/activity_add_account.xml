@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.newamber.gracebook.view.activity.AddAccountActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_add_account"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:navigationIcon="@drawable/ic_toolbar_back"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:elevation="2dp"
+            app:title="@string/record_an_account"
+            app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview_add_account"
+            android:layout_width="match_parent"
+            android:layout_height="480dp"
+            android:layout_margin="@dimen/basic_margin"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:hint="@string/hint_amount"
+                    app:hintAnimationEnabled="true"
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/edit_text_amount"
+                        android:labelFor="@id/edit_text_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:layout_below="@id/text_input_layout_amount"
+                    android:hint="@string/hint_note"
+                    app:hintAnimationEnabled="true"
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/edit_text_note"
+                        android:labelFor="@id/edit_text_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textShortMessage"
+                        android:maxLines="1"/>
+
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:src="@drawable/ic_fab_done"
+        app:fabSize="normal"
+        app:elevation="6dp"
+        app:backgroundTintMode="multiply"
+        app:rippleColor="@color/colorAccentRipple"
+        app:layout_anchor="@id/cardview_add_account"
+        app:layout_anchorGravity="bottom|end"/>
+
+
+</android.support.design.widget.CoordinatorLayout>

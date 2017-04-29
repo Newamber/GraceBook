@@ -51,7 +51,7 @@
             android:layout_weight="3"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/basic_margin"
-            android:text="@string/note"
+            android:text="@string/note_list_item"
             android:textColor="@color/colorBlackSecondaryText"
             android:textSize="@dimen/text_main"/>
 

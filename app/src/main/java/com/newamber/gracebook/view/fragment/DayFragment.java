@@ -2,6 +2,7 @@ package com.newamber.gracebook.view.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.newamber.gracebook.R;
 public class DayFragment extends Fragment {
 
 
+
     public DayFragment() {
         // Required empty public constructor
     }
@@ -28,4 +30,8 @@ public class DayFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_day, container, false);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 }
