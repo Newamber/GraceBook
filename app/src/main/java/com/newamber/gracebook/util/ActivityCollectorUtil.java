@@ -34,6 +34,7 @@ public class ActivityCollectorUtil {
      * Destroy all Activities.
      *
      */
+    @SuppressWarnings("all")
     public static void finishAllActivity() {
         for (Activity activity : sActivityList) {
             if (! activity.isFinishing()) activity.finish();

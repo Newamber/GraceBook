@@ -10,13 +10,14 @@
             android:icon="@drawable/ic_navigationview_share"
             android:title="@string/share" />
         <item
-            android:id="@+id/navigationview_settings"
-            android:icon="@drawable/ic_navigationview_settings"
-            android:title="@string/settings" />
-        <item
             android:id="@+id/navigationview_donation"
             android:icon="@drawable/ic_navigationview_donation"
             android:title="@string/donation" />
+        <item
+            android:id="@+id/navigationview_settings"
+            android:icon="@drawable/ic_navigationview_settings"
+            android:title="@string/settings" />
+
         <item
             android:id="@+id/navigationview_about"
             android:icon="@drawable/ic_navigationview_about"

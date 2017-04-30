@@ -63,7 +63,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/basic_margin"
             android:gravity="center_horizontal"
-            android:text="@string/amount"
+            android:text="@string/amount_item"
             android:textColor="@color/colorExpense"
             android:textSize="@dimen/text_main"/>
 

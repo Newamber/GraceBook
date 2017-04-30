@@ -55,12 +55,15 @@
                 android:id="@+id/textview_today_expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/view_vertical_line"
-                android:layout_margin="@dimen/standard_margin"
                 android:text="@string/expense_today"
                 android:textSize="@dimen/money_today"
-                android:textColor="@color/colorExpense"/>
+                android:textColor="@color/colorExpense"
+                android:layout_marginLeft="@dimen/standard_margin"
+                android:layout_marginRight="@dimen/standard_margin"
+                android:layout_alignBaseline="@+id/textview_today_income"
+                android:layout_alignBottom="@+id/textview_today_income"
+                android:layout_toEndOf="@+id/view_vertical_line"
+                android:layout_marginStart="16dp"/>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardview_balance"
