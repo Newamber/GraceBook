@@ -36,7 +36,7 @@
 
     <!--AddAccountActivity-->
     <string name="record_an_account">记一笔账</string>
-    <string name="hint_amount">收支金额</string>
+    <string name="hint_amount">金额</string>
     <string name="hint_note">摘要</string>
 
     <!--ViewPager Title-->
