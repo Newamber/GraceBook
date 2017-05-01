@@ -37,7 +37,7 @@ public class AccountListItemAdapter extends RecyclerView.Adapter<AccountListItem
         public ViewHolder(View v) {
             super(v);
             mTextViewHourMin = (TextView) v.findViewById(R.id.textview_hour_minute);
-            mTextViewMoneyType = (TextView) v.findViewById(R.id.textview_money_type);
+            mTextViewMoneyType = (TextView) v.findViewById(R.id.textView_moneyType);
             mTextViewNote = (TextView) v.findViewById(R.id.textview_note);
             mTextViewAmount = (TextView) v.findViewById(R.id.textview_amount);
             mImageViewMoneyType = (ImageView) v.findViewById(R.id.imageview_money_type);

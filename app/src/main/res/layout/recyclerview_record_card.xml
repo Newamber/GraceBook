@@ -34,7 +34,7 @@
             android:contentDescription="@string/money_type"/>
 
         <TextView
-            android:id="@+id/textview_money_type"
+            android:id="@+id/textView_moneyType"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"

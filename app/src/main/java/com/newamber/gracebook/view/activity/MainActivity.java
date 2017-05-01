@@ -36,23 +36,27 @@ import java.util.List;
 public class MainActivity extends BaseActivity {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.activity_main;
+
     @SuppressWarnings("all")
     private Toolbar mToolbarMain;
+
     private DrawerLayout mDrawerLayout;
+
     @SuppressWarnings("all")
     private ActionBarDrawerToggle mActionBarDrawerToggle;
+
     @SuppressWarnings("all")
     private NavigationView mNavigationView;
+
     @SuppressWarnings("all")
     private TabLayout mTabLayout;
+
     @SuppressWarnings("all")
     private ViewPager mViewPager;
-    private FloatingActionButton fab;
-    private List<Fragment> fragmentList;
 
-    private ImageView mImageViewHeader;
+    private FloatingActionButton fabAdd;
 
-    // State bit to control the fab's appearance.
+    // State bit to control the fabAdd's appearance.
     private boolean isFromFirstTab;
 
     @Override
@@ -79,15 +83,16 @@ public class MainActivity extends BaseActivity {
         mToolbarMain = (Toolbar) findViewById(R.id.toolbar_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-        fab = (FloatingActionButton) findViewById(R.id.fab_add);
+        fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
         mTabLayout = (TabLayout) findViewById(R.id.tablayout_main);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         View navigationHeaderView = mNavigationView.getHeaderView(0);
-        mImageViewHeader = (ImageView) navigationHeaderView.findViewById(R.id.imageview_navigation_header);
-        Glide.with(this).load(R.drawable.bg_navigationview).into(mImageViewHeader);
+        ImageView imageViewHeader = (ImageView) navigationHeaderView
+                .findViewById(R.id.imageview_navigation_header);
+        Glide.with(this).load(R.drawable.bg_navigationview).into(imageViewHeader);
 
         // --------------------------setOnClickListener---------------------------------------------
-        fab.setOnClickListener(this);
+        fabAdd.setOnClickListener(this);
 
         // --------------------------Toolbar&DrawerLayout-------------------------------------------
         setSupportActionBar(mToolbarMain);
@@ -95,6 +100,7 @@ public class MainActivity extends BaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
+        // Set an animated toolbar navigation icon.
         mActionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
@@ -113,7 +119,7 @@ public class MainActivity extends BaseActivity {
                     Toast.makeText(MainActivity.this, "like", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigationview_settings:
-                    Toast.makeText(MainActivity.this, "settings", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                     break;
                 case R.id.navigationview_donation:
                     Toast.makeText(MainActivity.this, "donation", Toast.LENGTH_SHORT).show();
@@ -131,8 +137,8 @@ public class MainActivity extends BaseActivity {
             return false;
         });
 
-        // ---------------------------TabLayout&ViewPager---------------------------------
-        fragmentList = new ArrayList<>();
+        // ------------------------------TabLayout&ViewPager----------------------------------------
+        List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new DayFragment());
         fragmentList.add(new StreamFragment());
         fragmentList.add(new ChartFragment());
@@ -151,20 +157,20 @@ public class MainActivity extends BaseActivity {
                 Animator animator;
                 if (position == 0) {
                     animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_fab_show);
-                    animator.setTarget(fab);
+                    animator.setTarget(fabAdd);
                     animator.start();
-                    fab.setCompatElevation(20);
-                    fab.setVisibility(View.VISIBLE);
+                    fabAdd.setCompatElevation(20);
+                    fabAdd.setVisibility(View.VISIBLE);
                     isFromFirstTab = true;
                 } else {
                     if (isFromFirstTab) {
                         animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_fab_hide);
-                        animator.setTarget(fab);
+                        animator.setTarget(fabAdd);
                         animator.start();
-                        fab.setCompatElevation(0);
+                        fabAdd.setCompatElevation(0);
                         isFromFirstTab = false;
                     } else {
-                        fab.setVisibility(View.GONE);
+                        fabAdd.setVisibility(View.GONE);
                     }
                 }
                 invalidateOptionsMenu();

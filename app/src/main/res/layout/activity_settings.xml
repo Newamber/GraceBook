@@ -1,151 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.newamber.gracebook.view.activity.SettingsActivity">
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical"
-            android:text="图案密码"
-            android:textSize="@dimen/title_little"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switchCompat2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        android:layout_marginBottom="8dp"/>
-
-    <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_settings"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="设置"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:navigationIcon="@drawable/ic_toolbar_back"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:title="设置"
+            app:elevation="2dp"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="记账设置"
-            android:textColor="@color/colorAccent"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="16dp"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="自动记账"
-        android:textSize="@dimen/title_little"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"/>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="0dp"
-        android:gravity="center_vertical"
-        android:text="数据备份"
-        android:textSize="@dimen/title_little"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"/>
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.5"
-        android:layout_marginEnd="8dp"/>
-
-    <View
-        android:id="@+id/view_vertical_line2"
-        android:layout_height="24dp"
-        android:layout_width="0.5dp"
-        android:background="#c7c7c7"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintRight_toLeftOf="@+id/switch1"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"/>
-    <View
-        android:id="@+id/view_vertical_line3"
-        android:layout_height="0.5dp"
-        android:layout_width="0dp"
-        android:background="#c7c7c7"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="数据安全"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_vertical_line3"/>
+    </android.support.design.widget.AppBarLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView_picturePassword"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/standard_margin"
+                android:text="@string/picture_password"
+                android:textSize="@dimen/title_little"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="32dp"
+                android:text="@string/setting_record"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/textView_autoRecord"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/standard_margin"
+                android:text="@string/auto_record"
+                android:textSize="@dimen/title_little"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView1"/>
+
+            <TextView
+                android:id="@+id/textView_dataBackup"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="1dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/standard_margin"
+                android:text="@string/data_backup"
+                android:textSize="@dimen/title_little"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_orien_line2"/>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="32dp"
+                android:text="@string/data_safe"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_typeEdit"/>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="32dp"
+                android:text="@string/appearance"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_orien_line4"/>
+
+            <TextView
+                android:id="@+id/textView_typeEdit"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="1dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/standard_margin"
+                android:text="@string/type_edit"
+                android:textSize="@dimen/title_little"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_orien_line1"/>
+
+
+            <TextView
+                android:id="@+id/textView_accentColor"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingStart="@dimen/standard_margin"
+                android:text="@string/accent_color"
+                android:textSize="@dimen/title_little"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_orien_line8"/>
+
+            <TextView
+                android:id="@+id/textView_primaryColor"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingStart="@dimen/standard_margin"
+                android:text="@string/primary_color"
+                android:textSize="@dimen/title_little"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_picture_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_picturePassword"
+                app:layout_constraintRight_toRightOf="@+id/textView_picturePassword"
+                app:layout_constraintTop_toTopOf="@+id/textView_picturePassword"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_auto_record"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_autoRecord"
+                app:layout_constraintRight_toRightOf="@+id/textView_autoRecord"
+                app:layout_constraintTop_toTopOf="@+id/textView_autoRecord"
+                app:layout_constraintVertical_bias="0.0"/>
+
+            <View
+                android:id="@+id/view_vertical_line2"
+                android:layout_width="0.5dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="@dimen/basic_margin"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/basic_margin"
+                android:background="@color/colorDivider"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_autoRecord"
+                app:layout_constraintRight_toLeftOf="@+id/switch_auto_record"
+                app:layout_constraintTop_toTopOf="@+id/textView_autoRecord"
+                app:layout_constraintVertical_bias="0.5"/>
+
+            <View
+                android:id="@+id/view_orien_line1"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_autoRecord"/>
+
+            <View
+                android:id="@+id/view_orien_line2"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_picturePassword"/>
+
+            <View
+                android:id="@+id/view_orien_line3"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_typeEdit"/>
+
+            <View
+                android:id="@+id/view_orien_line4"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_dataBackup"/>
+
+            <View
+                android:id="@+id/view_orien_line5"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:background="@color/colorDivider"
+                app:layout_constraintBottom_toTopOf="@+id/textView_autoRecord"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <View
+                android:id="@+id/view_orien_line6"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:background="@color/colorDivider"
+                app:layout_constraintBottom_toTopOf="@+id/textView_picturePassword"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <View
+                android:id="@+id/view_orien_line7"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:background="@color/colorDivider"
+                app:layout_constraintBottom_toTopOf="@+id/textView_primaryColor"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <View
+                android:id="@+id/view_orien_line8"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_primaryColor"/>
+
+            <View
+                android:id="@+id/view_orien_line9"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_accentColor"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview_primary_color"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:layout_constraintRight_toRightOf="@+id/textView_primaryColor"
+                app:layout_constraintTop_toTopOf="@+id/view_orien_line7"
+                app:layout_constraintBottom_toTopOf="@+id/cardview_accent_color"
+                app:layout_constraintVertical_bias="0.22000003"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview_accent_color"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:layout_constraintRight_toRightOf="@+id/textView_accentColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_orien_line8"
+                app:layout_constraintVertical_bias="0.466"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>

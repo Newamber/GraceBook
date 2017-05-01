@@ -46,6 +46,17 @@
     <string name="wechat_charge"><u>微信零钱</u></string>
     <string name="online_shopping"><u>网购</u></string>
 
+    <!--SettingsActivity-->
+    <string name="picture_password">图案密码</string>
+    <string name="setting_record">记账设置</string>
+    <string name="auto_record">自动记账</string>
+    <string name="data_backup">数据备份</string>
+    <string name="data_safe">数据安全</string>
+    <string name="type_edit">类别编辑</string>
+    <string name="appearance">外观</string>
+    <string name="accent_color">强调色</string>
+    <string name="primary_color">主色调</string>
+
     <!--ViewPager Title-->
     <string-array name="viewpager_title">
         <item>今日</item>

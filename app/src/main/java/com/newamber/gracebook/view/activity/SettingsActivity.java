@@ -16,7 +16,7 @@ import com.newamber.gracebook.base.BasePresenter;
 
 public class SettingsActivity extends BaseActivity {
 
-    private static final @LayoutRes int LAYOUT_ID = R.layout.activity_add_account;
+    private static final @LayoutRes int LAYOUT_ID = R.layout.activity_settings;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
