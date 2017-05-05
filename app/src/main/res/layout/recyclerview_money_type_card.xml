@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="@dimen/basic_margin"
+        android:layout_marginStart="@dimen/basic_margin"
+        android:layout_marginEnd="@dimen/basic_margin"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_height="64dp"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView_typeEdit_moneyType"
+                android:layout_height="36dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/basic_margin"
+                android:src="@drawable/ic_navigationview_like"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/money_type"/>
+
+            <TextView
+                android:id="@+id/textView_typeEdit_moneyType"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/basic_margin"
+                android:text="@string/money_type_item"/>
+
+            <ImageView
+                android:id="@+id/imageView_typeEdit_dragIcon"
+                android:layout_height="36dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/basic_margin"
+                android:src="@drawable/ic_type_edit_drag"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/money_type"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_typeEdit"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:paddingEnd="@dimen/standard_margin"
+        android:paddingTop="@dimen/standard_margin">
+
+        <ImageView
+            android:id="@+id/imageView_typeEdit_moneyType_edit"
+            android:layout_height="48dp"
+            android:layout_width="48dp"
+            android:background="#798dc9"
+            android:clickable="true"
+            android:src="@drawable/ic_item_edit"
+            android:contentDescription="@string/money_type"/>
+
+        <ImageView
+            android:id="@+id/imageView_typeEdit_moneyType_delete"
+            android:layout_height="48dp"
+            android:layout_width="48dp"
+            android:clickable="true"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/ic_item_delete"
+            android:contentDescription="@string/money_type"/>
+
+    </LinearLayout>
+
+</LinearLayout>

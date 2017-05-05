@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 /**
  * Description: BaseFragment which extracts some common operations. <br>
- * {@code V} means a view interface which implemented by this Fragment. <br>
- * {@code T} means a sub presenter of BasePresenter. <p>
+ * {@code <V>} means a view interface which implemented by this Fragment. <br>
+ * {@code <T>} means a sub presenter of BasePresenter. <p>
  *
  * Created by Newamber on 2017/4/24.
  */
@@ -35,6 +35,18 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         if (mPresenter != null) mPresenter.attachView((V) this);
         return mRootView;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initView();
+    }
+
+    /**
+     * Initialize and bind views here.
+     *
+     */
+    public abstract void initView();
 
     /**
      * Processing click events at here.

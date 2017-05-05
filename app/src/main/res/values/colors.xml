@@ -2,7 +2,7 @@
 <resources>
     <!--Basic Color-->
     <color name="colorPrimary">#870d4c</color>
-    <color name="colorPrimaryDark">#550024</color>
+    <color name="colorPrimaryDark">#5b0e2e</color>
     <color name="colorPrimaryLight">#bb4678</color>
     <color name="colorAccent">#e57373</color>
     <color name="colorAccentRipple">#af4448</color>

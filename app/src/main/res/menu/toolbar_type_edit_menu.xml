@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/toolbar_typeEdit_new"
+        android:icon="@drawable/ic_fab_add"
+        android:visible="true"
+        android:title="@string/new_type"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/toolbar_typeEdit_delete"
+        android:title="@string/delete"
+        android:icon="@drawable/ic_toolbar_delete"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/toolbar_typeEdit_deleteAll"
+        android:title="@string/delete_allType"
+        android:visible="true"
+        app:showAsAction="never" />
+
+</menu>

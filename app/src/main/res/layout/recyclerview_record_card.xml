@@ -4,14 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    app:cardElevation="2dp"
-    app:cardCornerRadius="4dp"
-    app:cardMaxElevation="8dp">
+    android:layout_margin="@dimen/basic_margin"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="4dp">
 
     <LinearLayout
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:orientation="horizontal">
+        android:layout_width="match_parent">
 
         <TextView
             android:id="@+id/textview_hour_minute"
@@ -24,7 +23,7 @@
             android:textSize="@dimen/text_main"/>
 
         <ImageView
-            android:id="@+id/imageview_money_type"
+            android:id="@+id/imageView_moneyType"
             android:layout_height="36dp"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -40,12 +39,12 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/basic_margin"
-            android:text="@string/money_type"
+            android:text="@string/money_type_item"
             android:textColor="@color/colorBlackTextOrIcon"
             android:textSize="@dimen/text_main"/>
 
         <TextView
-            android:id="@+id/textview_note"
+            android:id="@+id/textView_note"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="3"
@@ -56,7 +55,7 @@
             android:textSize="@dimen/text_main"/>
 
         <TextView
-            android:id="@+id/textview_amount"
+            android:id="@+id/textView_amount"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="2"

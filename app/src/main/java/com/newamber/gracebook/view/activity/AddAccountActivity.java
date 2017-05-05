@@ -2,7 +2,9 @@ package com.newamber.gracebook.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.view.MenuItem;
 import android.view.View;
+import android.support.v7.widget.Toolbar;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
@@ -27,11 +29,25 @@ public class AddAccountActivity extends BaseActivity<AddAccountView, AddAccountP
     @Override
     public void initView() {
         setContentView(LAYOUT_ID);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_addAccount);
+
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
     }
 
     @Override
     protected AddAccountPresenter getAttachedPresenter() {
         return new AddAccountPresenter();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
+        return true;
     }
 
     @Override

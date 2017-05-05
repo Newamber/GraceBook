@@ -6,22 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.newamber.gracebook.view.fragment.StreamFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_stream"
-        android:layout_width="match_parent"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout_stream"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/basic_margin"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_back_to_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/standard_margin"
-        android:src="@drawable/ic_fab_back_to_top"
-        app:fabSize="normal"
-        app:elevation="6dp"
-        app:backgroundTintMode="multiply"
-        app:rippleColor="@color/colorAccentRipple"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_stream"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </android.support.design.widget.CoordinatorLayout>

@@ -9,8 +9,8 @@ import com.newamber.gracebook.util.ActivityCollectorUtil;
 
 /**
  * Description: BaseActivity which extracts some common operations. <br>
- * {@code V} means a view interface which implemented by this Activity. <br>
- * {@code T} means a sub presenter of BasePresenter. <p>
+ * {@code <V>} means a view interface which implemented by this Activity. <br>
+ * {@code <T>} means a sub presenter of BasePresenter. <p>
  *
  * Created by Newamber on 2017/4/24.
  */

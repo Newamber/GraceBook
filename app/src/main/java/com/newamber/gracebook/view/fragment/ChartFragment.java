@@ -13,11 +13,10 @@ import com.newamber.gracebook.base.BasePresenter;
  */
 public class ChartFragment extends BaseFragment {
 
+    @Override
+    public void initView() {
 
-    public ChartFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public void processClick(View v) {

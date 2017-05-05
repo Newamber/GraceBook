@@ -57,14 +57,26 @@
     <string name="accent_color">强调色</string>
     <string name="primary_color">主色调</string>
 
-    <!--ViewPager Title-->
-    <string-array name="viewpager_title">
+    <!--TypeEditActivity-->
+    <string name="new_type">新建类型</string>
+    <string name="delete_allType">删除全部类型</string>
+    <string name="picture_waited_to_be_selected">Picture waited to be selected.</string>
+    <string name="money_type_name">类型名称</string>
+
+    <!--MainViewPager Title-->
+    <string-array name="main_viewpager_title">
         <item>今日</item>
         <item>流水</item>
         <item>图表</item>
     </string-array>
 
-    <!--FadingText-->
+    <!--TypeEditViewPager Title-->
+    <string-array name="typeEdit_viewpager_title">
+        <item>收支类型</item>
+        <item>钱库类型</item>
+    </string-array>
+
+    <!--FadingTextView-->
     <string-array name="fading_text">
         <item>2017年4月28日，星期五</item>
         <item>祝您有个好心情~</item>

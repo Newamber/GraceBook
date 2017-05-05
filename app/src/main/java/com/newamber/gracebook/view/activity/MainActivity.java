@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -24,7 +25,7 @@ import com.bumptech.glide.Glide;
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.model.adapter.ViewPagerAdapter;
+import com.newamber.gracebook.model.adapter.MainViewPagerAdapter;
 import com.newamber.gracebook.util.ActivityCollectorUtil;
 import com.newamber.gracebook.view.fragment.ChartFragment;
 import com.newamber.gracebook.view.fragment.DayFragment;
@@ -67,8 +68,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public void processClick(View v) {
         switch (v.getId()) {
-            case R.id.fab_add:
-                startActivity(new Intent(this, AddAccountActivity.class));
+            case R.id.fab_record:
+                startActivity(new Intent(this,  AddAccountActivity.class));
             default:
                 break;
         }
@@ -82,12 +83,12 @@ public class MainActivity extends BaseActivity {
         // ----------------------------findViewByID-------------------------------------------------
         mToolbarMain = (Toolbar) findViewById(R.id.toolbar_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-        fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
+        mNavigationView = (NavigationView) findViewById(R.id.navigationView);
+        fabAdd = (FloatingActionButton) findViewById(R.id.fab_record);
         mTabLayout = (TabLayout) findViewById(R.id.tablayout_main);
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        View navigationHeaderView = mNavigationView.getHeaderView(0);
-        ImageView imageViewHeader = (ImageView) navigationHeaderView
+        mViewPager = (ViewPager) findViewById(R.id.viewPager_main);
+        ImageView imageViewHeader = (ImageView) mNavigationView
+                .getHeaderView(0)
                 .findViewById(R.id.imageview_navigation_header);
         Glide.with(this).load(R.drawable.bg_navigationview).into(imageViewHeader);
 
@@ -119,7 +120,8 @@ public class MainActivity extends BaseActivity {
                     Toast.makeText(MainActivity.this, "like", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigationview_settings:
-                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                    new Handler().postDelayed(() ->
+                            startActivity(new Intent(MainActivity.this, SettingsActivity.class)), 300);
                     break;
                 case R.id.navigationview_donation:
                     Toast.makeText(MainActivity.this, "donation", Toast.LENGTH_SHORT).show();
@@ -143,7 +145,7 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(new StreamFragment());
         fragmentList.add(new ChartFragment());
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
+        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -156,7 +158,7 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 Animator animator;
                 if (position == 0) {
-                    animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_fab_show);
+                    animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_add_fab_show);
                     animator.setTarget(fabAdd);
                     animator.start();
                     fabAdd.setCompatElevation(20);
@@ -164,7 +166,7 @@ public class MainActivity extends BaseActivity {
                     isFromFirstTab = true;
                 } else {
                     if (isFromFirstTab) {
-                        animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_fab_hide);
+                        animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_add_fab_hide);
                         animator.setTarget(fabAdd);
                         animator.start();
                         fabAdd.setCompatElevation(0);

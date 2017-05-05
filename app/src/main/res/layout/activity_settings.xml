@@ -333,7 +333,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_accentColor"/>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cardview_primary_color"
+                android:id="@+id/cardview_primaryColor"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginBottom="8dp"
@@ -345,11 +345,11 @@
                 app:cardElevation="0dp"
                 app:layout_constraintRight_toRightOf="@+id/textView_primaryColor"
                 app:layout_constraintTop_toTopOf="@+id/view_orien_line7"
-                app:layout_constraintBottom_toTopOf="@+id/cardview_accent_color"
+                app:layout_constraintBottom_toTopOf="@+id/cardview_accentColor"
                 app:layout_constraintVertical_bias="0.22000003"/>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cardview_accent_color"
+                android:id="@+id/cardview_accentColor"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginBottom="8dp"

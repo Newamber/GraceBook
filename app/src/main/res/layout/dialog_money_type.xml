@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView_iconSelected"
+        android:layout_height="48dp"
+        android:layout_width="48dp"
+        android:layout_marginBottom="@dimen/basic_margin"
+        android:layout_marginEnd="@dimen/basic_margin"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_love_10"
+        android:contentDescription="@string/picture_waited_to_be_selected"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_typeEdit_moneyType"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:entries="@array/main_viewpager_title"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout_moneyTypeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:hint="@string/money_type_name"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true">
+
+        <EditText
+            android:id="@+id/editText_moneyTypeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textShortMessage"
+            android:labelFor="@id/editText_amount"
+            android:maxLines="1"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
