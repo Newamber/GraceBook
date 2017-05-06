@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView_iconRepoSelected"
+        android:layout_height="48dp"
+        android:layout_width="48dp"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_love_10"
+        android:contentDescription="@string/picture_waited_to_be_selected"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_typeEdit_moneyRepoType"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/basic_margin"
+        android:layout_toEndOf="@id/imageView_iconRepoSelected"
+        android:entries="@array/main_viewpager_title"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout_moneyTypeRepoName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_below="@id/imageView_iconRepoSelected"
+        android:hint="@string/repo_type_name"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true">
+
+        <EditText
+            android:id="@+id/editText_moneyRepoTypeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textShortMessage"
+            android:labelFor="@id/editText_moneyRepoTypeName"
+            android:maxLines="1"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout_moneyTypeRepoBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/basic_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_below="@id/textInputLayout_moneyTypeRepoName"
+        android:hint="@string/initial_balance"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true">
+
+        <EditText
+            android:id="@+id/editText_moneyRepoTypeBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:labelFor="@id/editText_moneyRepoTypeBalance"
+            android:maxLines="1"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+</RelativeLayout>

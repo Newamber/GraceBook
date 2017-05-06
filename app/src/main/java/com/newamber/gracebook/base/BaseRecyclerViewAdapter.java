@@ -30,10 +30,9 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
     private ItemClickListener mItemClickListener;
     private ItemLongClickListener mItemLongClickListener;
 
-
-    protected BaseRecyclerViewAdapter(@NonNull List<E> entityList, @LayoutRes int layoutId) {
+    protected BaseRecyclerViewAdapter(@NonNull List<E> entityList, @LayoutRes int layoutID) {
         mEntityList = entityList;
-        mLayoutID = layoutId;
+        mLayoutID = layoutID;
     }
 
     @Override

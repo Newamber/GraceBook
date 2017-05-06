@@ -18,7 +18,7 @@ import com.newamber.gracebook.util.ActivityCollectorUtil;
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity
         implements View.OnClickListener {
 
-    protected T attachedPresenter;
+    private T mPresenter;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -26,8 +26,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onCreate(savedInstanceState);
         initView();
         ActivityCollectorUtil.addActivity(this);
-        attachedPresenter = getAttachedPresenter();
-        if (attachedPresenter != null) attachedPresenter.attachView((V) this);
+        mPresenter = createPresenter();
+        if (mPresenter != null) mPresenter.attachView((V) this);
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     public abstract void processClick(View v);
 
     /**
-     * Initializing views here.
+     * Initializing Views here.
      *
      */
     public abstract void initView();
@@ -49,17 +49,26 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     /**
-     * Get a presenter that implements BasePresenter.
+     * Create a presenter that implements BasePresenter.
      *
      * @return A presenter that implements BasePresenter.
      */
-    protected abstract T getAttachedPresenter();
+    protected abstract T createPresenter();
+
+    /**
+     * Get the presenter attaching to relevant View.
+     *
+     * @return the presenter
+     */
+    protected T getPresenter() {
+        return mPresenter;
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ActivityCollectorUtil.removeActivity(this);
         // Detach the presenter from this Activity.
-        if (attachedPresenter != null) attachedPresenter.detachView();
+        if (mPresenter != null) mPresenter.detachView();
     }
 }

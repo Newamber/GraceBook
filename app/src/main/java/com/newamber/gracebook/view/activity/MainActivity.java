@@ -187,7 +187,7 @@ public class MainActivity extends BaseActivity {
 
     // The activity has no business logic so there is no presenter.
     @Override
-    protected BasePresenter getAttachedPresenter() {
+    protected BasePresenter createPresenter() {
         return null;
     }
 

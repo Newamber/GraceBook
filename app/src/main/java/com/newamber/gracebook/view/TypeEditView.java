@@ -6,5 +6,6 @@ package com.newamber.gracebook.view;
  */
 
 public interface TypeEditView {
-
+   void showMoneyTypeDialog();
+   void showMoneyRepoTypeDialog();
 }

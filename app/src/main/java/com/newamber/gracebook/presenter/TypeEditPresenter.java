@@ -9,5 +9,8 @@ import com.newamber.gracebook.view.TypeEditView;
  */
 
 public class TypeEditPresenter extends BasePresenter<TypeEditView> {
-    
+    public void newTypeDialog(int position) {
+        if (position == 0) getView().showMoneyTypeDialog();
+        else getView().showMoneyRepoTypeDialog();
+    }
 }

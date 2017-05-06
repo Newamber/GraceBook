@@ -24,7 +24,7 @@ public class ChartFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter createPresenter() {
         return null;
     }
 

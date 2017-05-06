@@ -30,7 +30,7 @@ public class MoneyRepoTypeFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter createPresenter() {
         return null;
     }
 

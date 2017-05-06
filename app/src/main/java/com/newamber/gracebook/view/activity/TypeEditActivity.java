@@ -25,7 +25,8 @@ import com.newamber.gracebook.view.fragment.MoneyTypeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresenter> implements TypeEditView {
+public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresenter>
+        implements TypeEditView {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.activity_type_edit;
     private ViewPager mviewPager;
@@ -64,7 +65,7 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
     }
 
     @Override
-    protected TypeEditPresenter getAttachedPresenter() {
+    protected TypeEditPresenter createPresenter() {
         return new TypeEditPresenter();
     }
 
@@ -80,27 +81,7 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
             case R.id.toolbar_typeEdit_delete:
                 break;
             case R.id.toolbar_typeEdit_new:
-                if (mviewPager.getCurrentItem() == 0) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(TypeEditActivity.this);
-                    builder.setTitle("新建");
-                    View view = LayoutInflater.from(TypeEditActivity.this).inflate(R.layout.dialog_money_type, null);
-                    builder.setView(view);
-                    builder.setCancelable(false);
-                    final EditText moneyTypeName = (EditText) view.findViewById(R.id.editText_moneyTypeName);
-
-                    builder.setPositiveButton("确定", (dialog, which) -> {
-                        String a = moneyTypeName.getText().toString().trim();
-                        Toast.makeText(TypeEditActivity.this, a, Toast.LENGTH_SHORT).show();
-                    });
-                    builder.setNegativeButton("取消", (dialog, which) -> {
-
-                    });
-                    builder.show();
-
-                }
-                else {
-
-                }
+                getPresenter().newTypeDialog(mviewPager.getCurrentItem());
                 break;
             case R.id.toolbar_typeEdit_deleteAll:
                 break;
@@ -112,8 +93,39 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    @SuppressWarnings("all")
+    public void showMoneyTypeDialog() {
+        // TODO: simplify codes if possible
+        AlertDialog.Builder builder = new AlertDialog.Builder(TypeEditActivity.this);
+        builder.setTitle(R.string.new_type);
+        View view = LayoutInflater.from(TypeEditActivity.this).inflate(R.layout.dialog_money_type, null);
+        builder.setView(view);
+        final EditText moneyTypeName = (EditText) view.findViewById(R.id.editText_moneyTypeName);
+
+        builder.setPositiveButton(R.string.sure, (dialog, which) -> {
+            String a = moneyTypeName.getText().toString().trim();
+            Toast.makeText(TypeEditActivity.this, a, Toast.LENGTH_SHORT).show();
+        });
+
+        builder.setNegativeButton(R.string.cancel, (dialog, which) -> {});
+        builder.show();
     }
 
+    @Override
+    @SuppressWarnings("all")
+    public void showMoneyRepoTypeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TypeEditActivity.this);
+        builder.setTitle(R.string.new_repo_type);
+        View view = LayoutInflater.from(TypeEditActivity.this).inflate(R.layout.dialog_money_repo_type, null);
+        builder.setView(view);
+        final EditText moneyRepoTypeName = (EditText) view.findViewById(R.id.editText_moneyRepoTypeName);
+
+        builder.setPositiveButton(R.string.sure, (dialog, which) -> {
+            String a = moneyRepoTypeName.getText().toString().trim();
+            Toast.makeText(TypeEditActivity.this, a, Toast.LENGTH_SHORT).show();
+        });
+
+        builder.setNegativeButton(R.string.cancel, (dialog, which) -> {});
+        builder.show();
+    }
 }

@@ -40,7 +40,7 @@ public class AddAccountActivity extends BaseActivity<AddAccountView, AddAccountP
     }
 
     @Override
-    protected AddAccountPresenter getAttachedPresenter() {
+    protected AddAccountPresenter createPresenter() {
         return new AddAccountPresenter();
     }
 

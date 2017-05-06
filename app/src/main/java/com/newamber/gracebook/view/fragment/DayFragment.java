@@ -16,12 +16,9 @@ import com.newamber.gracebook.R;
  */
 public class DayFragment extends Fragment {
 
-
-
     public DayFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

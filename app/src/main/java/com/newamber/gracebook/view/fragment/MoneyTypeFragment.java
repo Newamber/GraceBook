@@ -53,7 +53,7 @@ public class MoneyTypeFragment extends BaseFragment {
         mMoneyTypeTableList.add(mMoneyTypeTable1);
         mMoneyTypeTableList.add(mMoneyTypeTable2);
 
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerView_moneyType);
+        mRecyclerView = (RecyclerView) getRootView().findViewById(R.id.recyclerView_moneyType);
         mRecyclerView.setHasFixedSize(true);
         MoneyTypeItemAdapter moneyTypeItemAdapter = new MoneyTypeItemAdapter(mMoneyTypeTableList, ITEM_LAYOUT_ID);
 
@@ -71,7 +71,7 @@ public class MoneyTypeFragment extends BaseFragment {
 
     // The Fragment has no business logic so there is no presenter
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter createPresenter() {
         return null;
     }
 

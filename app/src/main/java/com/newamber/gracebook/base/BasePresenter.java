@@ -5,7 +5,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * Description: BasePresenter which extracts some common operations.<br>
- * {@code V} means a View interface.<p>
+ * {@code <V>} means a view interface.<p>
  *
  * Created by Newamber on 2017/4/24.
  */
@@ -26,6 +26,11 @@ public abstract class BasePresenter<V> {
         }
     }
 
+    /**
+     * Get attached View and then you can invoke relevant method.
+     *
+     * @return the attched View we need
+     */
     protected V getView() {
         return  attachedView.get();
     }

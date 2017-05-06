@@ -19,10 +19,9 @@ import android.view.ViewGroup;
 public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment
         implements View.OnClickListener {
 
-    protected T mPresenter;
-
+    private T mPresenter;
     // A reference points to an Activity attached by this Fragment.
-    protected View mRootView;
+    private View mRootView;
 
 
     @Nullable
@@ -31,7 +30,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         if (mRootView == null) mRootView = inflater.inflate(getLayoutRes(), container, false);
-        mPresenter = getPresenter();
+        mPresenter = createPresenter();
         if (mPresenter != null) mPresenter.attachView((V) this);
         return mRootView;
     }
@@ -60,7 +59,20 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
      *
      * @return A presenter that implements BasePresenter.
      */
-    protected abstract T getPresenter();
+    protected abstract T createPresenter();
+
+    /**
+     * Get the presenter attaching to relevant View.
+     *
+     * @return the presenter
+     */
+    protected T getPresenter() {
+        return mPresenter;
+    }
+
+    protected View getRootView() {
+        return mRootView;
+    }
 
     protected abstract  @LayoutRes int getLayoutRes();
 
