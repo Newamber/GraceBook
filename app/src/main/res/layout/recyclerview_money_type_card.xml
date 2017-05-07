@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/basic_margin"
         android:layout_marginStart="@dimen/basic_margin"
         android:layout_marginEnd="@dimen/basic_margin"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="3dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/basic_margin"
-                android:src="@drawable/ic_navigationview_like"
+                android:src="@drawable/ic_office_104"
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/money_type"/>
 
@@ -55,21 +55,12 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout_typeEdit"
+    <FrameLayout
+        android:id="@+id/linearLayout_typeEdit_delete"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:paddingEnd="@dimen/standard_margin"
         android:paddingTop="@dimen/standard_margin">
-
-        <ImageView
-            android:id="@+id/imageView_typeEdit_moneyType_edit"
-            android:layout_height="48dp"
-            android:layout_width="48dp"
-            android:background="#798dc9"
-            android:clickable="true"
-            android:src="@drawable/ic_item_edit"
-            android:contentDescription="@string/money_type"/>
 
         <ImageView
             android:id="@+id/imageView_typeEdit_moneyType_delete"
@@ -80,6 +71,6 @@
             android:src="@drawable/ic_item_delete"
             android:contentDescription="@string/money_type"/>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

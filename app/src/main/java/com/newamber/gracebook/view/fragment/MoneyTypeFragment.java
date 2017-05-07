@@ -36,15 +36,15 @@ public class MoneyTypeFragment extends BaseFragment {
         mMoneyTypeTable1 = new MoneyTypeTable();
         mMoneyTypeTable2 = new MoneyTypeTable();
 
-        mMoneyTypeTable.moneyTypeImageID = R.drawable.ic_navigationview_like;
+        mMoneyTypeTable.moneyTypeImageID = R.drawable.ic_love_10;
         mMoneyTypeTable.moneyTypeName = "打杂";
         mMoneyTypeTable.save();
 
-        mMoneyTypeTable1.moneyTypeImageID = R.drawable.ic_navigationview_like;
+        mMoneyTypeTable1.moneyTypeImageID = R.drawable.ic_office_73;
         mMoneyTypeTable1.moneyTypeName = "网购";
         mMoneyTypeTable1.save();
 
-        mMoneyTypeTable2.moneyTypeImageID = R.drawable.ic_navigationview_like;
+        mMoneyTypeTable2.moneyTypeImageID = R.drawable.ic_office_28;
         mMoneyTypeTable2.moneyTypeName = "嘻嘻";
         mMoneyTypeTable2.save();
 

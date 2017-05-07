@@ -202,7 +202,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         switch (mViewPager.getCurrentItem()) {
-            // TODO: Toolbar change with animation.
+            // TODO: Toolbar change with animation
             case 0:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(true);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(true);

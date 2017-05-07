@@ -82,7 +82,7 @@ public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
             holder.itemView.setAlpha(alpha);
            // holder.itemView.setTranslationX(dX);
             holder.itemView.scrollTo(-(int) dX, 0);
-            holder.getSubView(R.id.linearLayout_typeEdit).setTranslationX(dX);
+            holder.getSubView(R.id.linearLayout_typeEdit_delete).setTranslationX(dX);
         }
     }
 

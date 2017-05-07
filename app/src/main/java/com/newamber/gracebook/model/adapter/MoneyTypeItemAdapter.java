@@ -26,7 +26,6 @@ public class MoneyTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyTypeTable
         holder.setImageResource(R.id.imageView_typeEdit_moneyType, entity.moneyTypeImageID);
         holder.setText(R.id.textView_typeEdit_moneyType, entity.moneyTypeName);
         holder.setImageResource(R.id.imageView_typeEdit_dragIcon, R.drawable.ic_type_edit_drag);
-
         holder.setImageResource(R.id.imageView_typeEdit_moneyType_delete, R.drawable.ic_item_delete);
     }
 
