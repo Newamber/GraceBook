@@ -1,5 +1,7 @@
 package com.newamber.gracebook.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -20,9 +22,18 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         implements View.OnClickListener {
 
     private T mPresenter;
-    // A reference points to an Activity attached by this Fragment.
+    // A reference points to an RootView attached by this Fragment.
     private View mRootView;
 
+    // Host Activity
+    protected Activity mActivity;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (Activity) context;
+    }
 
     @Nullable
     @Override
@@ -34,6 +45,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         if (mPresenter != null) mPresenter.attachView((V) this);
         return mRootView;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -83,7 +95,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         // Detach the presenter from this Activity.
         if (mPresenter != null) mPresenter.detachView();
         mRootView = null;

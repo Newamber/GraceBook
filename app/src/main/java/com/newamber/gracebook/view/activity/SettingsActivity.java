@@ -60,7 +60,7 @@ public class SettingsActivity extends BaseActivity {
         return true;
     }
 
-    // The activity has no business logic so there is no presenter.
+    // The Activity has no business logic so there is no presenter.
     @Override
     protected BasePresenter createPresenter() {
         return null;

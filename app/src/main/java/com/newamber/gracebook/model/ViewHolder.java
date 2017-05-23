@@ -41,12 +41,12 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set text of view.
      *
-     * @param viewID  the ID resource of view which is set text
+     * @param viewId  the ID resource of view which is set text
      * @param textContent the text we want to set
      * @return {@code this} the instance of ViewHolder
      */
-    public ViewHolder setText(@IdRes int viewID , CharSequence textContent) {
-        View view = getSubView(viewID);
+    public ViewHolder setText(@IdRes int viewId , CharSequence textContent) {
+        View view = getSubView(viewId);
         if (view instanceof TextView) ((TextView) view).setText(textContent);
         if (view instanceof Button) ((Button) view).setText(textContent);
         return this;
@@ -55,24 +55,24 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set color of view.
      *
-     * @param viewID the ID resource of view which is set color
-     * @param colorID the color we want to set
+     * @param viewId the ID resource of view which is set color
+     * @param colorId the color we want to set
      * @return {@code this} the instance of ViewHolder
      */
-    public ViewHolder setColor(@IdRes int viewID, @ColorRes int colorID) {
-        View view = getSubView(viewID);
+    public ViewHolder setColor(@IdRes int viewId, @ColorRes int colorId) {
+        View view = getSubView(viewId);
         if (view instanceof TextView) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                ((TextView) view).setTextColor(mContext.getResources().getColor(colorID, null));
+                ((TextView) view).setTextColor(mContext.getResources().getColor(colorId, null));
             else
-                ((TextView) view).setTextColor(mContext.getResources().getColor(colorID));
+                ((TextView) view).setTextColor(mContext.getResources().getColor(colorId));
         }
 
         if (view instanceof Button) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                ((Button) view).setTextColor(mContext.getResources().getColor(colorID, null));
+                ((Button) view).setTextColor(mContext.getResources().getColor(colorId, null));
             else
-                ((Button) view).setTextColor(mContext.getResources().getColor(colorID));
+                ((Button) view).setTextColor(mContext.getResources().getColor(colorId));
         }
         return this;
     }
@@ -80,16 +80,16 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set background color of view.
      *
-     * @param viewID the ID resource of view which is set background color
-     * @param colorID he color we want to set
+     * @param viewId the ID resource of view which is set background color
+     * @param colorId he color we want to set
      * @return {@code this} the instance of ViewHolder
      */
-    public ViewHolder setBackgroundColor(@IdRes int viewID, @ColorRes int colorID) {
-        View view = getSubView(viewID);
+    public ViewHolder setBackgroundColor(@IdRes int viewId, @ColorRes int colorId) {
+        View view = getSubView(viewId);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            view.setBackgroundColor(mContext.getResources().getColor(colorID, null));
+            view.setBackgroundColor(mContext.getResources().getColor(colorId, null));
         else
-            view.setBackgroundColor(mContext.getResources().getColor(colorID));
+            view.setBackgroundColor(mContext.getResources().getColor(colorId));
 
         return this;
     }
@@ -97,42 +97,42 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set drawable of view.
      *
-     * @param viewID the ID resource of view which is set image
-     * @param drawableID the ID drawable resource image which we want to set
+     * @param viewId the ID resource of view which is set image
+     * @param drawableId the ID drawable resource image which we want to set
      * @return {@code this} the instance of ViewHolder
      */
-    public ViewHolder setImageResource(@IdRes int viewID , @DrawableRes int drawableID) {
-        View view = getSubView(viewID);
+    public ViewHolder setImageResource(@IdRes int viewId , @DrawableRes int drawableId) {
+        View view = getSubView(viewId);
         if (view instanceof ImageView) {
-            Glide.with(mContext).load(drawableID).into((ImageView) view);
+            Glide.with(mContext).load(drawableId).into((ImageView) view);
         }
-        return this ;
-    }
-
-    public ViewHolder setOnClickListener(@IdRes int viewID , View.OnClickListener clickListener) {
-        getSubView(viewID).setOnClickListener(clickListener);
         return this;
     }
 
-    public ViewHolder setOnLongClickListener(@IdRes int viewID , View.OnLongClickListener longClickListener) {
-        getSubView(viewID).setOnLongClickListener(longClickListener);
+    public ViewHolder setOnClickListener(@IdRes int viewId , View.OnClickListener clickListener) {
+        getSubView(viewId).setOnClickListener(clickListener);
+        return this;
+    }
+
+    public ViewHolder setOnLongClickListener(@IdRes int viewId , View.OnLongClickListener longClickListener) {
+        getSubView(viewId).setOnLongClickListener(longClickListener);
         return this;
     }
 
     /**
-     * Get our item view according to IDRes.<br>
+     * Get our item view according to IdRes.<br>
      * The method can avoid redundant findViewById codes.
      *
-     * @param viewID the ID resource of view which we want to get
-     * @param <T> certain view type depends on {@code viewID}
+     * @param viewId the ID resource of view which we want to get
+     * @param <T> certain view type depends on {@code viewId}
      * @return {@code (T) view} which is converted to {@code T}
      */
     @SuppressWarnings("unchecked")
-    public <T extends View> T getSubView(@IdRes int viewID) {
-        View view = mSubViewArray.get(viewID);
+    private <T extends View> T getSubView(@IdRes int viewId) {
+        View view = mSubViewArray.get(viewId);
         if (view == null) {
-            view = itemView.findViewById(viewID);
-            mSubViewArray.put(viewID, view);
+            view = itemView.findViewById(viewId);
+            mSubViewArray.put(viewId, view);
         }
         return (T) view;
     }

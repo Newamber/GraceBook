@@ -8,14 +8,17 @@ import android.view.View;
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseFragment;
 import com.newamber.gracebook.base.BasePresenter;
+import com.newamber.gracebook.model.MoneyTypeModel;
 import com.newamber.gracebook.model.adapter.MoneyTypeItemAdapter;
-import com.newamber.gracebook.model.entity.MoneyTypeTable;
+import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.util.EditTypeItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ import java.util.List;
+
  * Description: .<p>
  * Created by Newamber on 2017/5/2.
  */
@@ -26,36 +29,21 @@ public class MoneyTypeFragment extends BaseFragment {
     private static final @LayoutRes int ITEM_LAYOUT_ID = R.layout.recyclerview_money_type_card;
 
     private RecyclerView mRecyclerView;
-    private MoneyTypeTable mMoneyTypeTable, mMoneyTypeTable1, mMoneyTypeTable2;
-    private List<MoneyTypeTable> mMoneyTypeTableList;
+    public List<MoneyTypePO> mMoneyTypePOList;
+
+    public MoneyTypeItemAdapter moneyTypeItemAdapter;
 
     @Override
     public void initView() {
-        // Test data.
-        mMoneyTypeTable = new MoneyTypeTable();
-        mMoneyTypeTable1 = new MoneyTypeTable();
-        mMoneyTypeTable2 = new MoneyTypeTable();
+        mMoneyTypePOList = new ArrayList<>();
 
-        mMoneyTypeTable.moneyTypeImageID = R.drawable.ic_love_10;
-        mMoneyTypeTable.moneyTypeName = "打杂";
-        mMoneyTypeTable.save();
-
-        mMoneyTypeTable1.moneyTypeImageID = R.drawable.ic_office_73;
-        mMoneyTypeTable1.moneyTypeName = "网购";
-        mMoneyTypeTable1.save();
-
-        mMoneyTypeTable2.moneyTypeImageID = R.drawable.ic_office_28;
-        mMoneyTypeTable2.moneyTypeName = "嘻嘻";
-        mMoneyTypeTable2.save();
-
-        mMoneyTypeTableList = new ArrayList<>();
-        mMoneyTypeTableList.add(mMoneyTypeTable);
-        mMoneyTypeTableList.add(mMoneyTypeTable1);
-        mMoneyTypeTableList.add(mMoneyTypeTable2);
+        //TypeEditActivity activity = (TypeEditActivity) getActivity();
+        mMoneyTypePOList = new MoneyTypeModel().getAllData();
 
         mRecyclerView = (RecyclerView) getRootView().findViewById(R.id.recyclerView_moneyType);
         mRecyclerView.setHasFixedSize(true);
-        MoneyTypeItemAdapter moneyTypeItemAdapter = new MoneyTypeItemAdapter(mMoneyTypeTableList, ITEM_LAYOUT_ID);
+
+        moneyTypeItemAdapter = new MoneyTypeItemAdapter(mMoneyTypePOList, ITEM_LAYOUT_ID);
 
         EditTypeItemTouchHelperCallback itemTouchHelperCallback = new EditTypeItemTouchHelperCallback(moneyTypeItemAdapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);

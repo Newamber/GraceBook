@@ -8,19 +8,18 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
- * Description: Save moneyRepo types which defined by user<p>
+ * Description: Save money types which defined by user.<p>
  *
  * Created by Newamber on 2017/4/28.
  */
 @SuppressWarnings("all")
 @Table(database = GraceBookDatabase.class, allFields = true)
-public class MoneyRepoTypeTable extends BaseModel {
+public class MoneyTypePO extends BaseModel {
 
-    @PrimaryKey
-    public String moneyRepoTypeName;    // defined by user
+    @PrimaryKey(autoincrement = true)
+    public int id;
 
-    public @DrawableRes
-    int moneyRepoTypeImageID;           // defined by user
+    public String moneyTypeName;                 // defined by user
 
-    public Double balance;              // the balance of MoneyRepo initializd by user
+    public @DrawableRes int moneyTypeImageID;    // the same...
 }

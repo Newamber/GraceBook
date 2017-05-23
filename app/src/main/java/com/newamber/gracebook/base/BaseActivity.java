@@ -60,7 +60,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      *
      * @return the presenter
      */
-    protected T getPresenter() {
+    public T getPresenter() {
         return mPresenter;
     }
 

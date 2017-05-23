@@ -37,7 +37,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return GraceBookApplication
-                .getGraceBookContext()
+                .getContext()
                 .getResources()
                 .getStringArray(R.array.main_viewpager_title)[position];
     }

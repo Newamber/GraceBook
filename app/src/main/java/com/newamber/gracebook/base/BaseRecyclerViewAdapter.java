@@ -104,7 +104,7 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
 
     /**
      * Extract our operations about different data binding.<br>
-     * This is a specific job of our sub adapter according to the show of different item view.<br>
+     * This is a specific job of our sub adapters according to the show of different item view.<br>
      * You can set text, color or drawble in the method.
      *
      * @param holder the outer layer holder of sub items

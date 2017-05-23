@@ -9,7 +9,6 @@
     <string name="settings">设置</string>
     <string name="about">关于</string>
     <string name="donation">捐赠</string>
-    <string name="this_is_a_background">这是一片背景。</string>
     <string name="remind_time">记账时间：</string>
 
     <!--Toolbar Main-->
@@ -45,7 +44,6 @@
     <string name="_2017_4_23"><u>2017年4月23日</u></string>
     <string name="wechat_charge"><u>微信零钱</u></string>
     <string name="online_shopping"><u>网购</u></string>
-    <string name="this_is_a_budget_convert_button">This is a budget convert button</string>
 
     <!--SettingsActivity-->
     <string name="picture_password">图案密码</string>
@@ -67,7 +65,6 @@
     <string name="new_repo_type">新建钱库</string>
     <string name="repo_type_name">钱库名称</string>
     <string name="initial_balance">初始金额</string>
-    <string name="picture_waited_to_be_selected">Icon waited to be selected.</string>
 
     <!--MainViewPager Title-->
     <string-array name="main_viewpager_title">

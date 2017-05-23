@@ -25,7 +25,7 @@ public class GraceBookApplication extends Application {
         FlowManager.init(this);
     }
 
-    public static Context getGraceBookContext() {
+    public static Context getContext() {
         return sContext.get();
     }
 }

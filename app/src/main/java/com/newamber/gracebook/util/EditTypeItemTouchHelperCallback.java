@@ -7,7 +7,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.newamber.gracebook.R;
 import com.newamber.gracebook.model.ViewHolder;
 
 /**
@@ -80,9 +79,7 @@ public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             final float alpha = ALPHA_FULL - Math.abs(dX) / (float) holder.itemView.getWidth();
             holder.itemView.setAlpha(alpha);
-           // holder.itemView.setTranslationX(dX);
-            holder.itemView.scrollTo(-(int) dX, 0);
-            holder.getSubView(R.id.linearLayout_typeEdit_delete).setTranslationX(dX);
+            //holder.getSubView(R.id.linearLayout_typeEdit_delete).setTranslationX(dX);
         }
     }
 

@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -13,15 +14,15 @@
         android:layout_marginEnd="@dimen/basic_margin"
         android:layout_marginStart="@dimen/standard_margin"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_love_10"
-        android:contentDescription="@string/picture_waited_to_be_selected"/>
+        tools:src="@drawable/ic_love_10"
+        tools:ignore="ContentDescription"/>
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner_typeEdit_moneyType"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_gravity="center_vertical"
-        android:entries="@array/main_viewpager_title"/>
+        android:dropDownSelector="?android:attr/selectableItemBackground"
+        android:layout_gravity="center_vertical"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout_moneyTypeName"
@@ -39,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textShortMessage"
-            android:labelFor="@id/editText_amount"
+            android:labelFor="@id/editText_moneyTypeName"
             android:maxLines="1"/>
 
     </android.support.design.widget.TextInputLayout>

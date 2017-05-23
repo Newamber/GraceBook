@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.newamber.gracebook.R;
-import com.newamber.gracebook.model.entity.AccountTable;
+import com.newamber.gracebook.model.entity.AccountPO;
 
 import java.util.Calendar;
 import java.util.List;
@@ -23,11 +23,11 @@ import java.util.List;
 @SuppressWarnings("all")
 public class AccountItemAdapter extends RecyclerView.Adapter<AccountItemAdapter.ViewHolder> {
 
-    private List<AccountTable> mAccountTableList;
+    private List<AccountPO> mAccountPOList;
     private Context mContext;
 
-    public AccountItemAdapter(List<AccountTable> accountTableslist) {
-        mAccountTableList = accountTableslist;
+    public AccountItemAdapter(List<AccountPO> accountTableslist) {
+        mAccountPOList = accountTableslist;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,23 +55,23 @@ public class AccountItemAdapter extends RecyclerView.Adapter<AccountItemAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        AccountTable accountTable = mAccountTableList.get(position);
+        AccountPO accountPO = mAccountPOList.get(position);
 
-        int hour = accountTable.date.get(Calendar.HOUR);
-        int minute = accountTable.date.get(Calendar.MINUTE);
-        String hours = (hour < 10) ? "0" + hour : ""+hour;
-        String minutes = (minute < 10) ? "0" + minute : ""+minute;
+        int hour = accountPO.date.get(Calendar.HOUR);
+        int minute = accountPO.date.get(Calendar.MINUTE);
+        String hours = (hour < 10) ? "0" + hour : "" + hour;
+        String minutes = (minute < 10) ? "0" + minute : "" + minute;
 
         holder.mTextViewHourMin.setText(hours + ":" +minutes);
-        holder.mTextViewMoneyType.setText(accountTable.moneyType);
-        holder.mTextViewNote.setText(accountTable.note);
-        holder.mTextViewAmount.setText(accountTable.amount + "￥");
-        Glide.with(mContext).load(accountTable.moneyTypeImageId).into(holder.mImageViewMoneyType);
+        holder.mTextViewMoneyType.setText(accountPO.moneyType);
+        holder.mTextViewNote.setText(accountPO.note);
+        holder.mTextViewAmount.setText(accountPO.amount + "￥");
+        Glide.with(mContext).load(accountPO.moneyTypeImageId).into(holder.mImageViewMoneyType);
     }
 
     @Override
     public int getItemCount() {
-        return mAccountTableList.size();
+        return mAccountPOList.size();
     }
 
 }

@@ -16,7 +16,7 @@ import java.util.Calendar;
  */
 @SuppressWarnings("all")
 @Table(database = GraceBookDatabase.class, allFields = true)
-public class AccountTable extends BaseModel {
+public class AccountPO extends BaseModel {
 
     @PrimaryKey(autoincrement = true)
     public int id;

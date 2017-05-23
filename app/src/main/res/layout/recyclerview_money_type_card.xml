@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -12,7 +13,7 @@
         android:layout_marginTop="@dimen/basic_margin"
         android:layout_marginStart="@dimen/basic_margin"
         android:layout_marginEnd="@dimen/basic_margin"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="4dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -29,9 +30,9 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/basic_margin"
-                android:src="@drawable/ic_office_104"
+                tools:src="@drawable/ic_office_104"
                 android:layout_gravity="center_vertical"
-                android:contentDescription="@string/money_type"/>
+                tools:ignore="ContentDescription"/>
 
             <TextView
                 android:id="@+id/textView_typeEdit_moneyType"
@@ -40,7 +41,7 @@
                 android:layout_weight="4"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/basic_margin"
-                android:text="@string/money_type_item"/>
+                tools:text="@string/money_type_item"/>
 
             <ImageView
                 android:id="@+id/imageView_typeEdit_dragIcon"

@@ -2,6 +2,7 @@ package com.newamber.gracebook.view.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BasePresenter;
 import com.newamber.gracebook.model.adapter.MainViewPagerAdapter;
 import com.newamber.gracebook.util.ActivityCollectorUtil;
+import com.newamber.gracebook.util.DeviceUtil;
 import com.newamber.gracebook.view.fragment.ChartFragment;
 import com.newamber.gracebook.view.fragment.DayFragment;
 import com.newamber.gracebook.view.fragment.StreamFragment;
@@ -57,7 +60,7 @@ public class MainActivity extends BaseActivity {
 
     private FloatingActionButton fabAdd;
 
-    // State bit to control the fabAdd's appearance.
+    // State bit to control the fab_record's appearance.
     private boolean isFromFirstTab;
 
     @Override
@@ -95,7 +98,7 @@ public class MainActivity extends BaseActivity {
         // --------------------------setOnClickListener---------------------------------------------
         fabAdd.setOnClickListener(this);
 
-        // --------------------------Toolbar&DrawerLayout-------------------------------------------
+        // --------------------------Toolbar & DrawerLayout-------------------------------------------
         setSupportActionBar(mToolbarMain);
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -114,6 +117,7 @@ public class MainActivity extends BaseActivity {
         // ------------------------------NavigationView---------------------------------------------
         mNavigationView.setItemIconTintList(null);
         mNavigationView.setItemTextColor(ContextCompat.getColorStateList(this, R.color.drawer_list_color));
+        final int START_DELAY_TIME = 100;
         mNavigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigationview_like:
@@ -121,7 +125,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case R.id.navigationview_settings:
                     new Handler().postDelayed(() ->
-                            startActivity(new Intent(MainActivity.this, SettingsActivity.class)), 300);
+                            startActivity(new Intent(MainActivity.this, SettingsActivity.class)), START_DELAY_TIME);
                     break;
                 case R.id.navigationview_donation:
                     Toast.makeText(MainActivity.this, "donation", Toast.LENGTH_SHORT).show();
@@ -139,7 +143,7 @@ public class MainActivity extends BaseActivity {
             return false;
         });
 
-        // ------------------------------TabLayout&ViewPager----------------------------------------
+        // ------------------------------TabLayout & ViewPager----------------------------------------
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new DayFragment());
         fragmentList.add(new StreamFragment());
@@ -157,24 +161,29 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 Animator animator;
+                int elevation = DeviceUtil.dp2Px(6f);
                 if (position == 0) {
-                    animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_add_fab_show);
+                    animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_show);
                     animator.setTarget(fabAdd);
                     animator.start();
-                    fabAdd.setCompatElevation(20);
+                    fabAdd.setCompatElevation(elevation);
                     fabAdd.setVisibility(View.VISIBLE);
                     isFromFirstTab = true;
                 } else {
                     if (isFromFirstTab) {
-                        animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_add_fab_hide);
+                        ValueAnimator valueAnimator = ValueAnimator.ofFloat(elevation, 0f).setDuration(800);
+                        valueAnimator.setInterpolator(new BounceInterpolator());
+                        valueAnimator.start();
+                        animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_hide);
                         animator.setTarget(fabAdd);
                         animator.start();
-                        fabAdd.setCompatElevation(0);
+                        fabAdd.setCompatElevation((Float) valueAnimator.getAnimatedValue());
                         isFromFirstTab = false;
                     } else {
                         fabAdd.setVisibility(View.GONE);
                     }
                 }
+                // Bring the changes of Toolbar into effect.
                 invalidateOptionsMenu();
             }
 
@@ -185,7 +194,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    // The activity has no business logic so there is no presenter.
+    // The Activity has no business logic so there is no presenter.
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -201,21 +210,32 @@ public class MainActivity extends BaseActivity {
     // Toolbar dynamic Changes.
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        Animator animator;
+        View searchIcon = mToolbarMain.findViewById(R.id.toolbar_main_search);
         switch (mViewPager.getCurrentItem()) {
-            // TODO: Toolbar change with animation
+            // TODO: Toolbar change with animation and reduce codes.
             case 0:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(true);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(true);
                 menu.setGroupVisible(R.id.toolbar_group_stream, false);
+                animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_hide);
+                animator.setTarget(searchIcon);
+                animator.start();
                 break;
             case 1:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
+                animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_show);
+                animator.setTarget(searchIcon);
+                animator.start();
                 menu.setGroupVisible(R.id.toolbar_group_stream, true);
                 break;
             case 2:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
+                animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_hide);
+                animator.setTarget(searchIcon);
+                animator.start();
                 menu.setGroupVisible(R.id.toolbar_group_stream, false);
                 break;
         }

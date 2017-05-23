@@ -36,7 +36,7 @@ public class TypeEditViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return GraceBookApplication
-                .getGraceBookContext()
+                .getContext()
                 .getResources()
                 .getStringArray(R.array.typeEdit_viewpager_title)[position];
     }
