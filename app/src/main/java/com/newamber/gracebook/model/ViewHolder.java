@@ -123,7 +123,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
      * Get our item view according to IdRes.<br>
      * The method can avoid redundant findViewById codes.
      *
-     * @param viewId the ID resource of view which we want to get
+     * @param viewId the Id resource of view which we want to get
      * @param <T> certain view type depends on {@code viewId}
      * @return {@code (T) view} which is converted to {@code T}
      */
