@@ -1,6 +1,7 @@
 package com.newamber.gracebook.base;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,16 +23,16 @@ import java.util.List;
 public abstract class BaseListViewAdapter<T> extends BaseAdapter {
 
     private List<T> mEntityList;
-    private int mLayoutRes;
+    private int mLayoutResId;
 
-    protected BaseListViewAdapter(List<T> mEntityList, int mLayoutRes) {
-        this.mEntityList = mEntityList;
-        this.mLayoutRes = mLayoutRes;
+    protected BaseListViewAdapter(@NonNull List<T> entityList, int layoutId) {
+        this.mEntityList = entityList;
+        this.mLayoutResId = layoutId;
     }
 
     @Override
     public int getCount() {
-        return (mEntityList != null) ? mEntityList.size() : 0;
+        return mEntityList.size();
     }
 
     @Override
@@ -46,7 +47,7 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = ViewHolder.bind(parent.getContext(), convertView, parent, mLayoutRes,
+        ViewHolder holder = ViewHolder.bind(parent.getContext(), convertView, parent, mLayoutResId,
                 position);
         bindView(holder, getItem(position));
         return holder.getItemView();
@@ -106,7 +107,6 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
             item = convertView;
         }
 
-        //绑定ViewHolder与item
         static ViewHolder bind(Context context, View convertView, ViewGroup parent, int layoutRes,
                                int position) {
             ViewHolder holder;
@@ -130,23 +130,15 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
             return (T) view;
         }
 
-        /**
-         * 获取当前条目
-         */
         private View getItemView() {
             return item;
         }
 
-        /**
-         * 获取条目位置
-         */
+
         public int getItemPosition() {
             return position;
         }
 
-        /**
-         * 设置文字
-         */
         public ViewHolder setText(int id, CharSequence text) {
             View view = getView(id);
             if (view instanceof TextView) {
@@ -155,9 +147,6 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
             return this;
         }
 
-        /**
-         * 设置图片
-         */
         public ViewHolder setImageResource(int id, int drawableRes) {
             View view = getView(id);
             if (view instanceof ImageView) {
@@ -166,25 +155,17 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
             return this;
         }
 
-        /**
-         * 设置点击监听
-         */
         public ViewHolder setOnClickListener(int id, View.OnClickListener listener) {
             getView(id).setOnClickListener(listener);
             return this;
         }
 
-        /**
-         * 设置可见
-         */
         public ViewHolder setVisibility(int id, int visible) {
             getView(id).setVisibility(visible);
             return this;
         }
 
-        /**
-         * 设置标签
-         */
+
         public ViewHolder setTag(int id, Object obj) {
             getView(id).setTag(obj);
             return this;

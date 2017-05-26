@@ -21,5 +21,5 @@ public class MoneyTypePO extends BaseModel {
 
     public String moneyTypeName;                 // defined by user
 
-    public @DrawableRes int moneyTypeImageID;    // the same...
+    public @DrawableRes int moneyTypeImageId;    // the same...
 }

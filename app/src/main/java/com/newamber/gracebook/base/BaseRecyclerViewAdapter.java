@@ -9,36 +9,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.newamber.gracebook.model.ViewHolder;
-import com.newamber.gracebook.util.ItemTouchHelperAdapter;
+import com.newamber.gracebook.helper.ItemTouchHelperAdapter;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Description: Common Adapter for RecyclerView. <br>
- * {@code <E>} means certain entity(like {@code String}) type depends on data source. <p>
+ * {@code E} means certain entity(like {@code String}) type depends on data source. <p>
  *
  * Created by Newamber on 2017/5/2.
  */
+@SuppressWarnings("unused")
 public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<ViewHolder>
         implements ItemTouchHelperAdapter{
 
     private Context mContext;
     private List<E> mEntityList;
-    private @LayoutRes int mLayoutID;
+    private @LayoutRes int mLayoutId;
 
     private ItemClickListener mItemClickListener;
     private ItemLongClickListener mItemLongClickListener;
 
-    protected BaseRecyclerViewAdapter(@NonNull List<E> entityList, @LayoutRes int layoutID) {
+    protected BaseRecyclerViewAdapter(@NonNull List<E> entityList, @LayoutRes int layoutId) {
         mEntityList = entityList;
-        mLayoutID = layoutID;
+        mLayoutId = layoutId;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mContext == null) mContext = parent.getContext();
-        View view = LayoutInflater.from(mContext).inflate(mLayoutID, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
         final ViewHolder holder = new ViewHolder(view, mContext);
 
         // init sub itemClickListener
@@ -47,7 +48,7 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
         // init OnItemClickListener
         initOnItemClickListener(holder);
 
-        // The instance of ViewHolder is passed to parameter "holder" in onBindViewHolder method
+        // The instance of ViewHolder is passed to parameter "holder" at onBindViewHolder method
         return holder;
     }
 
@@ -133,7 +134,7 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
 
     /**
      * The item click listener interface of RecyclerView
-     * {@code <T>} means the type of entity, it should be the same with {@code <E>}
+     * {@code T} means the type of entity, it should be the same with {@code <E>}
      */
     interface ItemClickListener {
         <T> void onItemClick(View view, T entity, int position) ;
@@ -141,7 +142,7 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
 
     /**
      * The item long click listener interface of RecyclerView
-     * {@code <T>} means the type of entity, it should be the same with {@code <E>}
+     * {@code T} means the type of entity, it should be the same with {@code <E>}
      */
     interface ItemLongClickListener {
         <T> void onItemLongClick(View view, T entity, int position) ;

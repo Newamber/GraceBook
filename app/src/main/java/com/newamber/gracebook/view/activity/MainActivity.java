@@ -2,7 +2,6 @@ package com.newamber.gracebook.view.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -43,21 +41,15 @@ public class MainActivity extends BaseActivity {
 
     @SuppressWarnings("all")
     private Toolbar mToolbarMain;
-
     private DrawerLayout mDrawerLayout;
-
     @SuppressWarnings("all")
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-
     @SuppressWarnings("all")
     private NavigationView mNavigationView;
-
     @SuppressWarnings("all")
     private TabLayout mTabLayout;
-
     @SuppressWarnings("all")
     private ViewPager mViewPager;
-
     private FloatingActionButton fabAdd;
 
     // State bit to control the fab_record's appearance.
@@ -80,7 +72,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(LAYOUT_ID);
         isFromFirstTab = true;
 
         // ----------------------------findViewByID-------------------------------------------------
@@ -161,23 +152,19 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 Animator animator;
-                int elevation = DeviceUtil.dp2Px(6f);
                 if (position == 0) {
                     animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_show);
                     animator.setTarget(fabAdd);
                     animator.start();
-                    fabAdd.setCompatElevation(elevation);
+                    fabAdd.setCompatElevation(DeviceUtil.dp2Px(6f));
                     fabAdd.setVisibility(View.VISIBLE);
                     isFromFirstTab = true;
                 } else {
                     if (isFromFirstTab) {
-                        ValueAnimator valueAnimator = ValueAnimator.ofFloat(elevation, 0f).setDuration(800);
-                        valueAnimator.setInterpolator(new BounceInterpolator());
-                        valueAnimator.start();
                         animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_hide);
                         animator.setTarget(fabAdd);
                         animator.start();
-                        fabAdd.setCompatElevation((Float) valueAnimator.getAnimatedValue());
+                        new Handler().postDelayed(() -> fabAdd.setCompatElevation(0), 700);
                         isFromFirstTab = false;
                     } else {
                         fabAdd.setVisibility(View.GONE);
@@ -200,6 +187,11 @@ public class MainActivity extends BaseActivity {
         return null;
     }
 
+    @Override
+    protected int getLayoutId() {
+        return LAYOUT_ID;
+    }
+
     // Toolbar Created.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -210,32 +202,21 @@ public class MainActivity extends BaseActivity {
     // Toolbar dynamic Changes.
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        Animator animator;
-        View searchIcon = mToolbarMain.findViewById(R.id.toolbar_main_search);
         switch (mViewPager.getCurrentItem()) {
             // TODO: Toolbar change with animation and reduce codes.
             case 0:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(true);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(true);
                 menu.setGroupVisible(R.id.toolbar_group_stream, false);
-                animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_hide);
-                animator.setTarget(searchIcon);
-                animator.start();
                 break;
             case 1:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
-                animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_show);
-                animator.setTarget(searchIcon);
-                animator.start();
                 menu.setGroupVisible(R.id.toolbar_group_stream, true);
                 break;
             case 2:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
-                animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_record_fab_hide);
-                animator.setTarget(searchIcon);
-                animator.start();
                 menu.setGroupVisible(R.id.toolbar_group_stream, false);
                 break;
         }

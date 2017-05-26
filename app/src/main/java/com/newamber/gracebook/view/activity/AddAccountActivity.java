@@ -28,8 +28,6 @@ public class AddAccountActivity extends BaseActivity<AddAccountView, AddAccountP
 
     @Override
     public void initView() {
-        setContentView(LAYOUT_ID);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_addAccount);
 
         setSupportActionBar(toolbar);
@@ -48,6 +46,11 @@ public class AddAccountActivity extends BaseActivity<AddAccountView, AddAccountP
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) finish();
         return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return LAYOUT_ID;
     }
 
     @Override

@@ -1,23 +1,22 @@
 package com.newamber.gracebook.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
  * Description: BaseFragment which extracts some common operations. <br>
- * {@code <V>} means a view interface which implemented by this Fragment. <br>
- * {@code <T>} means a sub presenter of BasePresenter. <p>
+ * {@code V} means a view interface which implemented by this Fragment. <br>
+ * {@code T} means a sub presenter of BasePresenter. <p>
  *
  * Created by Newamber on 2017/4/24.
  */
-
 public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment
         implements View.OnClickListener {
 
@@ -26,13 +25,12 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     private View mRootView;
 
     // Host Activity
-    protected Activity mActivity;
-
+    private AppCompatActivity mHostActivity;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActivity = (Activity) context;
+        mHostActivity = (AppCompatActivity) context;
     }
 
     @Nullable
@@ -40,12 +38,11 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @SuppressWarnings("unchecked")
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        if (mRootView == null) mRootView = inflater.inflate(getLayoutRes(), container, false);
+        if (mRootView == null) mRootView = inflater.inflate(getLayoutId(), container, false);
         mPresenter = createPresenter();
         if (mPresenter != null) mPresenter.attachView((V) this);
         return mRootView;
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -82,12 +79,17 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         return mPresenter;
     }
 
+    public AppCompatActivity getHostActivity() {
+        return mHostActivity;
+    }
+
     protected View getRootView() {
         return mRootView;
     }
 
-    protected abstract  @LayoutRes int getLayoutRes();
+    protected abstract  @LayoutRes int getLayoutId();
 
+    @Override
     public void onClick(View v) {
         processClick(v);
     }

@@ -29,7 +29,7 @@ public class ChartFragment extends BaseFragment {
     }
 
     @Override
-    protected int getLayoutRes() {
+    protected int getLayoutId() {
         return R.layout.fragment_chart;
     }
 }

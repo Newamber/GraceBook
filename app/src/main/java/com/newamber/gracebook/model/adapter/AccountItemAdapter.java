@@ -1,77 +1,56 @@
 package com.newamber.gracebook.model.adapter;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
+import com.newamber.gracebook.model.ViewHolder;
 import com.newamber.gracebook.model.entity.AccountPO;
 
 import java.util.Calendar;
 import java.util.List;
 
 /**
- * Description: RecyclerView Adapter of AccountListItem.<p>
+ * Description: RecyclerView Adapter of AccountItem.<p>
  *
  * Created by Newamber on 2017/4/28.
  */
 @SuppressWarnings("all")
-public class AccountItemAdapter extends RecyclerView.Adapter<AccountItemAdapter.ViewHolder> {
+public class AccountItemAdapter extends BaseRecyclerViewAdapter<AccountPO> {
 
-    private List<AccountPO> mAccountPOList;
-    private Context mContext;
-
-    public AccountItemAdapter(List<AccountPO> accountTableslist) {
-        mAccountPOList = accountTableslist;
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mTextViewHourMin, mTextViewMoneyType, mTextViewNote, mTextViewAmount;
-        ImageView mImageViewMoneyType;
-
-        public ViewHolder(View v) {
-            super(v);
-            mTextViewHourMin = (TextView) v.findViewById(R.id.textview_hour_minute);
-            mTextViewMoneyType = (TextView) v.findViewById(R.id.textView_moneyType);
-            mTextViewNote = (TextView) v.findViewById(R.id.textView_note);
-            mTextViewAmount = (TextView) v.findViewById(R.id.textView_amount);
-            mImageViewMoneyType = (ImageView) v.findViewById(R.id.imageView_moneyType);
-        }
+    public AccountItemAdapter(@NonNull List<AccountPO> entityList, @LayoutRes int layoutId) {
+        super(entityList, layoutId);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (mContext == null) mContext = parent.getContext();
-        View view = LayoutInflater
-                .from(mContext)
-                .inflate(R.layout.recyclerview_record_card, parent ,false);
-        return new ViewHolder(view);
+    public void onItemDismiss(int position) {
+        super.onItemDismiss(position);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        AccountPO accountPO = mAccountPOList.get(position);
-
-        int hour = accountPO.date.get(Calendar.HOUR);
-        int minute = accountPO.date.get(Calendar.MINUTE);
+    protected void convertView(ViewHolder holder, AccountPO entity) {
+        int hour = entity.date.get(Calendar.HOUR);
+        int minute = entity.date.get(Calendar.MINUTE);
         String hours = (hour < 10) ? "0" + hour : "" + hour;
         String minutes = (minute < 10) ? "0" + minute : "" + minute;
 
-        holder.mTextViewHourMin.setText(hours + ":" +minutes);
-        holder.mTextViewMoneyType.setText(accountPO.moneyType);
-        holder.mTextViewNote.setText(accountPO.note);
-        holder.mTextViewAmount.setText(accountPO.amount + "￥");
-        Glide.with(mContext).load(accountPO.moneyTypeImageId).into(holder.mImageViewMoneyType);
+        // TODO: Solve the display way of note and amount.
+        holder.setText(R.id.textview_hour_minute, hours + ":" + minutes);
+        holder.setText(R.id.textView_moneyType, entity.moneyType);
+
+        if (entity.note.length() <= 8) {
+            holder.setText(R.id.textView_note, entity.note);
+        } else {
+            holder.setText(R.id.textView_note, entity.note.substring(0, 7) + "...");
+        }
+
+        holder.setText(R.id.textView_amount, entity.amount + "￥");
+        holder.setImageResource(R.id.imageView_moneyType, entity.moneyTypeImageId);
     }
 
     @Override
-    public int getItemCount() {
-        return mAccountPOList.size();
+    protected void initSubItemClickListener(ViewHolder holder) {
+        // TODO: Initialize sub item click listener here if needed.
     }
-
 }

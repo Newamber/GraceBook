@@ -10,6 +10,7 @@
     <!--Usual Color-->
     <color name="colorWhite">#ffffff</color>
     <color name="colorDivider">#c7c7c7</color>
+    <color name="colorRed">#e51c23</color>
 
     <!--White Text Part-->
     <color name="colorWhiteDivider">#1fffffff</color>

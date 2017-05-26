@@ -2,10 +2,13 @@ package com.newamber.gracebook;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.lang.ref.WeakReference;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Description: Some global operations are relevant to this Application.<p>
@@ -20,6 +23,9 @@ public class GraceBookApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = new WeakReference<>(getApplicationContext());
+
+        // Initialize the Toasty.
+        Toasty.Config.getInstance().setInfoColor(Color.parseColor("#42a5f5")).apply();
 
         // Initialize the database with DBFlow.
         FlowManager.init(this);

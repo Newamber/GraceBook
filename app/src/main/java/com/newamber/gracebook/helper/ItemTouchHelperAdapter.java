@@ -1,4 +1,4 @@
-package com.newamber.gracebook.util;
+package com.newamber.gracebook.helper;
 
 /**
  * Description: .<p>
@@ -20,7 +20,6 @@ public interface ItemTouchHelperAdapter {
      * @see com.newamber.gracebook.model.ViewHolder#getAdapterPosition()
      */
     void onItemMove(int fromPosition, int toPosition);
-
 
     /**
      * Called when an item has been dismissed by a swipe.<br>

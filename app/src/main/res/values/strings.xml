@@ -29,8 +29,8 @@
 
     <!--Account List Item Today-->
     <string name="hour_minute">16:57</string>
-    <string name="money_type_item">网购</string>
-    <string name="note_list_item">买了三件衣服</string>
+    <string name="money_type_item">网购的啊啊啊</string>
+    <string name="note_list_item">买了三件衣服啊啊</string>
     <string name="amount_item">892.5￥</string>
 
     <!--AddAccountActivity-->
@@ -65,6 +65,14 @@
     <string name="new_repo_type">新建钱库</string>
     <string name="repo_type_name">钱库名称</string>
     <string name="initial_balance">初始金额</string>
+    <string name="no_name_no_type">您没有输入名称，类型未保存</string>
+    <string name="over_words_limit">字段过长，类型未保存</string>
+    <string name="delete_all_money_type_is_sure">\n您确定要删除全部“收支类型”吗？该操作将无法撤销。\n</string>
+    <string name="there_is_no_money_type">这里已经没有任何“收支类型”</string>
+    <string name="caution">注意</string>
+    <string name="new_type_success">新建类型成功</string>
+    <string name="there_is_no_money_repo_type">这里已经没有任何“钱库类型”</string>
+    <string name="delete_all_money_repo_type_is_sure">\n您确定要删除全部“钱库类型”吗？该操作将无法撤销。\n</string>
 
     <!--MainViewPager Title-->
     <string-array name="main_viewpager_title">

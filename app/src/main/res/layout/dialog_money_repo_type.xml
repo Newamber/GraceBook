@@ -11,7 +11,7 @@
         android:layout_height="48dp"
         android:layout_width="48dp"
         android:layout_marginTop="@dimen/standard_margin"
-        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginStart="24dp"
         android:layout_gravity="center_vertical"
         tools:src="@drawable/ic_love_10"
         tools:ignore="ContentDescription"/>
@@ -30,11 +30,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_margin"
-        android:layout_marginEnd="@dimen/standard_margin"
-        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:layout_below="@id/imageView_iconRepoSelected"
         android:hint="@string/repo_type_name"
         app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="6"
         app:hintAnimationEnabled="true">
 
         <EditText
@@ -52,8 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/basic_margin"
-        android:layout_marginEnd="@dimen/standard_margin"
-        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:layout_below="@id/textInputLayout_moneyTypeRepoName"
         android:hint="@string/initial_balance"
         app:errorEnabled="true"

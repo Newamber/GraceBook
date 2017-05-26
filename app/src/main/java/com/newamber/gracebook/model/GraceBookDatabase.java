@@ -1,5 +1,6 @@
 package com.newamber.gracebook.model;
 
+import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.raizlabs.android.dbflow.annotation.Database;
 import com.raizlabs.android.dbflow.annotation.Migration;
@@ -17,12 +18,25 @@ public class GraceBookDatabase {
 
     public static final String NAME = "GraceBook";
 
-    public static final int VERSION = 2;
+    public static final int VERSION = 3;
 
     @Migration(version = 2, database = GraceBookDatabase.class)
     public static class MigrationMoneyType extends AlterTableMigration<MoneyTypePO> {
 
         public MigrationMoneyType(Class<MoneyTypePO> table) {
+            super(table);
+        }
+
+        @Override
+        public void onPreMigrate() {
+            addColumn(SQLiteType.INTEGER, "id");
+        }
+    }
+
+    @Migration(version = 2, database = GraceBookDatabase.class)
+    public static class MigrationMoneyRepoType extends AlterTableMigration<MoneyRepoTypePO> {
+
+        public MigrationMoneyRepoType(Class<MoneyRepoTypePO> table) {
             super(table);
         }
 

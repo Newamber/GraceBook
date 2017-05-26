@@ -9,11 +9,13 @@ import java.util.List;
  * Description: Offer an universal interface to<br>
  * {@link MoneyTypePO} and<br>
  * {@link MoneyRepoTypePO}.<p>
- * {@code <E>} means entity type.
+ * {@code E} means entity type.<br>
+ * <br>
  *
  * Created by Newamber on 2017/5/8.
  */
 public interface TypeModel<E> {
     void saveData();
+    void deleteAllData();
     List<E> getAllData();
 }

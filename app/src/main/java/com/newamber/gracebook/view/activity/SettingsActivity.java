@@ -39,8 +39,6 @@ public class SettingsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(LAYOUT_ID);
-
         TextView textViewTypeEdit = (TextView) findViewById(R.id.textView_typeEdit);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
 
@@ -53,6 +51,10 @@ public class SettingsActivity extends BaseActivity {
         textViewTypeEdit.setOnClickListener(this);
     }
 
+    @Override
+    protected int getLayoutId() {
+        return LAYOUT_ID;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

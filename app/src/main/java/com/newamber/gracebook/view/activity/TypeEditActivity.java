@@ -19,16 +19,17 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BaseListViewAdapter;
-import com.newamber.gracebook.model.MoneyTypeModel;
 import com.newamber.gracebook.model.adapter.TypeEditViewPagerAdapter;
+import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.entity.SpinnerTypeIcon;
 import com.newamber.gracebook.presenter.TypeEditPresenter;
+import com.newamber.gracebook.util.ToastUtil;
+import com.newamber.gracebook.util.ToastUtil.ToastMode;
 import com.newamber.gracebook.view.TypeEditView;
 import com.newamber.gracebook.view.fragment.MoneyRepoTypeFragment;
 import com.newamber.gracebook.view.fragment.MoneyTypeFragment;
@@ -67,17 +68,20 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
         implements TypeEditView {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.activity_type_edit;
-    private ViewPager mviewPager;
-    private List<SpinnerTypeIcon> mSpinnerTypeIconList;
-    private AppCompatSpinner spinnerMoneyType, spinnerMoneyRepoType;
-    private BaseAdapter adapter;
 
-    private MoneyTypeFragment moneyTypeFragment;
-    int iconID;
+    private int iconId;
+    private BaseAdapter adapter;
+    private ViewPager mViewPager;
+    private TypeEditPresenter mEditPresenter;
+    private List<SpinnerTypeIcon> mSpinnerTypeIconList;
+    public MoneyTypeFragment mMoneyTypeFragment;
+    public MoneyRepoTypeFragment mMoneyRepoTypeFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mEditPresenter = getPresenter();
     }
 
     @Override
@@ -87,12 +91,10 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
 
     @Override
     public void initView() {
-        setContentView(LAYOUT_ID);
-
         // -----------------------------findViewById------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_typeEdit);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout_typeEdit);
-        mviewPager = (ViewPager) findViewById(R.id.viewPager_typeEdit);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager_typeEdit);
 
         // ---------------------------Toolbar-------------------------------------------------------
         setSupportActionBar(toolbar);
@@ -103,28 +105,24 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
 
         // -----------------------------ViewPager---------------------------------------------------
         List<Fragment> fragmentList = new ArrayList<>();
-        moneyTypeFragment = new MoneyTypeFragment();
-        fragmentList.add(moneyTypeFragment);
-        fragmentList.add(new MoneyRepoTypeFragment());
+        mMoneyTypeFragment = new MoneyTypeFragment();
+        mMoneyRepoTypeFragment = new MoneyRepoTypeFragment();
+        fragmentList.add(mMoneyTypeFragment);
+        fragmentList.add(mMoneyRepoTypeFragment);
+
         TypeEditViewPagerAdapter pagerAdapter = new TypeEditViewPagerAdapter(getSupportFragmentManager(), fragmentList);
-        mviewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(mviewPager);
+        mViewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
 
         // -----------------------------SpinnerAdapter----------------------------------------------
         initIconSpinnerDropDown();
-        adapter = new BaseListViewAdapter<SpinnerTypeIcon>(mSpinnerTypeIconList,
-                R.layout.spinner_item_icons) {
+        adapter = new BaseListViewAdapter<SpinnerTypeIcon>(mSpinnerTypeIconList, R.layout.spinner_item_icons) {
             @Override
             protected void bindView(ViewHolder holder, SpinnerTypeIcon entity) {
                 holder.setImageResource(R.id.imageView_spinner_item_icon, entity.getIconId());
                 holder.setText(R.id.textView_placeholder, entity.getPlaceholder());
             }
         };
-    }
-
-    @Override
-    protected TypeEditPresenter createPresenter() {
-        return new TypeEditPresenter();
     }
 
     @Override
@@ -135,61 +133,56 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int position = mViewPager.getCurrentItem();
         switch (item.getItemId()) {
             case R.id.toolbar_typeEdit_delete:
                 break;
             case R.id.toolbar_typeEdit_new:
-                getPresenter().newTypeDialog(mviewPager.getCurrentItem());
+                mEditPresenter.showBuildDialog(position);
+                /*if (position == 0) showMoneyTypeDialog();
+                else showMoneyRepoTypeDialog();*/
                 break;
             case R.id.toolbar_typeEdit_deleteAll:
-                // TODO: extract to presenter
-                AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
-                dialog.setTitle("注意");
-                dialog.setIcon(R.drawable.ic_dialog_warning);
-                if (moneyTypeFragment.mMoneyTypePOList.isEmpty()) {
-                    dialog.setMessage("这里已经没有任何收支类型。");
-                    dialog.setPositiveButton("确定", (dialog1, which) -> {});
+                /*if (position == 0) {
+                    if (mMoneyTypeFragment.mPOList.isEmpty())
+                        ToastUtil.showShort(R.string.there_is_no_money_type, ToastMode.INFO);
+                    else
+                        mEditPresenter.showDeleteDialog(0);
                 } else {
-                    dialog.setMessage("您确定要删除全部“收支类型”吗？该操作将无法撤销。");
-                    dialog.setPositiveButton("确定", (dialog1, which) -> {
-                        new MoneyTypeModel().deleteAllData();
-                        for(int i = 0; i <= moneyTypeFragment.mMoneyTypePOList.size() - 1; i++) {
-                            moneyTypeFragment.mMoneyTypePOList.remove(i);
-                            moneyTypeFragment.moneyTypeItemAdapter.notifyItemRemoved(i);
-                        }
-                    });
-                    dialog.setNegativeButton("取消", (dialog1, which) -> {});
-                }
-                dialog.show();
+                    if (mMoneyRepoTypeFragment.mPOList.isEmpty())
+                        ToastUtil.showShort(R.string.there_is_no_money_repo_type, ToastMode.INFO);
+                    else
+                        mEditPresenter.showDeleteDialog(position);
+                }*/
+                mEditPresenter.showDeleteDialog(position);
                 break;
             case android.R.id.home:
                 finish();
             default:
+                break;
         }
         return true;
     }
+
 
     @Override
     @SuppressWarnings("all")
     public void showMoneyTypeDialog() {
         Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_record_fab_show);
-        getPresenter().isMoneyType = true;
-        AlertDialog.Builder dialogMoneyType = new AlertDialog.Builder(TypeEditActivity.this);
-        View view =  LayoutInflater.from(this).inflate(R.layout.dialog_money_type, null);
-        dialogMoneyType.setTitle(R.string.new_type);
-        dialogMoneyType.setView(view);
-        dialogMoneyType.setCancelable(false);
-        EditText editTextmoneyTypeName = (EditText) view.findViewById(R.id.editText_moneyTypeName);
+        mEditPresenter.isMoneyType = true;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_money_type, null);
+        EditText editText = (EditText) view.findViewById(R.id.editText_moneyTypeName);
         ImageView icon = (ImageView) view.findViewById(R.id.imageView_iconSelected);
         TextInputLayout textInputLayout = (TextInputLayout) view.findViewById(R.id.textInputLayout_moneyTypeName);
 
-        spinnerMoneyType = (AppCompatSpinner) view.findViewById(R.id.spinner_typeEdit_moneyType);
+        AppCompatSpinner spinnerMoneyType = (AppCompatSpinner) view.findViewById(R.id.spinner_typeEdit_moneyType);
         spinnerMoneyType.setAdapter(adapter);
         spinnerMoneyType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerTypeIcon entity = (SpinnerTypeIcon) parent.getItemAtPosition(position);
-                iconID = entity.getIconId();
+                iconId = entity.getIconId();
                 animator.setTarget(icon);
                 animator.start();
                 icon.setBackgroundResource(entity.getIconId());
@@ -201,64 +194,147 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
             }
         });
 
-        dialogMoneyType.setPositiveButton(R.string.sure, (dialog, which) -> {
-            // TODO: logic business
-            String name = editTextmoneyTypeName.getText().toString();
-            if (name.isEmpty())
-                Toast.makeText(TypeEditActivity.this, "您没有输入名称，类型未保存", Toast.LENGTH_SHORT).show();
-            else if(name.length() >= 10) {
-                Toast.makeText(TypeEditActivity.this, "字段过长，类型未保存", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                getPresenter().saveData(name, iconID, 0);
-                MoneyTypePO moneyTypePO = new MoneyTypePO();
-                moneyTypePO.moneyTypeName = name;
-                moneyTypePO.moneyTypeImageID = iconID;
-                moneyTypeFragment.mMoneyTypePOList.add(moneyTypePO);
-                int postion = moneyTypeFragment.moneyTypeItemAdapter.getItemCount();
-                moneyTypeFragment.moneyTypeItemAdapter.notifyItemInserted(postion);
-            }
-        });
-        dialogMoneyType.setNegativeButton(R.string.cancel, (dialog, which) -> {});
-        dialogMoneyType.show();
+        dialog.setTitle(R.string.new_type)
+                .setView(view)
+                .setCancelable(false)
+                .setPositiveButton(R.string.sure, (dialog1, which) -> {
+                    String name = editText.getText().toString();
+                    if (name.isEmpty()) {
+                        ToastUtil.showShort(R.string.no_name_no_type, ToastMode.WARNING);
+                    } else if (name.length() > 6) {
+                        ToastUtil.showShort(R.string.over_words_limit, ToastMode.WARNING);
+                    } else {
+                        mEditPresenter.saveData(name, iconId, 0);
+
+                        MoneyTypePO moneyTypePO = new MoneyTypePO();
+                        moneyTypePO.moneyTypeName = name;
+                        moneyTypePO.moneyTypeImageId = iconId;
+                        mMoneyTypeFragment.mPOList.add(moneyTypePO);
+
+                        int postion = mMoneyTypeFragment.mAdapter.getItemCount();
+                        mMoneyTypeFragment.mAdapter.notifyItemInserted(postion);
+                        ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
+                .show();
     }
 
     @Override
     @SuppressWarnings("all")
     public void showMoneyRepoTypeDialog() {
         Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_record_fab_show);
-        getPresenter().isMoneyType = false;
-        AlertDialog.Builder dialogMoneyRepo = new AlertDialog.Builder(TypeEditActivity.this);
+        mEditPresenter.isMoneyType = false;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
         View view =  LayoutInflater.from(this).inflate(R.layout.dialog_money_repo_type, null);
-        dialogMoneyRepo.setTitle(R.string.new_repo_type);
-        dialogMoneyRepo.setView(view);
 
-        EditText moneyRepoTypeName = (EditText) view.findViewById(R.id.editText_moneyRepoTypeName);
-        ImageView imageViewIconRepo = (ImageView) view.findViewById(R.id.imageView_iconRepoSelected);
+        EditText editTextName = (EditText) view.findViewById(R.id.editText_moneyRepoTypeName);
+        EditText editTextBalance = (EditText) view.findViewById(R.id.editText_moneyRepoTypeBalance);
 
-        spinnerMoneyRepoType = (AppCompatSpinner) view.findViewById(R.id.spinner_typeEdit_moneyRepoType);
+        ImageView icon = (ImageView) view.findViewById(R.id.imageView_iconRepoSelected);
+
+        AppCompatSpinner spinnerMoneyRepoType = (AppCompatSpinner) view.findViewById(R.id.spinner_typeEdit_moneyRepoType);
         spinnerMoneyRepoType.setAdapter(adapter);
         spinnerMoneyRepoType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerTypeIcon entity = (SpinnerTypeIcon) parent.getItemAtPosition(position);
-                animator.setTarget(imageViewIconRepo);
+                iconId = entity.getIconId();
+                animator.setTarget(icon);
                 animator.start();
-                imageViewIconRepo.setBackgroundResource(entity.getIconId());
+                icon.setBackgroundResource(entity.getIconId());
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-        dialogMoneyRepo.setPositiveButton(R.string.sure, (dialog, which) -> {
-            // TODO: logic business
-            String a = moneyRepoTypeName.getText().toString().trim();
-            Toast.makeText(TypeEditActivity.this, a, Toast.LENGTH_SHORT).show();
-        });
-        dialogMoneyRepo.setNegativeButton(R.string.cancel, (dialog, which) -> {});
-        dialogMoneyRepo.show();
+
+        dialog.setTitle(R.string.new_repo_type)
+                .setView(view)
+                .setPositiveButton(R.string.sure, (dialog1, which) -> {
+                    String name = editTextName.getText().toString();
+                    String balance = editTextBalance.getText().toString();
+                    if (balance.isEmpty()) balance = "0";
+                    if (balance.length() == 1) {
+                       if (balance.contains(".")) balance = "0";
+                   }
+                   Double balanceAmount = Double.valueOf(balance);
+
+                    if (name.isEmpty()) {
+                        ToastUtil.showShort(R.string.no_name_no_type, ToastMode.WARNING);
+                    } else if (name.length() > 6) {
+                        ToastUtil.showShort(R.string.over_words_limit, ToastMode.WARNING);
+                    } else {
+                        mEditPresenter.saveData(name, iconId, balanceAmount);
+
+                        MoneyRepoTypePO moneyRepoTypePO = new MoneyRepoTypePO();
+                        moneyRepoTypePO.moneyRepoTypeName = name;
+                        moneyRepoTypePO.moneyRepoTypeImageId = iconId;
+                        moneyRepoTypePO.balance = balanceAmount;
+
+                        mMoneyRepoTypeFragment.mPOList.add(moneyRepoTypePO);
+                        int postion = mMoneyRepoTypeFragment.mAdapter.getItemCount();
+                        mMoneyRepoTypeFragment.mAdapter.notifyItemInserted(postion);
+                        ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
+                .show();
+    }
+
+    @Override
+    public void showTypeDeleteDialog() {
+        mEditPresenter.isMoneyType = true;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
+        dialog.setTitle(R.string.caution)
+                .setIcon(R.drawable.ic_dialog_warning)
+                .setMessage(R.string.delete_all_money_type_is_sure)
+                .setPositiveButton(R.string.sure, (dialog1, which) -> {
+
+                    // TODO: some bug
+                    mEditPresenter.deleteAllData();
+                    for (int i = 0; i <= mMoneyTypeFragment.mPOList.size() - 1; i++) {
+                        mMoneyTypeFragment.mPOList.remove(i);
+                        mMoneyTypeFragment.mAdapter.notifyItemRemoved(i);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
+                .show();
+        }
+
+    @Override
+    public void showRepoTypeDeleteDialog() {
+        mEditPresenter.isMoneyType = false;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
+        dialog.setTitle(R.string.caution)
+                .setIcon(R.drawable.ic_dialog_warning)
+                .setMessage(R.string.delete_all_money_repo_type_is_sure)
+                .setPositiveButton(R.string.sure, (dialog1, which) -> {
+                    mEditPresenter.deleteAllData();
+                    for (int i = 0; i <= mMoneyRepoTypeFragment.mPOList.size() - 1; i++) {
+                        mMoneyRepoTypeFragment.mPOList.remove(i);
+                        mMoneyRepoTypeFragment.mAdapter.notifyItemRemoved(i);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
+                .show();
+    }
+
+
+    @Override
+    protected int getLayoutId() {
+        return LAYOUT_ID;
+    }
+
+    @Override
+    protected TypeEditPresenter createPresenter() {
+        return new TypeEditPresenter();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void initIconSpinnerDropDown() {

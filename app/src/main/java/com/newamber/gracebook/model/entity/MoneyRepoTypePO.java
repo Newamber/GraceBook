@@ -16,11 +16,14 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 @Table(database = GraceBookDatabase.class, allFields = true)
 public class MoneyRepoTypePO extends BaseModel {
 
-    @PrimaryKey
+    @PrimaryKey(autoincrement = true)
+    public int id;
+
     public String moneyRepoTypeName;    // defined by user
 
     public @DrawableRes
-    int moneyRepoTypeImageID;           // defined by user
+    int moneyRepoTypeImageId;           // defined by user
 
     public Double balance;              // the balance of MoneyRepo initializd by user
+
 }

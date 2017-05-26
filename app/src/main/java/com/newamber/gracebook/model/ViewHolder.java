@@ -15,8 +15,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 /**
- * Description: A encapsulated common ViewHolder.<p>
- *
+ * Description: A encapsulated common ViewHolder of RecyclerView .<p>
+ * <br>
  * Created by Newamber on 2017/5/2.
  */
 public class ViewHolder extends RecyclerView.ViewHolder {
@@ -41,7 +41,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set text of view.
      *
-     * @param viewId  the ID resource of view which is set text
+     * @param viewId  the id resource of view which is set text
      * @param textContent the text we want to set
      * @return {@code this} the instance of ViewHolder
      */
@@ -55,7 +55,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set color of view.
      *
-     * @param viewId the ID resource of view which is set color
+     * @param viewId the id resource of view which is set color
      * @param colorId the color we want to set
      * @return {@code this} the instance of ViewHolder
      */
@@ -80,7 +80,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set background color of view.
      *
-     * @param viewId the ID resource of view which is set background color
+     * @param viewId the id resource of view which is set background color
      * @param colorId he color we want to set
      * @return {@code this} the instance of ViewHolder
      */
@@ -97,8 +97,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * Encapsulated method used to set drawable of view.
      *
-     * @param viewId the ID resource of view which is set image
-     * @param drawableId the ID drawable resource image which we want to set
+     * @param viewId the id resource of view which is set image
+     * @param drawableId the id drawable resource image which we want to set
      * @return {@code this} the instance of ViewHolder
      */
     public ViewHolder setImageResource(@IdRes int viewId , @DrawableRes int drawableId) {
@@ -123,9 +123,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
      * Get our item view according to IdRes.<br>
      * The method can avoid redundant findViewById codes.
      *
-     * @param viewId the Id resource of view which we want to get
+     * @param viewId the id resource of view which we want to get
      * @param <T> certain view type depends on {@code viewId}
-     * @return {@code (T) view} which is converted to {@code T}
+     * @return {@code view} which is converted to {@code T}
      */
     @SuppressWarnings("unchecked")
     private <T extends View> T getSubView(@IdRes int viewId) {

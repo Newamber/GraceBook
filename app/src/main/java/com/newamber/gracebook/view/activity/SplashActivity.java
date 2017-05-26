@@ -10,7 +10,7 @@ import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BasePresenter;
 
 /**
- * Description: Splash Activity which include some initializing operations.<p>
+ * Description: Splash Activity which include some initial operations.<p>
  *
  * Created by Newamber on 2017/5/4.
  */
@@ -31,10 +31,14 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(LAYOUT_ID);
     }
 
-    // The activity has no business logic so there is no presenter.
+    @Override
+    protected int getLayoutId() {
+        return LAYOUT_ID;
+    }
+
+    // The Activity has no business logic so there is no presenter.
     @Override
     protected BasePresenter createPresenter() {
         return null;
