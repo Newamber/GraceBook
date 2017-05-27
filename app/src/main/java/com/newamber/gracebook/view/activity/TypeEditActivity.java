@@ -168,7 +168,7 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
     @Override
     @SuppressWarnings("all")
     public void showMoneyTypeDialog() {
-        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_record_fab_show);
+        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_bounce_show);
         mEditPresenter.isMoneyType = true;
         AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_money_type, null);
@@ -223,7 +223,7 @@ public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresent
     @Override
     @SuppressWarnings("all")
     public void showMoneyRepoTypeDialog() {
-        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_record_fab_show);
+        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_bounce_show);
         mEditPresenter.isMoneyType = false;
         AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
         View view =  LayoutInflater.from(this).inflate(R.layout.dialog_money_repo_type, null);

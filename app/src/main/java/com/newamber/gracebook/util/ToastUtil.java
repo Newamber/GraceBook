@@ -110,6 +110,10 @@ public class ToastUtil {
     }
 
     public enum ToastMode {
-        NORMAL, WARNING, INFO, SUCCESS, ERROR
+        NORMAL,
+        WARNING,
+        INFO,
+        SUCCESS,
+        ERROR
     }
 }
