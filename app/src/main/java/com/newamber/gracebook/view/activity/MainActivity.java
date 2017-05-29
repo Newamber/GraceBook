@@ -142,7 +142,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 Animator animator;
-                // Flowing codes look like strange because of the
+                // Following codes look like strange because of the
                 // strange display way about fab with animation.
                 // If there is no handler, fab might not show shadow correctly.
                 if (position == 0) {
@@ -153,7 +153,7 @@ public class MainActivity extends BaseActivity {
                     new Handler().postDelayed(() -> {
                             if (fabAdd.getCompatElevation() == 0)
                             fabAdd.setCompatElevation(DeviceUtil.dp2Px(6f));
-                    }, 462);
+                    }, 463);
                     fabAdd.setVisibility(View.VISIBLE);
                     isFromFirstTab = true;
                 } else {

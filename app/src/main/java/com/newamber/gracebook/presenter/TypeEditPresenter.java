@@ -23,7 +23,8 @@ public class TypeEditPresenter extends BasePresenter<TypeEditView> {
 
     public boolean isMoneyType;
 
-    // TODO: Figure out why can't getView() here.
+    // Only if this presenter is initialized, the mView can be got.
+    // So do not invoke getView() here.
     private TypeEditView mView;
     private TypeModel typeModel;
 
