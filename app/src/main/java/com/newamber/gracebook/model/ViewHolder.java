@@ -1,13 +1,17 @@
 package com.newamber.gracebook.model;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,7 +63,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
      * @param colorId the color we want to set
      * @return {@code this} the instance of ViewHolder
      */
-    public ViewHolder setColor(@IdRes int viewId, @ColorRes int colorId) {
+    public ViewHolder setTextColor(@IdRes int viewId, @ColorRes int colorId) {
         View view = getSubView(viewId);
         if (view instanceof TextView) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -93,6 +97,23 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
         return this;
     }
+
+    public ViewHolder setBackgroundColor(@IdRes int viewId, @NonNull String startColor, @NonNull String endColor) {
+
+        final int startColorInt = Color.parseColor(startColor);
+        final int endColorInt = Color.parseColor(endColor);
+
+        ValueAnimator animator = ValueAnimator.ofInt(startColorInt, endColorInt);
+        animator.setDuration(500);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
+
+        getSubView(viewId).setBackgroundColor((int) animator.getAnimatedValue());
+        return this;
+    }
+
+
+
 
     /**
      * Encapsulated method used to set drawable of view.

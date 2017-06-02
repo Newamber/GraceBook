@@ -72,6 +72,7 @@ public class MoneyTypeModel implements TypeModel<MoneyTypePO> {
             //dataList.size()
             for (MoneyTypePO data : dataList) if (data != null) data.id -= 1;
         }
+
         if (entity != null) entity.delete();
     }
 

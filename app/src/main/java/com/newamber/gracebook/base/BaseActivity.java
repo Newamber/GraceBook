@@ -34,14 +34,14 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     /**
-     * Processing click events at here.
+     * Processing click events here.
      *
      * @param v view waited to be clicked.
      */
     public abstract void processClick(View v);
 
     /**
-     * Initializing View here.
+     * Initializing Views here.
      *
      */
     public abstract void initView();

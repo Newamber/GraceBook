@@ -23,15 +23,21 @@ public class GraceBookApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = new WeakReference<>(getApplicationContext());
-
-        // Initialize the Toasty.
-        Toasty.Config.getInstance().setInfoColor(Color.parseColor("#42a5f5")).apply();
-
-        // Initialize the database with DBFlow.
-        FlowManager.init(this);
+        initConfig();
     }
 
     public static Context getContext() {
         return sContext.get();
+    }
+
+    private void initConfig() {
+        // Initialize Toasty with custom config.
+        Toasty.Config
+                .getInstance()
+                .setInfoColor(Color.parseColor("#42a5f5"))
+                .apply();
+
+        // Initialize DBFlow.
+        FlowManager.init(this);
     }
 }

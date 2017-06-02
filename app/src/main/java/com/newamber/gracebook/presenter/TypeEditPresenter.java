@@ -28,13 +28,13 @@ public class TypeEditPresenter extends BasePresenter<TypeEditView> {
     private TypeEditView mView;
     private TypeModel typeModel;
 
-    public void showBuildDialog(int position) {
+    public void showNewTypeDialog(int position) {
         mView = getView();
         if (position == 0) mView.showMoneyTypeDialog();
         else mView.showMoneyRepoTypeDialog();
     }
 
-    public void showDeleteDialog(int position) {
+    public void showDeleteAllDialog(int position) {
         mView = getView();
         TypeEditActivity activity = (TypeEditActivity) mView;
         if (position == 0) {
@@ -53,7 +53,7 @@ public class TypeEditPresenter extends BasePresenter<TypeEditView> {
      *
      * @param name type name
      * @param imageId image id.
-     * @param balance balance is random if is MoneyType and defined by user if not.
+     * @param balance balance can be random if type is MoneyType and defined by user if not.
      */
     public void saveData(String name, @DrawableRes int imageId, double balance) {
         typeModel = isMoneyType ?

@@ -35,7 +35,7 @@ public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
             return makeMovementFlags(dragFlags, swipeFlags);
         } else {
             final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-            final int swipeFlags = ItemTouchHelper.START;
+            final int swipeFlags = ItemTouchHelper.END;
             return makeMovementFlags(dragFlags, swipeFlags);
         }
     }
@@ -58,16 +58,19 @@ public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-        if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
-            return;
-        }
         super.onSelectedChanged(viewHolder, actionState);
+        //final ViewHolder holder = (ViewHolder) viewHolder;
+        /*if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
+            holder.setBackgroundColor(R.id.cardView_typeEdit_moneyType, "#ffffff", "#e57373");
+        }*/
     }
 
     @Override
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         super.clearView(recyclerView, viewHolder);
-        final View itemContainer = ((ViewHolder) viewHolder).itemView;
+        final ViewHolder holder = (ViewHolder) viewHolder;
+        final View itemContainer = holder.itemView;
+       // holder.setBackgroundColor(R.id.cardView_typeEdit_moneyType, "#e57373", "#ffffff");
         itemContainer.setAlpha(ALPHA_FULL);
         itemContainer.setScaleX(1);
         itemContainer.setScaleY(1);

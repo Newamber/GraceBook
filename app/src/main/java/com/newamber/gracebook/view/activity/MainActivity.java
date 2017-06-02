@@ -28,6 +28,7 @@ import com.newamber.gracebook.base.BasePresenter;
 import com.newamber.gracebook.model.adapter.MainViewPagerAdapter;
 import com.newamber.gracebook.util.ActivityCollectorUtil;
 import com.newamber.gracebook.util.DeviceUtil;
+import com.newamber.gracebook.util.ToastUtil;
 import com.newamber.gracebook.view.fragment.ChartFragment;
 import com.newamber.gracebook.view.fragment.DayFragment;
 import com.newamber.gracebook.view.fragment.StreamFragment;
@@ -106,10 +107,10 @@ public class MainActivity extends BaseActivity {
                     break;
                 case R.id.navigationview_settings:
                     new Handler().postDelayed(() ->
-                            startActivity(new Intent(MainActivity.this, SettingsActivity.class)), 100);
+                            startActivity(new Intent(this, SettingsActivity.class)), 200);
                     break;
                 case R.id.navigationview_donation:
-                    Toast.makeText(MainActivity.this, "donation", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showShort("donation", ToastUtil.ToastMode.ERROR);
                     break;
                 case R.id.navigationview_share:
                     Toast.makeText(MainActivity.this, "share", Toast.LENGTH_SHORT).show();

@@ -100,18 +100,16 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
      *
      * @param holder view holder
      */
-    @SuppressWarnings("all")
     protected abstract void initSubItemClickListener(ViewHolder holder);
 
     /**
      * Extract our operations about different data binding.<br>
      * This is a specific job of our sub adapters according to the show of different item view.<br>
-     * You can set text, color or drawble in the method.
+     * You can set text, color or drawable resource in the method.
      *
      * @param holder the outer layer holder of sub items
      * @param entity the data source
      */
-    @SuppressWarnings("all")
     protected abstract void convertView(ViewHolder holder, E entity);
 
     /**

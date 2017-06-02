@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Grace Book</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">图表，待添加</string>
 
     <!-- NavigationView-->
     <string name="like">好评</string>
@@ -64,9 +64,9 @@
     <string name="cancel">取消</string>
     <string name="new_repo_type">新建钱库</string>
     <string name="repo_type_name">钱库名称</string>
-    <string name="initial_balance">初始金额</string>
+    <string name="initial_balance">初始余额</string>
     <string name="no_name_no_type">您没有输入名称，类型未保存</string>
-    <string name="over_words_limit">字段过长，类型未保存</string>
+    <string name="over_words_limit">名称过长，类型未保存</string>
     <string name="delete_all_money_type_is_sure">\n您确定要删除全部“收支类型”吗？该操作将无法撤销。\n</string>
     <string name="there_is_no_money_type">这里已经没有任何“收支类型”</string>
     <string name="caution">注意</string>

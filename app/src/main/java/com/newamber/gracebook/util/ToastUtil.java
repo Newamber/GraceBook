@@ -85,10 +85,10 @@ public class ToastUtil {
         }
     }
 
-    public static void showLong(@StringRes int stringId, ToastMode mode) {
+    public static void showLong(@StringRes int stringId, ToastMode modeEnum) {
         Context context = GraceBookApplication.getContext();
         String text = context.getResources().getString(stringId);
-        switch (mode) {
+        switch (modeEnum) {
             case NORMAL:
                 Toasty.normal(context, text, Toast.LENGTH_LONG).show();
                 break;
@@ -111,8 +111,8 @@ public class ToastUtil {
 
     public enum ToastMode {
         NORMAL,
-        WARNING,
         INFO,
+        WARNING,
         SUCCESS,
         ERROR
     }
