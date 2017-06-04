@@ -201,7 +201,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         switch (mViewPager.getCurrentItem()) {
-            // TODO: Toolbar change with animation and reduce codes.
             case 0:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(true);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(true);
@@ -219,6 +218,18 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         return super.onPrepareOptionsMenu(menu);
+        /*List<boolean[]> situation = new ArrayList<>();
+        situation.add(new boolean[] {true, true, false});
+        situation.add(new boolean[] {false, false, true});
+        situation.add(new boolean[] {false, false, false});
+
+        // TODO: Toolbar change with animation
+        boolean[] isVisible = situation.get(mViewPager.getCurrentItem());
+        menu.findItem(R.id.toolbar_main_editbookname).setVisible(isVisible[0]);
+        menu.findItem(R.id.toolbar_main_settings).setVisible(isVisible[1]);
+        menu.setGroupVisible(R.id.toolbar_group_stream, isVisible[2]);
+
+        return super.onPrepareOptionsMenu(menu);*/
     }
 
     // Toolbar items.

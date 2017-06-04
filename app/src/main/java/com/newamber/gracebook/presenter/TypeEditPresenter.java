@@ -18,7 +18,6 @@ import java.util.List;
  * Description: The presenter of {@link com.newamber.gracebook.view.activity.TypeEditActivity}.<p>
  * Created by Newamber on 2017/5/5.
  */
-
 public class TypeEditPresenter extends BasePresenter<TypeEditView> {
 
     public boolean isMoneyType;

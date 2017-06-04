@@ -134,7 +134,6 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
             return item;
         }
 
-
         public int getItemPosition() {
             return position;
         }
@@ -164,7 +163,6 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
             getView(id).setVisibility(visible);
             return this;
         }
-
 
         public ViewHolder setTag(int id, Object obj) {
             getView(id).setTag(obj);
