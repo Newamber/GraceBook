@@ -24,14 +24,14 @@ import android.widget.ImageView;
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BaseListViewAdapter;
-import com.newamber.gracebook.model.adapter.TypeEditViewPagerAdapter;
+import com.newamber.gracebook.base.BaseView;
+import com.newamber.gracebook.adapter.TypeEditViewPagerAdapter;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.entity.SpinnerTypeIcon;
 import com.newamber.gracebook.presenter.TypeEditPresenter;
 import com.newamber.gracebook.util.ToastUtil;
 import com.newamber.gracebook.util.ToastUtil.ToastMode;
-import com.newamber.gracebook.view.TypeEditView;
 import com.newamber.gracebook.view.fragment.MoneyRepoTypeFragment;
 import com.newamber.gracebook.view.fragment.MoneyTypeFragment;
 
@@ -65,8 +65,8 @@ import static com.newamber.gracebook.R.drawable.ic_transport_17;
 import static com.newamber.gracebook.R.drawable.ic_transport_96;
 import static com.newamber.gracebook.R.drawable.ic_travel_60;
 
-public class TypeEditActivity extends BaseActivity<TypeEditView, TypeEditPresenter>
-        implements TypeEditView {
+public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEditPresenter>
+        implements BaseView.TypeEditView {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.activity_type_edit;
 

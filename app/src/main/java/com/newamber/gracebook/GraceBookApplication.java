@@ -6,6 +6,7 @@ import android.graphics.Color;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
 
+import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
 import es.dmoral.toasty.Toasty;
@@ -17,7 +18,7 @@ import es.dmoral.toasty.Toasty;
  */
 public class GraceBookApplication extends Application {
 
-    private static WeakReference<Context> sContext;
+    private static Reference<Context> sContext;
 
     @Override
     public void onCreate() {
@@ -31,9 +32,8 @@ public class GraceBookApplication extends Application {
     }
 
     private void initConfig() {
-        // Initialize Toasty with custom config.
-        Toasty.Config
-                .getInstance()
+        // Initialize Toasty with custom configuration.
+        Toasty.Config.getInstance()
                 .setInfoColor(Color.parseColor("#42a5f5"))
                 .apply();
 

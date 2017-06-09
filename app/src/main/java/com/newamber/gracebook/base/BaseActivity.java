@@ -26,7 +26,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-
         mPresenter = createPresenter();
         if (mPresenter != null) mPresenter.attachView((V) this);
         ActivityCollectorUtil.addActivity(this);

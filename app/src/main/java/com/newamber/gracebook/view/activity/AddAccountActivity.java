@@ -2,17 +2,17 @@ package com.newamber.gracebook.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.support.v7.widget.Toolbar;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
+import com.newamber.gracebook.base.BaseView;
 import com.newamber.gracebook.presenter.AddAccountPresenter;
-import com.newamber.gracebook.view.AddAccountView;
 
-public class AddAccountActivity extends BaseActivity<AddAccountView, AddAccountPresenter>
-        implements AddAccountView {
+public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, AddAccountPresenter>
+        implements BaseView.AddAccountView {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.activity_add_account;
 

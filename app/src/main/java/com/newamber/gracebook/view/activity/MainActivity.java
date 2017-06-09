@@ -25,7 +25,7 @@ import com.bumptech.glide.Glide;
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.model.adapter.MainViewPagerAdapter;
+import com.newamber.gracebook.adapter.MainViewPagerAdapter;
 import com.newamber.gracebook.util.ActivityCollectorUtil;
 import com.newamber.gracebook.util.DeviceUtil;
 import com.newamber.gracebook.util.ToastUtil;

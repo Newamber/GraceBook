@@ -1,4 +1,4 @@
-package com.newamber.gracebook.model.adapter;
+package com.newamber.gracebook.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,15 +10,16 @@ import com.newamber.gracebook.R;
 import java.util.List;
 
 /**
- * Description: .<p>
- * Created by Newamber on 2017/5/2.
+ * Description: The adapter of ViewPager to adapts three Fragments.<p>
+ *
+ * Created by Newamber on 2017/4/25.
  */
 
-public class TypeEditViewPagerAdapter extends FragmentPagerAdapter {
+public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragmentList;
 
-    public TypeEditViewPagerAdapter(FragmentManager fm, List<Fragment> mFragmentList) {
+    public MainViewPagerAdapter(FragmentManager fm, List<Fragment> mFragmentList) {
         super(fm);
         this.mFragmentList =  mFragmentList;
     }
@@ -38,6 +39,6 @@ public class TypeEditViewPagerAdapter extends FragmentPagerAdapter {
         return GraceBookApplication
                 .getContext()
                 .getResources()
-                .getStringArray(R.array.typeEdit_viewpager_title)[position];
+                .getStringArray(R.array.main_viewpager_title)[position];
     }
 }

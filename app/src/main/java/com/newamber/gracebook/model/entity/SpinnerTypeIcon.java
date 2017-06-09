@@ -20,15 +20,7 @@ public class SpinnerTypeIcon {
         return placeholder;
     }
 
-    public void setPlaceholder(String placeholder) {
-        this.placeholder = placeholder;
-    }
-
     public int getIconId() {
         return iconId;
-    }
-
-    public void setIconId(int iconId) {
-        this.iconId = iconId;
     }
 }

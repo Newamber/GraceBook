@@ -2,7 +2,7 @@ package com.newamber.gracebook.model.impl;
 
 import android.support.annotation.DrawableRes;
 
-import com.newamber.gracebook.model.TypeModel;
+import com.newamber.gracebook.base.BaseModels;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -11,12 +11,12 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 import java.util.List;
 
 /**
- * Description: The implementation of TypeModel.<p>
+ * Description: The implementation of {@link com.newamber.gracebook.base.BaseModels.TypeModel}.<p>
  *
  * Created by Newamber on 2017/5/8.
  */
 
-public class MoneyTypeModel implements TypeModel<MoneyTypePO> {
+public class MoneyTypeModel implements BaseModels.TypeModel<MoneyTypePO> {
 
     private String name;
     private @DrawableRes int imageId;
@@ -38,7 +38,7 @@ public class MoneyTypeModel implements TypeModel<MoneyTypePO> {
 
     @Override
     public void deleteAllData() {
-        //getAllData().forEach(BaseModel::delete);
+        //getAllData().forEach(BaseModels::delete);
         for (BaseModel data : getAllData()) {
             data.delete();
         }

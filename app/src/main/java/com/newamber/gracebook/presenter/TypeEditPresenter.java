@@ -3,12 +3,12 @@ package com.newamber.gracebook.presenter;
 import android.support.annotation.DrawableRes;
 
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.base.BaseModels;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.model.TypeModel;
+import com.newamber.gracebook.base.BaseView;
 import com.newamber.gracebook.model.impl.MoneyRepoTypeModel;
 import com.newamber.gracebook.model.impl.MoneyTypeModel;
 import com.newamber.gracebook.util.ToastUtil;
-import com.newamber.gracebook.view.TypeEditView;
 import com.newamber.gracebook.view.activity.TypeEditActivity;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
@@ -18,14 +18,14 @@ import java.util.List;
  * Description: The presenter of {@link com.newamber.gracebook.view.activity.TypeEditActivity}.<p>
  * Created by Newamber on 2017/5/5.
  */
-public class TypeEditPresenter extends BasePresenter<TypeEditView> {
+public class TypeEditPresenter extends BasePresenter<BaseView.TypeEditView> {
 
     public boolean isMoneyType;
 
     // Only if this presenter is initialized, the mView can be got.
     // So do not invoke getView() here.
-    private TypeEditView mView;
-    private TypeModel typeModel;
+    private BaseView.TypeEditView mView;
+    private BaseModels.TypeModel typeModel;
 
     public void showNewTypeDialog(int position) {
         mView = getView();

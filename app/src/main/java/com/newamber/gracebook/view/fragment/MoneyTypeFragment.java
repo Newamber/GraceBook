@@ -8,7 +8,7 @@ import android.view.View;
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseFragment;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.model.adapter.MoneyTypeItemAdapter;
+import com.newamber.gracebook.adapter.MoneyTypeItemAdapter;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.helper.EditTypeItemTouchHelperCallback;
 import com.newamber.gracebook.view.activity.TypeEditActivity;

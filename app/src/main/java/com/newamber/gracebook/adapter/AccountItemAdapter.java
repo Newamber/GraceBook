@@ -1,4 +1,4 @@
-package com.newamber.gracebook.model.adapter;
+package com.newamber.gracebook.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -51,6 +51,6 @@ public class AccountItemAdapter extends BaseRecyclerViewAdapter<AccountPO> {
 
     @Override
     protected void initSubItemClickListener(ViewHolder holder) {
-        // TODO: Initialize sub item click listener here if needed.
+        // TODO: Initialize subitem click listener here if needed.
     }
 }

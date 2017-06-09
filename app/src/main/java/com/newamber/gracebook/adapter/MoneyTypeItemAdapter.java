@@ -1,4 +1,4 @@
-package com.newamber.gracebook.model.adapter;
+package com.newamber.gracebook.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;

@@ -19,7 +19,6 @@ public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private ItemTouchHelperAdapter mItemTouchHelperAdapter;
     private final float ALPHA_FULL = 1.0f;
-    //private final float SCALE_FULL = 1.0f;
 
     public EditTypeItemTouchHelperCallback(ItemTouchHelperAdapter recyclerViewAdapter) {
         mItemTouchHelperAdapter = recyclerViewAdapter;
@@ -29,7 +28,8 @@ public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager ||
                 recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
-            final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN |
+            final int dragFlags =
+                    ItemTouchHelper.UP | ItemTouchHelper.DOWN |
                     ItemTouchHelper.END | ItemTouchHelper.START;
             final int swipeFlags = 0;
             return makeMovementFlags(dragFlags, swipeFlags);
