@@ -14,9 +14,6 @@ public interface BaseModels {
      * {@link com.newamber.gracebook.model.entity.MoneyRepoTypePO} and<br>
      * {@link com.newamber.gracebook.model.entity.MoneyTypePO}.<p>
      * {@code E} means entity type.<br>
-     * <br>
-     *
-     * Created by Newamber on 2017/5/8.
      */
     interface TypeModel<E> {
         void saveData();

@@ -23,9 +23,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.adapter.MainViewPagerAdapter;
 import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.adapter.MainViewPagerAdapter;
 import com.newamber.gracebook.util.ActivityCollectorUtil;
 import com.newamber.gracebook.util.DeviceUtil;
 import com.newamber.gracebook.util.ToastUtil;
@@ -102,17 +102,17 @@ public class MainActivity extends BaseActivity {
         navigationView.setItemTextColor(ContextCompat.getColorStateList(this, R.color.drawer_list_color));
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.navigationview_like:
+                case R.id.navigationView_like:
                     Toast.makeText(MainActivity.this, "like", Toast.LENGTH_SHORT).show();
                     break;
-                case R.id.navigationview_settings:
+                case R.id.navigationView_settings:
                     new Handler().postDelayed(() ->
                             startActivity(new Intent(this, SettingsActivity.class)), 200);
                     break;
-                case R.id.navigationview_donation:
+                case R.id.navigationView_donation:
                     ToastUtil.showShort("donation", ToastUtil.ToastMode.ERROR);
                     break;
-                case R.id.navigationview_share:
+                case R.id.navigationView_share:
                     Toast.makeText(MainActivity.this, "share", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigationview_about:

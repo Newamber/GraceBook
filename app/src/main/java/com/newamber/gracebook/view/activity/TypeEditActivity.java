@@ -22,10 +22,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.adapter.TypeEditViewPagerAdapter;
 import com.newamber.gracebook.base.BaseActivity;
 import com.newamber.gracebook.base.BaseListViewAdapter;
 import com.newamber.gracebook.base.BaseView;
-import com.newamber.gracebook.adapter.TypeEditViewPagerAdapter;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.entity.SpinnerTypeIcon;

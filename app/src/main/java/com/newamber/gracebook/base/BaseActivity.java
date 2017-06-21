@@ -1,9 +1,14 @@
 package com.newamber.gracebook.base;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.util.Log;
 import android.view.View;
 
 import com.newamber.gracebook.util.ActivityCollectorUtil;
@@ -30,6 +35,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         if (mPresenter != null) mPresenter.attachView((V) this);
         ActivityCollectorUtil.addActivity(this);
         initView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setTransitionAnim();
+            Log.e("Current Activity", getClass().getSimpleName());
+        }
     }
 
     /**
@@ -75,5 +84,16 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
 
         // Detach the presenter from this Activity.
         if (mPresenter != null) mPresenter.detachView();
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setTransitionAnim() {
+        Fade fade = new Fade();
+        fade.setDuration(1000);
+        getWindow().setEnterTransition(fade);
+
+        Slide slide = new Slide();
+        slide.setDuration(1000);
+        getWindow().setReturnTransition(slide);
     }
 }
