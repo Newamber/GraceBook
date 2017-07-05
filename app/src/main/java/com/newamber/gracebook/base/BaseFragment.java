@@ -6,9 +6,14 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
+
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 /**
  * Description: BaseFragment which extracts some common operations. <br>
@@ -77,6 +82,27 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
      */
     protected T getPresenter() {
         return mPresenter;
+    }
+
+    protected void setEasyItemAnimatorAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+        int animDuration = 500;
+        recyclerView.setHasFixedSize(true);
+
+        AlphaInAnimationAdapter alphaInAdapter = new AlphaInAnimationAdapter(adapter);
+        alphaInAdapter.setDuration(animDuration);
+        alphaInAdapter.setFirstOnly(false);
+
+        ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaInAdapter);
+        scaleAdapter.setDuration(animDuration);
+        scaleAdapter.setInterpolator(new OvershootInterpolator());
+        scaleAdapter.setFirstOnly(false);
+
+        //recyclerView.setItemAnimator(new SlideInUpAnimator());
+        RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
+        animator.setAddDuration(animDuration);
+        animator.setRemoveDuration(150);
+
+        recyclerView.setAdapter(scaleAdapter);
     }
 
     public AppCompatActivity getHostActivity() {

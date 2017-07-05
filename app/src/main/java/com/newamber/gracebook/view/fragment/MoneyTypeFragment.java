@@ -6,11 +6,13 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.adapter.MoneyTypeItemAdapter;
 import com.newamber.gracebook.base.BaseFragment;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.adapter.MoneyTypeItemAdapter;
+import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
-import com.newamber.gracebook.helper.EditTypeItemTouchHelperCallback;
+import com.newamber.gracebook.util.ToastUtil;
+import com.newamber.gracebook.util.helper.EditTypeItemCallback;
 import com.newamber.gracebook.view.activity.TypeEditActivity;
 
 import java.util.ArrayList;
@@ -40,11 +42,22 @@ public class MoneyTypeFragment extends BaseFragment {
         // data source
         mPOList = activity.getPresenter().getAllData();
         RecyclerView recyclerView = (RecyclerView) getRootView().findViewById(R.id.recyclerView_moneyType);
-        recyclerView.setHasFixedSize(true);
         mAdapter = new MoneyTypeItemAdapter(mPOList, ITEM_LAYOUT_ID);
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemTouchHelperCallback(mAdapter));
+
+        // item animator
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemCallback(mAdapter, true));
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.ItemClickListener() {
+            @Override
+            public <E> void onItemClick(View view, E entity, int position) {
+                int id = 0;
+                int pos = position + 1;
+                if (entity instanceof MoneyTypePO) id = ((MoneyTypePO) entity).id;
+                ToastUtil.showShort("你点击了位置为"+ pos + "的ViewHolder" + "其id为 " + id,
+                        ToastUtil.ToastMode.WARNING);
+            }
+        });
+        setEasyItemAnimatorAdapter(recyclerView, mAdapter);
     }
 
     @Override
@@ -62,4 +75,5 @@ public class MoneyTypeFragment extends BaseFragment {
     protected int getLayoutId() {
         return LAYOUT_ID;
     }
+
 }

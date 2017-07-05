@@ -16,8 +16,15 @@ public interface BaseModels {
      * {@code E} means entity type.<br>
      */
     interface TypeModel<E> {
+
         void saveData();
+
         void deleteAllData();
+
+        void deleteDataById(int id);
+
+        void dragSwap(int fromId, int toId);
+
         List<E> getAllData();
     }
 }

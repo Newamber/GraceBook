@@ -4,10 +4,11 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.base.BaseModels;
 import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
-import com.newamber.gracebook.model.impl.MoneyTypeModel;
 import com.newamber.gracebook.model.ViewHolder;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
+import com.newamber.gracebook.model.impl.MoneyTypeModel;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
 
 public class MoneyTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyTypePO> {
 
+    private BaseModels.TypeModel mModel = new MoneyTypeModel();
+
     public MoneyTypeItemAdapter(@NonNull List<MoneyTypePO> entityList, @LayoutRes int layoutId) {
         super(entityList, layoutId);
     }
@@ -25,7 +28,13 @@ public class MoneyTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyTypePO> {
     @Override
     public void onItemDismiss(int position) {
         super.onItemDismiss(position);
-        new MoneyTypeModel().deleteDataById(position + 1);
+        mModel.deleteDataById(position + 1);
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        super.onItemMove(fromPosition, toPosition);
+        mModel.dragSwap(fromPosition + 1, toPosition + 1);
     }
 
     @Override

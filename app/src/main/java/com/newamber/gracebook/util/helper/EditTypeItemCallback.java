@@ -1,4 +1,4 @@
-package com.newamber.gracebook.helper;
+package com.newamber.gracebook.util.helper;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,35 +7,34 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.newamber.gracebook.model.ViewHolder;
-
 /**
  * Description: RecyclerView item touch helper.<p>
  *
  * Created by Newamber on 2017/5/4.
  */
 
-public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
+public class EditTypeItemCallback extends ItemTouchHelper.Callback {
 
-    private ItemTouchHelperAdapter mItemTouchHelperAdapter;
+    private ItemTouchActionHelper mItemTouchActionHelper;
     private final float ALPHA_FULL = 1.0f;
+    private boolean mIsMoneyType;
 
-    public EditTypeItemTouchHelperCallback(ItemTouchHelperAdapter recyclerViewAdapter) {
-        mItemTouchHelperAdapter = recyclerViewAdapter;
+    public EditTypeItemCallback(ItemTouchActionHelper recyclerViewAdapter, boolean isMoneyType) {
+        mItemTouchActionHelper = recyclerViewAdapter;
+        this.mIsMoneyType = isMoneyType;
     }
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager ||
                 recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
-            final int dragFlags =
-                    ItemTouchHelper.UP | ItemTouchHelper.DOWN |
+            final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN |
                     ItemTouchHelper.END | ItemTouchHelper.START;
             final int swipeFlags = 0;
             return makeMovementFlags(dragFlags, swipeFlags);
         } else {
             final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-            final int swipeFlags = ItemTouchHelper.END;
+            final int swipeFlags = mIsMoneyType ? ItemTouchHelper.END : ItemTouchHelper.START;
             return makeMovementFlags(dragFlags, swipeFlags);
         }
     }
@@ -47,46 +46,45 @@ public class EditTypeItemTouchHelperCallback extends ItemTouchHelper.Callback {
             return false;
         }
         // Notify the adapter of the move.
-        mItemTouchHelperAdapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+        mItemTouchActionHelper.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
         return true;
     }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        mItemTouchHelperAdapter.onItemDismiss(viewHolder.getAdapterPosition());
+        mItemTouchActionHelper.onItemDismiss(viewHolder.getAdapterPosition());
     }
 
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         super.onSelectedChanged(viewHolder, actionState);
-        //final ViewHolder holder = (ViewHolder) viewHolder;
-        /*if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
-            holder.setBackgroundColor(R.id.cardView_typeEdit_moneyType, "#ffffff", "#e57373");
-        }*/
     }
 
     @Override
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         super.clearView(recyclerView, viewHolder);
-        final ViewHolder holder = (ViewHolder) viewHolder;
-        final View itemContainer = holder.itemView;
-       // holder.setBackgroundColor(R.id.cardView_typeEdit_moneyType, "#e57373", "#ffffff");
+        final View itemContainer = viewHolder.itemView;
         itemContainer.setAlpha(ALPHA_FULL);
-        itemContainer.setScaleX(1);
-        itemContainer.setScaleY(1);
         itemContainer.setTranslationX(0);
+        //itemContainer.setBackgroundColor(Color.WHITE);
+        /*((ViewHolder) viewHolder).setGradientBackgroundColor(R.id.cardView_typeEdit_moneyType
+                , R.color.colorAccent, R.color.colorWhite);*/
     }
 
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder
             , float dX, float dY, int actionState, boolean isCurrentlyActive) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-        final View itemContainer = ((ViewHolder) viewHolder).itemView;
+        final View itemContainer = viewHolder.itemView;
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-            final float alpha = ALPHA_FULL - Math.abs(dX) / (float) itemContainer.getWidth();
+            float swipeDistance = Math.abs(dX);
+            float viewWidth = itemContainer.getWidth();
+            float ratio = swipeDistance / viewWidth;
+            final float alpha = ALPHA_FULL - ratio;
+            //@ColorInt int tempColor = Color.WHITE - (int) (ratio * (Color.WHITE - Color.parseColor("#FFE51C23")));
+            //((ViewHolder) viewHolder).setGradientColor(itemContainer, tempColor);
+
             itemContainer.setAlpha(alpha);
-            itemContainer.setScaleX(alpha);
-            itemContainer.setScaleY(alpha);
         }
     }
 }

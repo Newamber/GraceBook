@@ -10,9 +10,8 @@ import com.newamber.gracebook.base.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
-public class DayFragment extends BaseFragment {
+public class FlowFragment extends BaseFragment {
 
     @Override
     public void initView() {
@@ -31,6 +30,6 @@ public class DayFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_day;
+        return R.layout.fragment_flow;
     }
 }

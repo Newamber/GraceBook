@@ -26,6 +26,8 @@ public abstract class BasePresenter<V> {
 
     /**
      * Get attached View and then you can invoke relevant method in presenter.
+     * Note, do not invoke this method to instantiate the BaseView reference field variable,
+     * You should invoke it at specific method.
      *
      * @return the attched View we need
      */

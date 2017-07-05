@@ -9,6 +9,7 @@ import com.newamber.gracebook.base.BaseView;
 import com.newamber.gracebook.model.impl.MoneyRepoTypeModel;
 import com.newamber.gracebook.model.impl.MoneyTypeModel;
 import com.newamber.gracebook.util.ToastUtil;
+import com.newamber.gracebook.util.ToastUtil.ToastMode;
 import com.newamber.gracebook.view.activity.TypeEditActivity;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
@@ -38,11 +39,11 @@ public class TypeEditPresenter extends BasePresenter<BaseView.TypeEditView> {
         TypeEditActivity activity = (TypeEditActivity) mView;
         if (position == 0) {
             if (activity.mMoneyTypeFragment.mPOList.isEmpty())
-                    ToastUtil.showShort(R.string.there_is_no_money_type, ToastUtil.ToastMode.INFO);
+                    ToastUtil.showShort(R.string.there_is_no_money_type, ToastMode.INFO);
             else mView.showTypeDeleteDialog();
         } else {
             if (activity.mMoneyRepoTypeFragment.mPOList.isEmpty())
-                ToastUtil.showShort(R.string.there_is_no_money_repo_type, ToastUtil.ToastMode.INFO);
+                ToastUtil.showShort(R.string.there_is_no_money_repo_type, ToastMode.INFO);
             else mView.showRepoTypeDeleteDialog();
         }
     }

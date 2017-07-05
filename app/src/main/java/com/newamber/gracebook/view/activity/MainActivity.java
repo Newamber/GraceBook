@@ -31,7 +31,7 @@ import com.newamber.gracebook.util.DeviceUtil;
 import com.newamber.gracebook.util.ToastUtil;
 import com.newamber.gracebook.view.fragment.ChartFragment;
 import com.newamber.gracebook.view.fragment.DayFragment;
-import com.newamber.gracebook.view.fragment.StreamFragment;
+import com.newamber.gracebook.view.fragment.FlowFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity {
         // ------------------------------TabLayout & ViewPager----------------------------------------
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new DayFragment());
-        fragmentList.add(new StreamFragment());
+        fragmentList.add(new FlowFragment());
         fragmentList.add(new ChartFragment());
 
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), fragmentList);
@@ -151,10 +151,6 @@ public class MainActivity extends BaseActivity {
                     animator.setTarget(fabAdd);
                     animator.start();
                     fabAdd.setCompatElevation(DeviceUtil.dp2Px(6f));
-                    new Handler().postDelayed(() -> {
-                            if (fabAdd.getCompatElevation() == 0)
-                            fabAdd.setCompatElevation(DeviceUtil.dp2Px(6f));
-                    }, 463);
                     fabAdd.setVisibility(View.VISIBLE);
                     isFromFirstTab = true;
                 } else {
@@ -162,7 +158,7 @@ public class MainActivity extends BaseActivity {
                         animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_bounce_hide);
                         animator.setTarget(fabAdd);
                         animator.start();
-                        new Handler().postDelayed(() -> fabAdd.setCompatElevation(0), 600);
+                        fabAdd.setCompatElevation(0);
                         isFromFirstTab = false;
                     } else {
                         fabAdd.setVisibility(View.GONE);

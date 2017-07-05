@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.newamber.gracebook.model.ViewHolder;
-import com.newamber.gracebook.helper.ItemTouchHelperAdapter;
+import com.newamber.gracebook.util.helper.ItemTouchActionHelper;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,8 +21,8 @@ import java.util.List;
  * Created by Newamber on 2017/5/2.
  */
 @SuppressWarnings("unused")
-public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<ViewHolder>
-        implements ItemTouchHelperAdapter{
+public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<ViewHolder>
+        implements ItemTouchActionHelper {
 
     private Context mContext;
     private List<E> mEntityList;
@@ -40,20 +40,20 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mContext == null) mContext = parent.getContext();
         View view = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
-        final ViewHolder holder = new ViewHolder(view, mContext);
-
-        // init sub itemClickListener
-        initSubItemClickListener(holder);
-
-        // init OnItemClickListener
-        initOnItemClickListener(holder);
 
         // The instance of ViewHolder is passed to parameter "holder" at onBindViewHolder method
-        return holder;
+        return new ViewHolder(view, mContext);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        // init OnItemClickListener
+        initOnItemClickListener(holder);
+
+        // init sub itemClickListener
+        initSubItemClickListener(holder);
+
         convertView(holder, mEntityList.get(position));
     }
 
@@ -75,7 +75,7 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
     }
 
     // A auxiliary method to initialize (long) click listener in onCreateViewHolder(...).
-    private void initOnItemClickListener(final ViewHolder holder) {
+    private void initOnItemClickListener(ViewHolder holder) {
         // TODO: reduce codes
         if (mItemClickListener != null) {
             holder.itemView.setOnClickListener(v -> {
@@ -132,17 +132,20 @@ public abstract class BaseRecyclerViewAdapter <E> extends RecyclerView.Adapter<V
 
     /**
      * The item click listener interface of RecyclerView
-     * {@code T} means the type of entity, it should be the same with {@code <E>}
+     * {@code T} means the type of entity, it should be the same with {@code E}
      */
-    interface ItemClickListener {
+    @FunctionalInterface
+    public interface ItemClickListener {
         <T> void onItemClick(View view, T entity, int position) ;
     }
 
     /**
      * The item long click listener interface of RecyclerView
-     * {@code T} means the type of entity, it should be the same with {@code <E>}
+     * {@code T} means the type of entity, it should be the same with {@code E}
      */
-    interface ItemLongClickListener {
+    @FunctionalInterface
+    @SuppressWarnings("all")
+    public interface ItemLongClickListener {
         <T> void onItemLongClick(View view, T entity, int position) ;
     }
 }

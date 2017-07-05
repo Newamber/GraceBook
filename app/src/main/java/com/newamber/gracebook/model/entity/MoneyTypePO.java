@@ -16,9 +16,9 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 @Table(database = GraceBookDatabase.class, allFields = true)
 public class MoneyTypePO extends BaseModel {
 
-    @PrimaryKey(autoincrement = true)
     public int id;
 
+    @PrimaryKey
     public String moneyTypeName;                 // defined by user
 
     public @DrawableRes int moneyTypeImageId;    // the same...

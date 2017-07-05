@@ -6,11 +6,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.adapter.MoneyRepoTypeItemAdapter;
 import com.newamber.gracebook.base.BaseFragment;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.adapter.MoneyRepoTypeItemAdapter;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
-import com.newamber.gracebook.helper.EditTypeItemTouchHelperCallback;
+import com.newamber.gracebook.util.helper.EditTypeItemCallback;
 import com.newamber.gracebook.view.activity.TypeEditActivity;
 
 import java.util.ArrayList;
@@ -38,12 +38,12 @@ public class MoneyRepoTypeFragment extends BaseFragment {
         // data source
         mPOList = activity.getPresenter().getAllData();
         RecyclerView recyclerView = (RecyclerView) getRootView().findViewById(R.id.recyclerView_moneyRepoType);
-        recyclerView.setHasFixedSize(true);
         mAdapter = new MoneyRepoTypeItemAdapter(mPOList, ITEM_LAYOUT_ID);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemTouchHelperCallback(mAdapter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemCallback(mAdapter, false));
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        recyclerView.setAdapter(mAdapter);
+
+        setEasyItemAnimatorAdapter(recyclerView, mAdapter);
     }
 
     @Override
@@ -61,4 +61,5 @@ public class MoneyRepoTypeFragment extends BaseFragment {
     protected int getLayoutId() {
         return LAYOUT_ID;
     }
+
 }

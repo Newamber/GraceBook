@@ -46,8 +46,8 @@
     <string name="online_shopping"><u>网购</u></string>
 
     <!--SettingsActivity-->
-    <string name="picture_password">图案密码</string>
     <string name="setting_record">记账设置</string>
+    <string name="picture_password">图案密码</string>
     <string name="auto_record">自动记账</string>
     <string name="data_backup">数据备份</string>
     <string name="data_safe">数据安全</string>
@@ -73,6 +73,8 @@
     <string name="new_type_success">新建类型成功</string>
     <string name="there_is_no_money_repo_type">这里已经没有任何“钱库类型”</string>
     <string name="delete_all_money_repo_type_is_sure">\n您确定要删除全部“钱库类型”吗？该操作将无法撤销。\n</string>
+    <string name="all_money_type_deleted">所有“收支类型”已经被删除</string>
+    <string name="all_money_repo_type_deleted">所有“钱库类型”已经被删除</string>
 
     <!--MainViewPager Title-->
     <string-array name="main_viewpager_title">

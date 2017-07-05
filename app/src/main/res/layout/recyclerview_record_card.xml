@@ -4,8 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:layout_margin="@dimen/basic_margin"
-    app:cardElevation="4dp"
+    android:layout_marginTop="@dimen/basic_margin"
+    android:layout_marginStart="@dimen/basic_margin"
+    android:layout_marginEnd="@dimen/basic_margin"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardElevation="2dp"
     app:cardCornerRadius="4dp">
 
     <LinearLayout

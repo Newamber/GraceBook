@@ -9,7 +9,8 @@ import com.newamber.gracebook.GraceBookApplication;
 import es.dmoral.toasty.Toasty;
 
 /**
- * Description: .<p>
+ * Description: Repackaging of 3rd party library "Toasty".<p>
+ *
  * Created by Newamber on 2017/5/23.
  */
 @SuppressWarnings("unused")
