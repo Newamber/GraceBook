@@ -1,9 +1,12 @@
-package com.newamber.gracebook;
+package com.newamber.gracebook.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Color;
 
+import com.newamber.gracebook.R;
+import com.newamber.gracebook.util.ColorUtil;
+import com.newamber.gracebook.util.GlobalConstant;
+import com.newamber.gracebook.util.LocalStorage;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.lang.ref.Reference;
@@ -31,13 +34,18 @@ public class GraceBookApplication extends Application {
         return sContext.get();
     }
 
+
+    // Some init operations.
     private void initConfig() {
         // Initialize Toasty with custom configuration.
         Toasty.Config.getInstance()
-                .setInfoColor(Color.parseColor("#42a5f5"))
+                .setInfoColor(ColorUtil.getColor(R.color.colorToastyInfo))
                 .apply();
 
         // Initialize DBFlow.
         FlowManager.init(this);
+
+        if (LocalStorage.getBoolean(GlobalConstant.IS_FIRST_ENTER_APP, true))
+        LocalStorage.put(GlobalConstant.IS_FIRST_ENTER_APP, false);
     }
 }

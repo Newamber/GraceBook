@@ -2,71 +2,64 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="72dp"
     android:layout_marginTop="@dimen/basic_margin"
     android:layout_marginStart="@dimen/basic_margin"
     android:layout_marginEnd="@dimen/basic_margin"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardElevation="2dp"
-    app:cardCornerRadius="4dp">
+    app:cardElevation="@dimen/elevation_card"
+    app:cardCornerRadius="@dimen/radius_card_4">
 
     <LinearLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textview_hour_minute"
+            android:id="@+id/textview_item_hourMinute"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/basic_margin"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/hour_minute"
             android:textSize="@dimen/text_main"/>
 
         <ImageView
-            android:id="@+id/imageView_moneyType"
-            android:layout_height="36dp"
+            android:id="@+id/imageView_item_moneyType"
             android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/basic_margin"
             android:layout_weight="1"
-            android:layout_marginStart="@dimen/basic_margin"
-            android:src="@drawable/ic_navigationview_like"
-            android:layout_gravity="center_vertical"
-            android:contentDescription="@string/money_type"/>
+            android:contentDescription="@string/money_type"
+            tools:src="@drawable/ic_internet_62"/>
 
         <TextView
-            android:id="@+id/textView_moneyType"
-            android:layout_height="wrap_content"
+            android:id="@+id/textView_item_moneyType"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/basic_margin"
-            android:text="@string/money_type_item"
-            android:textColor="@color/colorBlackTextOrIcon"
-            android:textSize="@dimen/text_main"/>
-
-        <TextView
-            android:id="@+id/textView_note"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/basic_margin"
-            android:text="@string/note_list_item"
-            android:textColor="@color/colorBlackSecondaryText"
-            android:textSize="@dimen/text_main"/>
-
-        <TextView
-            android:id="@+id/textView_amount"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
             android:layout_weight="2"
+            android:gravity="start"
+            android:paddingStart="@dimen/basic_margin"
+            android:textColor="@color/colorBlackTextOrIcon"
+            android:textSize="@dimen/text_main"
+            tools:text="@string/money_type_item"/>
+
+        <TextView
+            android:id="@+id/textView_item_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/basic_margin"
-            android:gravity="center_horizontal"
+            android:layout_weight="3"
+            android:gravity="end"
+            android:paddingEnd="@dimen/standard_margin"
             android:text="@string/amount_item"
             android:textColor="@color/colorExpense"
             android:textSize="@dimen/text_main"/>

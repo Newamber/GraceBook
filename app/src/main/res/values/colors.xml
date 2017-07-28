@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Basic Color-->
+    <!--App Color-->
     <color name="colorPrimary">#870d4c</color>
     <color name="colorPrimaryDark">#5b0e2e</color>
     <color name="colorPrimaryLight">#bb4678</color>
@@ -25,6 +25,19 @@
     <color name="colorBlackTextOrIcon">#000000</color>
 
     <!--Income and Expense-->
-    <color name="colorIncome">#1a8c99</color>
-    <color name="colorExpense">#8ee61f00</color>
+    <color name="colorIncome">#52be48</color>
+    <color name="colorExpense">#af3724</color>
+    <color name="colorTodayIncome">#52be48</color>
+    <color name="colorTodayExpense">#f66751</color>
+
+
+    <!--Toasty-->
+    <color name="colorToastyInfo">#42a5f5</color>
+
+    <!--DayFragment-->
+    <color name="colorBigCard">#bb4678</color>
+
+    <!--AddActivity-->
+    <color name="colorGreenButton">#52be48</color>
+    <color name="colorRedButton">#bb4678</color>
 </resources>

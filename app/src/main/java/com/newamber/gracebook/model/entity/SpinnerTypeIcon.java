@@ -6,7 +6,6 @@ import android.support.annotation.DrawableRes;
  * Description: .<p>
  * Created by Newamber on 2017/5/9.
  */
-
 public class SpinnerTypeIcon {
     private String placeholder = "";
     private @DrawableRes int iconId;

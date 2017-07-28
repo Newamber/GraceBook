@@ -49,12 +49,12 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = ViewHolder.bind(parent.getContext(), convertView, parent, mLayoutResId,
                 position);
-        bindView(holder, getItem(position));
+        convertView(holder, getItem(position));
         return holder.getItemView();
     }
 
     @SuppressWarnings("all")
-    protected abstract void bindView(ViewHolder holder, T entity);
+    protected abstract void convertView(ViewHolder holder, T entity);
 
     public void add(T data) {
         if (mEntityList == null) {

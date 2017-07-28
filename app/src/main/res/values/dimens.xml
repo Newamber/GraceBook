@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Margin-->
-    <dimen name="standard_margin">16dp</dimen>
     <dimen name="basic_margin">8dp</dimen>
+    <dimen name="standard_margin">16dp</dimen>
+    <dimen name="wide_margin">24dp</dimen>
+    <!--Special AddAccount-->
+    <dimen name="text_add_account_padding">5dp</dimen>
 
+    
+    <!--View Size-->
+    <dimen name="little_size">24dp</dimen>
+    <dimen name="basic_size">36dp</dimen>
+    <dimen name="normal_size">48dp</dimen>
+    <dimen name="appbar_size">56dp</dimen>
+    
     <!--Text Size-->
     <dimen name="hint_little_word">12sp</dimen>
     <dimen name="text_main">14sp</dimen>
     <dimen name="title_little">16sp</dimen>
+    <dimen name="text_add_account">18sp</dimen>
     <dimen name="title_appbar">20sp</dimen>
     <dimen name="title_big">24sp</dimen>
-    <dimen name="money_today">30sp</dimen>
+    <dimen name="money_today">20sp</dimen>
+    
+    <!--Elevation-->
+    <dimen name="elevation_min">1dp</dimen>
+    <dimen name="elevation_appbar">2dp</dimen>
+    <dimen name="elevation_card">2dp</dimen>
+    <dimen name="elevation_button_press">8dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
+    <dimen name="elevation_fab_press">12dp</dimen>
+    <dimen name="elevation_navigation">16dp</dimen>
+
+    <!--Radius-->
+    <dimen name="radius_card_2">2dp</dimen>
+    <dimen name="radius_card_4">4dp</dimen>
+    <dimen name="radius_budget_button">25dp</dimen>
+
 
 </resources>

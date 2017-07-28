@@ -1,4 +1,4 @@
-package com.newamber.gracebook.view.fragment;
+package com.newamber.gracebook.ui.fragment;
 
 
 import android.support.v4.app.Fragment;
@@ -6,12 +6,12 @@ import android.view.View;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseFragment;
-import com.newamber.gracebook.base.BasePresenter;
+import com.newamber.gracebook.presenter.MainPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FlowFragment extends BaseFragment {
+public class FlowFragment extends BaseFragment<MainPresenter> {
 
     @Override
     public void initView() {
@@ -21,11 +21,6 @@ public class FlowFragment extends BaseFragment {
     @Override
     public void processClick(View v) {
 
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
     }
 
     @Override

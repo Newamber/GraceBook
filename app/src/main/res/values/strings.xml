@@ -3,14 +3,14 @@
 
     <string name="hello_blank_fragment">图表，待添加</string>
 
-    <!-- NavigationView-->
-    <string name="like">好评</string>
-    <string name="share">分享</string>
-    <string name="settings">设置</string>
-    <string name="about">关于</string>
-    <string name="donation">捐赠</string>
-    <string name="remind_time">记账时间：</string>
-
+    <!--MainActivity-->
+    <string name="today_budget">今日收支</string>
+    <string name="day_banner_text_1">今天您还没记账哦</string>
+    <string name="day_banner_text_2">祝您生活愉快</string>
+    <string name="lack_of_condition">缺少条件</string>
+    <string name="no_type_no_recording">没有“收支类型”或者“钱库类型”无法记账，点击“前往”按钮前去编辑界面新建您自定义的类型。</string>
+    <string name="go">前往</string>
+    <string name="keep_accounting_is_important">记账贵在坚持</string>
     <!--Toolbar Main-->
     <string name="search">搜索</string>
     <string name="delete_all">删除全部账目</string>
@@ -20,18 +20,18 @@
     <string name="exit_app">退出程序</string>
     <string name="delete">删除</string>
     <string name="all_select">全选</string>
-
-    <!--Big Card Today-->
-    <string name="today_budget">今日收支</string>
-    <string name="balance_money">结余：6666￥</string>
-    <string name="income_today">180.5￥</string>
-    <string name="expense_today">200.0￥</string>
-
+    <!-- NavigationView-->
+    <string name="like">好评</string>
+    <string name="share">分享</string>
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+    <string name="donation">捐赠</string>
+    <string name="remind_time">上次记账时间：</string>
     <!--Account List Item Today-->
     <string name="hour_minute">16:57</string>
-    <string name="money_type_item">网购的啊啊啊</string>
-    <string name="note_list_item">买了三件衣服啊啊</string>
-    <string name="amount_item">892.5￥</string>
+    <string name="money_type_item">网购类型哦</string>
+    <string name="note_list_item">买了三件衣服啊..</string>
+    <string name="amount_item">￥123,456,789.5</string>
 
     <!--AddAccountActivity-->
     <string name="record_an_account">记一笔账</string>
@@ -40,10 +40,22 @@
     <string name="date">日期：</string>
     <string name="money_repo">钱库：</string>
     <string name="money_type">种类：</string>
-    <string name="budget">收入</string>
+    <string name="income">收入</string>
+    <string name="expense">支出</string>
     <string name="_2017_4_23"><u>2017年4月23日</u></string>
     <string name="wechat_charge"><u>微信零钱</u></string>
     <string name="online_shopping"><u>网购</u></string>
+    <string name="select_budget_type">选择收支类型</string>
+    <string name="select_repo_type">选择钱库类型</string>
+    <string name="no_amount_input">您没有输入数额</string>
+    <string name="amount_can_not_be_zero">数额不能为零</string>
+    <string name="plz_input_number">请您输入数字</string>
+    <string name="single_amount_is_too_large">单笔金额过大，必须小于十亿</string>
+    <string name="over_words_limit">超出字数限制</string>
+    <string name="new_account_success">新增一条账目</string>
+    <string name="amount_over_balance">所选钱库余额不足</string>
+    <string name="click_too_fast">您点击过快了</string>
+    <string name="over_repo_balance_and_over_single_max">所选钱库余额不足，且超出单笔记账金额</string>
 
     <!--SettingsActivity-->
     <string name="setting_record">记账设置</string>
@@ -62,19 +74,26 @@
     <string name="money_type_name">收支名称</string>
     <string name="sure">确定</string>
     <string name="cancel">取消</string>
+    <string name="caution">注意</string>
     <string name="new_repo_type">新建钱库</string>
     <string name="repo_type_name">钱库名称</string>
     <string name="initial_balance">初始余额</string>
     <string name="no_name_no_type">您没有输入名称，类型未保存</string>
-    <string name="over_words_limit">名称过长，类型未保存</string>
-    <string name="delete_all_money_type_is_sure">\n您确定要删除全部“收支类型”吗？该操作将无法撤销。\n</string>
+    <string name="over_words_limit_not_save">名称过长，类型未保存</string>
+    <string name="delete_all_money_type_is_sure">全部删除之后，您需要新建至少一个“收支类型”，否则无法记账哦。
+        确定要删除全部“收支类型”吗？该操作将无法撤销。</string>
     <string name="there_is_no_money_type">这里已经没有任何“收支类型”</string>
-    <string name="caution">注意</string>
     <string name="new_type_success">新建类型成功</string>
     <string name="there_is_no_money_repo_type">这里已经没有任何“钱库类型”</string>
-    <string name="delete_all_money_repo_type_is_sure">\n您确定要删除全部“钱库类型”吗？该操作将无法撤销。\n</string>
+    <string name="delete_all_money_repo_type_is_sure">全部删除之后，您需要新建至少一个“钱库类型”，否则无法记账哦。
+    确定要删除全部“钱库类型”吗？该操作将无法撤销。</string>
     <string name="all_money_type_deleted">所有“收支类型”已经被删除</string>
     <string name="all_money_repo_type_deleted">所有“钱库类型”已经被删除</string>
+    <string name="update_type_success">更新类型图标成功</string>
+    <string name="initial_balance_is_too_large">初始金额过大，必须小于一万亿</string>
+    <string name="total_income">总收入：</string>
+    <string name="total_expense">总支出：</string>
+    <string name="total_surplus">总结余：</string>
 
     <!--MainViewPager Title-->
     <string-array name="main_viewpager_title">
@@ -87,13 +106,6 @@
     <string-array name="typeEdit_viewpager_title">
         <item>收支类型</item>
         <item>钱库类型</item>
-    </string-array>
-
-    <!--FadingTextView-->
-    <string-array name="fading_text">
-        <item>2017年4月28日，星期五</item>
-        <item>祝您有个好心情~</item>
-        <item>今天您记账了吗？</item>
     </string-array>
 
 </resources>

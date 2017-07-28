@@ -1,6 +1,5 @@
-package com.newamber.gracebook.view.activity;
+package com.newamber.gracebook.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
-import com.newamber.gracebook.base.BasePresenter;
 
 /**
  * Description: .<p>
@@ -31,7 +29,7 @@ public class SettingsActivity extends BaseActivity {
     public void processClick(View v) {
         switch (v.getId()) {
             case R.id.textView_typeEdit:
-                startActivity(new Intent(this, TypeEditActivity.class));
+                startTransitionActivity(TypeEditActivity.class);
                 break;
             default:
         }
@@ -59,12 +57,6 @@ public class SettingsActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) finish();
         return true;
-    }
-
-    // The Activity has no business logic so there is no presenter.
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
     }
 
     @Override

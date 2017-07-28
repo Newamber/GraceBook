@@ -1,10 +1,6 @@
-package com.newamber.gracebook.view.activity;
+package com.newamber.gracebook.ui.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,38 +22,43 @@ import com.bumptech.glide.Glide;
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.adapter.MainViewPagerAdapter;
 import com.newamber.gracebook.base.BaseActivity;
-import com.newamber.gracebook.base.BasePresenter;
+import com.newamber.gracebook.base.BaseView;
+import com.newamber.gracebook.presenter.MainPresenter;
+import com.newamber.gracebook.ui.fragment.ChartFragment;
+import com.newamber.gracebook.ui.fragment.DayFragment;
+import com.newamber.gracebook.ui.fragment.FlowFragment;
 import com.newamber.gracebook.util.ActivityCollectorUtil;
 import com.newamber.gracebook.util.DeviceUtil;
 import com.newamber.gracebook.util.ToastUtil;
-import com.newamber.gracebook.view.fragment.ChartFragment;
-import com.newamber.gracebook.view.fragment.DayFragment;
-import com.newamber.gracebook.view.fragment.FlowFragment;
+import com.newamber.gracebook.util.ToastUtil.ToastMode;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<BaseView.MainView, MainPresenter>
+        implements BaseView.MainView {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.activity_main;
 
-    private DrawerLayout mDrawerLayout;
     private ViewPager mViewPager;
+    private DrawerLayout mDrawerLayout;
     private FloatingActionButton fabAdd;
 
-    // State bit to control the fab_record's appearance.
+    private MainPresenter mPresenter;
+
+    // State bit to control the fab_record's appearance way.
     private boolean isFromFirstTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public void processClick(View v) {
         switch (v.getId()) {
             case R.id.fab_record:
-                startActivity(new Intent(this,  AddAccountActivity.class));
+                mPresenter.clickRecordButton();
             default:
                 break;
         }
@@ -65,6 +67,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         isFromFirstTab = true;
+        mPresenter = getPresenter();
 
         // ----------------------------findViewByID-------------------------------------------------
         Toolbar toolbarMain = (Toolbar) findViewById(R.id.toolbar_main);
@@ -81,7 +84,7 @@ public class MainActivity extends BaseActivity {
         // --------------------------setOnClickListener---------------------------------------------
         fabAdd.setOnClickListener(this);
 
-        // --------------------------Toolbar & DrawerLayout-------------------------------------------
+        // --------------------------Toolbar & DrawerLayout-----------------------------------------
         setSupportActionBar(toolbarMain);
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -103,20 +106,19 @@ public class MainActivity extends BaseActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigationView_like:
-                    Toast.makeText(MainActivity.this, "like", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showShort(R.string.like, ToastMode.ERROR);
                     break;
                 case R.id.navigationView_settings:
-                    new Handler().postDelayed(() ->
-                            startActivity(new Intent(this, SettingsActivity.class)), 200);
+                    startTransitionActivity(SettingsActivity.class, 200);
                     break;
                 case R.id.navigationView_donation:
-                    ToastUtil.showShort("donation", ToastUtil.ToastMode.ERROR);
+                    ToastUtil.showShort("donation", ToastMode.ERROR);
                     break;
                 case R.id.navigationView_share:
-                    Toast.makeText(MainActivity.this, "share", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showShort(R.string.share, ToastMode.ERROR);
                     break;
                 case R.id.navigationview_about:
-                    Toast.makeText(MainActivity.this, "about", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showShort(R.string.about, ToastMode.ERROR);
                     break;
                 default:
                     break;
@@ -136,55 +138,59 @@ public class MainActivity extends BaseActivity {
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             @Override
             public void onPageSelected(int position) {
-                Animator animator;
-                // Following codes look like strange because of the
-                // strange display way about fab with animation.
-                // If there is no handler, fab might not show shadow correctly.
                 if (position == 0) {
-                    animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_bounce_show);
-                    animator.setTarget(fabAdd);
-                    animator.start();
-                    fabAdd.setCompatElevation(DeviceUtil.dp2Px(6f));
+                    startAnimator(fabAdd, R.animator.anim_bounce_show);
+                    fabAdd.setCompatElevation(DeviceUtil.dp2Px(6.0f));
                     fabAdd.setVisibility(View.VISIBLE);
                     isFromFirstTab = true;
+                    //fabAdd.show();
                 } else {
                     if (isFromFirstTab) {
-                        animator = AnimatorInflater.loadAnimator(MainActivity.this, R.animator.anim_bounce_hide);
-                        animator.setTarget(fabAdd);
-                        animator.start();
+                        startAnimator(fabAdd, R.animator.anim_bounce_hide);
                         fabAdd.setCompatElevation(0);
                         isFromFirstTab = false;
                     } else {
-                        fabAdd.setVisibility(View.GONE);
+                        fabAdd.setVisibility(View.INVISIBLE);
                     }
+                    //fabAdd.hide();
                 }
                 // Bring the changes of Toolbar into effect.
                 invalidateOptionsMenu();
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
     }
 
-    // The Activity has no business logic so there is no presenter.
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    public void showErrorDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.lack_of_condition)
+                .setMessage(R.string.no_type_no_recording)
+                .setPositiveButton(R.string.go, (dialog, which) -> startTransitionActivity(TypeEditActivity.class))
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
+
+    @Override
+    protected MainPresenter createPresenter() {
+        return new MainPresenter();
     }
 
     @Override
     protected int getLayoutId() {
         return LAYOUT_ID;
     }
+
+    /*@Override
+    protected boolean isEnabledEventBus() {
+        return true;
+    }*/
 
     // Toolbar Created.
     @Override

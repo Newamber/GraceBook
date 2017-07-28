@@ -19,8 +19,8 @@
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner_typeEdit_moneyType"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:dropDownSelector="?android:attr/selectableItemBackground"
         android:layout_gravity="center_vertical"/>
 

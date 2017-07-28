@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.newamber.gracebook.view.activity.SettingsActivity">
+    tools:context="com.newamber.gracebook.ui.activity.SettingsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:navigationIcon="@drawable/ic_toolbar_back"
             app:title="设置"
-            app:elevation="2dp"/>
+            app:elevation="@dimen/elevation_appbar"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -193,9 +193,9 @@
                 android:id="@+id/switch_auto_record"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/basic_margin"
+                android:layout_marginEnd="@dimen/basic_margin"
+                android:layout_marginTop="@dimen/basic_margin"
                 app:layout_constraintBottom_toBottomOf="@+id/textView_autoRecord"
                 app:layout_constraintRight_toRightOf="@+id/textView_autoRecord"
                 app:layout_constraintTop_toTopOf="@+id/textView_autoRecord"
@@ -204,7 +204,7 @@
             <View
                 android:id="@+id/view_vertical_line2"
                 android:layout_width="0.5dp"
-                android:layout_height="24dp"
+                android:layout_height="@dimen/little_size"
                 android:layout_marginBottom="@dimen/basic_margin"
                 android:layout_marginEnd="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/basic_margin"
@@ -309,8 +309,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0.5dp"
                 android:layout_marginEnd="@dimen/standard_margin"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="@dimen/basic_margin"
+                android:layout_marginRight="@dimen/basic_margin"
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="1dp"
                 android:background="@color/colorDivider"
@@ -334,10 +334,10 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardview_primaryColor"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="@dimen/basic_size"
+                android:layout_height="@dimen/basic_size"
+                android:layout_marginBottom="@dimen/basic_margin"
+                android:layout_marginTop="@dimen/basic_margin"
                 android:layout_marginEnd="@dimen/standard_margin"
                 android:clickable="true"
                 app:cardBackgroundColor="@color/colorPrimary"
@@ -350,10 +350,10 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardview_accentColor"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="@dimen/basic_size"
+                android:layout_height="@dimen/basic_size"
+                android:layout_marginBottom="@dimen/basic_margin"
+                android:layout_marginTop="@dimen/basic_margin"
                 android:layout_marginEnd="@dimen/standard_margin"
                 android:clickable="true"
                 app:cardBackgroundColor="@color/colorAccent"

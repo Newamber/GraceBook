@@ -5,99 +5,116 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.newamber.gracebook.view.fragment.DayFragment">
+    tools:context="com.newamber.gracebook.ui.fragment.DayFragment">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardview_big"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="200dp"
         android:layout_margin="@dimen/basic_margin"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="6dp">
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/colorBigCard"
+        app:cardCornerRadius="@dimen/radius_card_4"
+        app:cardElevation="@dimen/elevation_card">
 
         <RelativeLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent">
 
             <TextView
-                android:id="@+id/textview_today_budget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/textview_today_total_budget"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:background="@color/colorWhiteHintText"
                 android:layout_marginTop="@dimen/basic_margin"
                 android:text="@string/today_budget"
+                android:gravity="center"
                 android:textSize="@dimen/title_big"
                 android:textColor="@color/colorWhiteTextOrIcon"/>
 
-            <View
-                android:id="@+id/view_vertical_line"
-                android:layout_height="120dp"
-                android:layout_width="3dp"
-                android:background="@color/colorWhiteTextOrIcon"
-                android:layout_below="@id/textview_today_budget"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/standard_margin"/>
+            <TextView
+                android:id="@+id/textview_today_total_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview_today_total_budget"
+                android:textSize="@dimen/money_today"
+                android:textColor="@color/colorWhiteTextOrIcon"
+                android:layout_marginStart="@dimen/wide_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:text="@string/total_income"/>
+
+            <TextView
+                android:id="@+id/textview_today_total_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorWhiteTextOrIcon"
+                android:layout_marginTop="@dimen/basic_margin"
+                android:layout_below="@id/textview_today_total_income"
+                android:textSize="@dimen/money_today"
+                android:layout_marginStart="@dimen/wide_margin"
+                android:text="@string/total_expense"/>
+
+            <TextView
+                android:id="@+id/textview_today_total_surplus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview_today_total_expense"
+                android:textSize="@dimen/money_today"
+                android:textColor="@color/colorWhiteTextOrIcon"
+                android:layout_marginStart="@dimen/wide_margin"
+                android:layout_marginTop="@dimen/basic_margin"
+                android:layout_marginBottom="@dimen/standard_margin"
+                android:text="@string/total_surplus"/>
 
             <TextView
                 android:id="@+id/textview_today_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/view_vertical_line"
-                android:layout_margin="@dimen/standard_margin"
-                android:text="@string/income_today"
+                android:layout_toEndOf="@id/textview_today_total_income"
+                android:layout_alignBaseline="@id/textview_today_total_income"
+                android:layout_margin="@dimen/basic_margin"
                 android:textSize="@dimen/money_today"
-                android:textColor="@color/colorIncome"/>
+                android:textColor="@color/colorWhiteTextOrIcon"
+                tools:text="￥6000.5"/>
 
             <TextView
                 android:id="@+id/textview_today_expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/expense_today"
                 android:textSize="@dimen/money_today"
-                android:textColor="@color/colorExpense"
-                android:layout_marginLeft="@dimen/standard_margin"
-                android:layout_marginRight="@dimen/standard_margin"
-                android:layout_alignBaseline="@+id/textview_today_income"
-                android:layout_alignBottom="@+id/textview_today_income"
-                android:layout_toEndOf="@+id/view_vertical_line"
-                android:layout_marginStart="16dp"/>
+                android:textColor="@color/colorWhiteTextOrIcon"
+                android:layout_marginBottom="@dimen/basic_margin"
+                android:layout_below="@+id/textview_today_income"
+                android:layout_alignStart="@+id/textview_today_income"
+                tools:text="￥200"/>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardview_balance"
+            <TextView
+                android:id="@+id/textview_today_surplus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="@dimen/basic_margin"
-                app:cardBackgroundColor="@color/colorWhiteDivider"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
-
-                <TextView
-                    android:id="@+id/textview_today_balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/basic_margin"
-                    android:text="@string/balance_money"
-                    android:textColor="@color/colorWhiteTextOrIcon"
-                    android:textSize="@dimen/hint_little_word"/>
-            </android.support.v7.widget.CardView>
+                android:textSize="@dimen/money_today"
+                android:textColor="@color/colorWhiteSecondaryText"
+                android:layout_below="@+id/textview_today_expense"
+                android:layout_alignStart="@+id/textview_today_income"
+                tools:text="￥5800.5"/>
 
         </RelativeLayout>
         
     </android.support.v7.widget.CardView>
 
     <com.tomer.fadingtextview.FadingTextView
+        android:id="@+id/fadeTextView_today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/text_main"
         android:layout_margin="@dimen/basic_margin"
-        app:timeout="3500"
-        app:texts="@array/fading_text"/>
+        app:timeout="3000"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_day"

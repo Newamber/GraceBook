@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.newamber.gracebook.view.activity.AddAccountActivity"
+    tools:context="com.newamber.gracebook.ui.activity.AddAccountActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,17 +13,22 @@
         android:background="@color/colorPrimary"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_addAccount"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:elevation="2dp"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:navigationIcon="@drawable/ic_toolbar_back"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@string/record_an_account"/>
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_addAccount"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:elevation="@dimen/elevation_appbar"
+                app:navigationIcon="@drawable/ic_toolbar_back"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/record_an_account"/>
+
+        </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView_addAccount"
@@ -31,67 +36,83 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/basic_margin"
             app:cardBackgroundColor="@color/colorWhite"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="6dp">
+            app:cardCornerRadius="@dimen/radius_card_4"
+            app:cardElevation="@dimen/elevation_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/textInputLayout_amount"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
-                    android:hint="@string/hint_amount"
-                    app:errorEnabled="true"
-                    app:hintAnimationEnabled="true">
+                <LinearLayout
+                    android:id="@+id/linearLayout_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/editText_amount"
-                        android:layout_width="match_parent"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputLayout_amount"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:labelFor="@id/editText_amount"
-                        android:maxLines="1"/>
+                        android:layout_marginEnd="@dimen/basic_margin"
+                        android:layout_marginStart="@dimen/wide_margin"
+                        android:layout_marginTop="@dimen/wide_margin"
+                        android:layout_weight="6"
+                        android:hint="@string/hint_amount"
+                        app:errorEnabled="true"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="true">
 
-                </android.support.design.widget.TextInputLayout>
+                        <EditText
+                            android:id="@+id/editText_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:labelFor="@id/editText_amount"
+                            android:maxLines="1"/>
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cardview_budget_button"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_alignTop="@+id/textInputLayout_amount"
-                    android:layout_margin="@dimen/standard_margin"
-                    android:layout_toEndOf="@id/textInputLayout_amount"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardBackgroundColor="#ffffff"
-                    app:cardMaxElevation="@dimen/basic_margin"
-                    app:cardCornerRadius="28dp"
-                    app:cardElevation="4dp">
+                    </android.support.design.widget.TextInputLayout>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_love_10"
-                        tools:ignore="ContentDescription"/>
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview_budget_button"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/normal_size"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/wide_margin"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/colorPrimaryLight"
+                        app:cardCornerRadius="@dimen/radius_budget_button"
+                        app:cardElevation="@dimen/elevation_card"
+                        app:cardMaxElevation="@dimen/basic_margin">
 
-                </android.support.v7.widget.CardView>
+                        <TextView
+                            android:id="@+id/textView_budget"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:text="@string/expense"
+                            android:layout_gravity="center"/>
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputLayout_note"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/textInputLayout_amount"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/standard_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout_amount"
+                    android:layout_marginEnd="@dimen/wide_margin"
+                    android:layout_marginStart="@dimen/wide_margin"
+                    android:layout_marginTop="@dimen/basic_margin"
                     android:hint="@string/hint_note"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="30"
                     app:errorEnabled="true"
-                    app:hintAnimationEnabled="true">
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true">
 
                     <EditText
                         android:id="@+id/editText_note"
@@ -106,91 +127,88 @@
                 <TextView
                     android:id="@+id/textView_date"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/normal_size"
                     android:layout_below="@id/textInputLayout_note"
-                    android:layout_marginEnd="@dimen/basic_margin"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:layout_marginTop="32dp"
                     android:layout_marginBottom="@dimen/basic_margin"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                    android:layout_marginStart="@dimen/wide_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:paddingStart="@dimen/text_add_account_padding"
                     android:gravity="center_vertical"
-                    android:paddingStart="5dp"
                     android:text="@string/date"
                     android:textColor="@color/colorAccent"
-                    android:textSize="18sp"/>
+                    android:textSize="@dimen/text_add_account"/>
 
-                <TextView
-                    android:id="@+id/textView_year_month_day"
+                <Button
+                    android:id="@+id/button_year_month_day"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/normal_size"
                     android:layout_below="@id/textInputLayout_note"
                     android:layout_marginEnd="@dimen/standard_margin"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="@dimen/standard_margin"
                     android:layout_toEndOf="@id/textView_date"
-                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingStart="@dimen/standard_margin"
                     android:clickable="true"
                     android:gravity="center_vertical"
-                    android:text="@string/_2017_4_23"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/colorBlackSecondaryText"
+                    android:textSize="@dimen/text_add_account"
+                    tools:text="@string/_2017_4_23"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
 
                 <TextView
                     android:id="@+id/textView_moneyRepoType"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/normal_size"
                     android:layout_below="@id/textView_date"
-                    android:layout_marginEnd="@dimen/basic_margin"
-                    android:layout_marginStart="@dimen/standard_margin"
                     android:layout_marginBottom="@dimen/basic_margin"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                    android:paddingStart="@dimen/text_add_account_padding"
+                    android:layout_marginStart="@dimen/wide_margin"
                     android:gravity="center_vertical"
-                    android:paddingStart="5dp"
                     android:text="@string/money_repo"
                     android:textColor="@color/colorAccent"
-                    android:textSize="18sp"/>
+                    android:textSize="@dimen/text_add_account"/>
 
-                <TextView
-                    android:id="@+id/textView_moneyRepoTypes"
+                <Button
+                    android:id="@+id/button_moneyRepoTypes"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/normal_size"
                     android:layout_below="@id/textView_date"
                     android:layout_marginEnd="@dimen/standard_margin"
+                    android:paddingStart="@dimen/standard_margin"
                     android:layout_toEndOf="@id/textView_moneyRepoType"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
                     android:gravity="center_vertical"
-                    android:text="@string/wechat_charge"
-                    android:textSize="18sp"/>
+                    android:clickable="true"
+                    android:textSize="@dimen/text_add_account"
+                    android:textColor="@color/colorBlackSecondaryText"
+                    tools:text="@string/wechat_charge"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
 
                 <TextView
                     android:id="@+id/textView_moneyType"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/normal_size"
                     android:layout_below="@id/textView_moneyRepoType"
                     android:layout_marginBottom="@dimen/standard_margin"
-                    android:layout_marginEnd="@dimen/basic_margin"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                    android:layout_marginStart="@dimen/wide_margin"
                     android:gravity="center_vertical"
-                    android:paddingStart="5dp"
+                    android:paddingStart="@dimen/text_add_account_padding"
                     android:text="@string/money_type"
                     android:textColor="@color/colorAccent"
-                    android:textSize="18sp"/>
+                    android:textSize="@dimen/text_add_account"/>
 
-                <TextView
-                    android:id="@+id/textView_moneyTypes"
+                <Button
+                    android:id="@+id/button_moneyTypes"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/normal_size"
                     android:layout_below="@id/textView_moneyRepoType"
                     android:layout_marginEnd="@dimen/standard_margin"
                     android:layout_toEndOf="@id/textView_moneyRepoType"
-                    android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:gravity="center_vertical"
+                    android:paddingStart="@dimen/standard_margin"
                     android:text="@string/online_shopping"
-                    android:textSize="18sp"/>
+                    android:textSize="@dimen/text_add_account"
+                    android:textColor="@color/colorBlackSecondaryText"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
 
             </RelativeLayout>
 
@@ -205,7 +223,7 @@
         android:layout_margin="@dimen/standard_margin"
         android:src="@drawable/ic_fab_done"
         app:fabSize="normal"
-        app:elevation="6dp"
+        app:elevation="@dimen/elevation_fab"
         app:backgroundTintMode="multiply"
         app:rippleColor="@color/colorAccentRipple"
         app:layout_anchor="@id/cardView_addAccount"

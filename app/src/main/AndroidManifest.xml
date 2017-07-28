@@ -4,35 +4,33 @@
           package="com.newamber.gracebook">
 
     <application
-        android:name=".GraceBookApplication"
+        android:name=".app.GraceBookApplication"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:fullBackupContent="true"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".view.activity.MainActivity">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".view.activity.AddAccountActivity">
+        <activity android:name=".ui.activity.AddAccountActivity">
         </activity>
-
-        <activity android:name=".view.activity.SettingsActivity">
+        <activity android:name=".ui.activity.SettingsActivity">
         </activity>
-
-        <activity android:name=".view.activity.TypeEditActivity">
+        <activity android:name=".ui.activity.TypeEditActivity">
         </activity>
-
-        <activity android:name=".view.activity.SplashActivity">
+        <activity android:name=".ui.activity.SplashActivity">
         </activity>
-
+        <activity android:name=".ui.activity.SearchActivity">
+        </activity>
     </application>
 
 </manifest>

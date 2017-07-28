@@ -21,7 +21,7 @@ public class AccountPO extends BaseModel {
     @PrimaryKey(autoincrement = true)
     public int id;
 
-    public double amount;           // amount waited to be recorded
+    public Double amount;           // amount waited to be recorded
 
     public String note;             // note: the usage of the money
 
@@ -29,12 +29,12 @@ public class AccountPO extends BaseModel {
 
     public String moneyType;        // for example, shopping, eating and so on
 
-    public boolean budget;          // income(true) or expense(false)
+    public boolean budget;          // income(false) or expense(true)
 
-    public Calendar date;           // the date of the money's record
+    public Calendar calendar;       // the calendar of the money's record
 
     public @DrawableRes
-    int moneyTypeImageId;           // the round icon of the money type
+    int  moneyTypeImageId;           // the round icon of the money type
 
     public @DrawableRes
     int moneyRepoTypeImageId;       // the round icon of the money type

@@ -12,7 +12,6 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  *
  * Created by Newamber on 2017/4/28.
  */
-@SuppressWarnings("all")
 @Table(database = GraceBookDatabase.class, allFields = true)
 public class MoneyTypePO extends BaseModel {
 

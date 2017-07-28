@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.newamber.gracebook.GraceBookApplication;
+import com.newamber.gracebook.app.GraceBookApplication;
 import com.newamber.gracebook.R;
 
 import java.util.List;

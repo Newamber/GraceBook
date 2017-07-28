@@ -1,13 +1,11 @@
-package com.newamber.gracebook.view.activity;
+package com.newamber.gracebook.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
-import com.newamber.gracebook.base.BasePresenter;
 
 /**
  * Description: Splash Activity which include some initial operations.<p>
@@ -25,22 +23,11 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
-    public void processClick(View v) {
-
-    }
-
-    @Override
     public void initView() {
     }
 
     @Override
     protected int getLayoutId() {
         return LAYOUT_ID;
-    }
-
-    // The Activity has no business logic so there is no presenter.
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
     }
 }

@@ -1,4 +1,4 @@
-package com.newamber.gracebook.util.helper;
+package com.newamber.gracebook.util.other;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,25 +16,26 @@ import android.view.View;
 public class EditTypeItemCallback extends ItemTouchHelper.Callback {
 
     private ItemTouchActionHelper mItemTouchActionHelper;
-    private final float ALPHA_FULL = 1.0f;
-    private boolean mIsMoneyType;
+    private static final float ALPHA_FULL = 1.0f;
+    private boolean isMoneyType;
 
     public EditTypeItemCallback(ItemTouchActionHelper recyclerViewAdapter, boolean isMoneyType) {
         mItemTouchActionHelper = recyclerViewAdapter;
-        this.mIsMoneyType = isMoneyType;
+        this.isMoneyType = isMoneyType;
     }
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager ||
                 recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
-            final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN |
+            final int dragFlags =
+                    ItemTouchHelper.UP | ItemTouchHelper.DOWN |
                     ItemTouchHelper.END | ItemTouchHelper.START;
             final int swipeFlags = 0;
             return makeMovementFlags(dragFlags, swipeFlags);
         } else {
             final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-            final int swipeFlags = mIsMoneyType ? ItemTouchHelper.END : ItemTouchHelper.START;
+            final int swipeFlags = isMoneyType ? ItemTouchHelper.END : ItemTouchHelper.START;
             return makeMovementFlags(dragFlags, swipeFlags);
         }
     }
@@ -46,18 +47,13 @@ public class EditTypeItemCallback extends ItemTouchHelper.Callback {
             return false;
         }
         // Notify the adapter of the move.
-        mItemTouchActionHelper.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+        mItemTouchActionHelper.onItemDragMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
         return true;
     }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        mItemTouchActionHelper.onItemDismiss(viewHolder.getAdapterPosition());
-    }
-
-    @Override
-    public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-        super.onSelectedChanged(viewHolder, actionState);
+        mItemTouchActionHelper.onItemSwipeDismiss(viewHolder.getAdapterPosition());
     }
 
     @Override

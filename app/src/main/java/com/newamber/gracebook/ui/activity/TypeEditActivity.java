@@ -1,7 +1,5 @@
-package com.newamber.gracebook.view.activity;
+package com.newamber.gracebook.ui.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -30,10 +28,14 @@ import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.entity.SpinnerTypeIcon;
 import com.newamber.gracebook.presenter.TypeEditPresenter;
+import com.newamber.gracebook.ui.fragment.MoneyRepoTypeFragment;
+import com.newamber.gracebook.ui.fragment.MoneyTypeFragment;
+import com.newamber.gracebook.util.GlobalConstant;
+import com.newamber.gracebook.util.LocalStorage;
 import com.newamber.gracebook.util.ToastUtil;
 import com.newamber.gracebook.util.ToastUtil.ToastMode;
-import com.newamber.gracebook.view.fragment.MoneyRepoTypeFragment;
-import com.newamber.gracebook.view.fragment.MoneyTypeFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,23 +77,17 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
     private ViewPager mViewPager;
     private List<SpinnerTypeIcon> mSpinnerTypeIconList;
 
-    public TypeEditPresenter mEditPresenter;
-    public MoneyTypeFragment mMoneyTypeFragment;
-    public MoneyRepoTypeFragment mMoneyRepoTypeFragment;
+    private TypeEditPresenter mEditPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEditPresenter = getPresenter();
-    }
-
-    @Override
-    public void processClick(View v) {
-
     }
 
     @Override
     public void initView() {
+        mEditPresenter = getPresenter();
+
         // -----------------------------findViewById------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_typeEdit);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout_typeEdit);
@@ -106,10 +102,8 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
 
         // -----------------------------ViewPager---------------------------------------------------
         List<Fragment> fragmentList = new ArrayList<>();
-        mMoneyTypeFragment = new MoneyTypeFragment();
-        mMoneyRepoTypeFragment = new MoneyRepoTypeFragment();
-        fragmentList.add(mMoneyTypeFragment);
-        fragmentList.add(mMoneyRepoTypeFragment);
+        fragmentList.add(new MoneyTypeFragment());
+        fragmentList.add(new MoneyRepoTypeFragment());
 
         TypeEditViewPagerAdapter pagerAdapter = new
                 TypeEditViewPagerAdapter(getSupportFragmentManager(), fragmentList);
@@ -117,11 +111,11 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
         tabLayout.setupWithViewPager(mViewPager);
 
         // -----------------------------SpinnerAdapter----------------------------------------------
-        initIconSpinnerDropDown();
+        initSpinnerDropDown();
         adapter = new BaseListViewAdapter<SpinnerTypeIcon>(mSpinnerTypeIconList,
                 R.layout.spinner_item_icons) {
             @Override
-            protected void bindView(ViewHolder holder, SpinnerTypeIcon entity) {
+            protected void convertView(ViewHolder holder, SpinnerTypeIcon entity) {
                 holder.setImageResource(R.id.imageView_spinner_item_icon, entity.getIconId());
                 holder.setText(R.id.textView_placeholder, entity.getPlaceholder());
             }
@@ -157,7 +151,6 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
     @Override
     @SuppressWarnings("all")
     public void showMoneyTypeDialog() {
-        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_spinner_icon_show);
         mEditPresenter.isMoneyType = true;
         AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_money_type, null);
@@ -175,49 +168,48 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerTypeIcon entity = (SpinnerTypeIcon) parent.getItemAtPosition(position);
                 iconId = entity.getIconId();
-                animator.setTarget(imageViewIcon);
-                animator.start();
+                startAnimator(imageViewIcon, R.animator.anim_spinner_icon_show);
                 imageViewIcon.setBackgroundResource(entity.getIconId());
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         dialog.setTitle(R.string.new_type)
                 .setView(dialogView)
-                .setCancelable(false)
                 .setPositiveButton(R.string.sure, (dialog1, which) -> {
                     String name = editText.getText().toString();
                     if (name.isEmpty()) {
                         ToastUtil.showShort(R.string.no_name_no_type, ToastMode.ERROR);
                     } else if (name.length() > textInputLayout.getCounterMaxLength()) {
-                        ToastUtil.showShort(R.string.over_words_limit, ToastMode.WARNING);
+                        ToastUtil.showShort(R.string.over_words_limit_not_save, ToastMode.WARNING);
                     } else {
-                        // change in DB
-                        mEditPresenter.saveData(name, iconId, 0);
-
-                        // change in memory
-                        MoneyTypePO moneyTypePO = new MoneyTypePO();
-                        moneyTypePO.moneyTypeName = name;
-                        moneyTypePO.moneyTypeImageId = iconId;
-                        mMoneyTypeFragment.mPOList.add(moneyTypePO);
-
-                        int postion = mMoneyTypeFragment.mAdapter.getItemCount();
-                        mMoneyTypeFragment.mAdapter.notifyItemInserted(postion);
-                        ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
+                        MoneyTypePO moneyTypePO;
+                        if (mEditPresenter.isExist(name)) {
+                            moneyTypePO = mEditPresenter.getRecordByName(name);
+                            moneyTypePO.moneyTypeImageId = iconId;
+                            moneyTypePO.update();
+                            LocalStorage.put(GlobalConstant.IS_EXIST_TYPE_NAME, true);
+                            ToastUtil.showShort(R.string.update_type_success, ToastMode.SUCCESS);
+                        } else {
+                            moneyTypePO = new MoneyTypePO();
+                            moneyTypePO.moneyTypeName = name;
+                            moneyTypePO.moneyTypeImageId = iconId;
+                            LocalStorage.put(GlobalConstant.IS_EXIST_TYPE_NAME, false);
+                            ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
+                        }
+                        EventBus.getDefault().post(moneyTypePO);
+                        mEditPresenter.saveInDB(name, iconId, 0);
                     }
                 })
-                .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
     @Override
     @SuppressWarnings("all")
     public void showMoneyRepoTypeDialog() {
-        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_spinner_icon_show);
         mEditPresenter.isMoneyType = false;
         AlertDialog.Builder dialog = new AlertDialog.Builder(TypeEditActivity.this);
         View dialogView =  LayoutInflater.from(this).inflate(R.layout.dialog_money_repo_type, null);
@@ -236,14 +228,11 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerTypeIcon entity = (SpinnerTypeIcon) parent.getItemAtPosition(position);
                 iconId = entity.getIconId();
-                animator.setTarget(imageViewIcon);
-                animator.start();
+                startAnimator(imageViewIcon, R.animator.anim_spinner_icon_show);
                 imageViewIcon.setBackgroundResource(entity.getIconId());
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         dialog.setTitle(R.string.new_repo_type)
@@ -260,24 +249,33 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
                     if (name.isEmpty()) {
                         ToastUtil.showShort(R.string.no_name_no_type, ToastMode.ERROR);
                     } else if (name.length() > textInputLayout.getCounterMaxLength()) {
-                        ToastUtil.showShort(R.string.over_words_limit, ToastMode.WARNING);
+                        ToastUtil.showShort(R.string.over_words_limit_not_save, ToastMode.WARNING);
                     } else {
-                        // change in DB
-                        mEditPresenter.saveData(name, iconId, balanceAmount);
-
-                        // change in memory
-                        MoneyRepoTypePO moneyRepoTypePO = new MoneyRepoTypePO();
-                        moneyRepoTypePO.moneyRepoTypeName = name;
-                        moneyRepoTypePO.moneyRepoTypeImageId = iconId;
-                        moneyRepoTypePO.balance = balanceAmount;
-
-                        mMoneyRepoTypeFragment.mPOList.add(moneyRepoTypePO);
-                        int postion = mMoneyRepoTypeFragment.mAdapter.getItemCount();
-                        mMoneyRepoTypeFragment.mAdapter.notifyItemInserted(postion);
-                        ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
+                        if (balanceAmount <= GlobalConstant.MAX_BALANCE) {
+                            MoneyRepoTypePO moneyRepoTypePO;
+                            if (mEditPresenter.isExist(name)) {
+                                moneyRepoTypePO = mEditPresenter.getRecordByName(name);
+                                moneyRepoTypePO.moneyRepoTypeImageId = iconId;
+                                LocalStorage.put(GlobalConstant.IS_EXIST_REPO_TYPE_NAME, true);
+                                ToastUtil.showShort(R.string.update_type_success, ToastMode.SUCCESS);
+                            } else {
+                                moneyRepoTypePO = new MoneyRepoTypePO();
+                                moneyRepoTypePO.moneyRepoTypeName = name;
+                                moneyRepoTypePO.moneyRepoTypeImageId = iconId;
+                                moneyRepoTypePO.balance = balanceAmount;
+                                LocalStorage.put(GlobalConstant.IS_EXIST_REPO_TYPE_NAME, false);
+                                ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
+                            }
+                            // update in memory
+                            EventBus.getDefault().post(moneyRepoTypePO);
+                            // update in DB
+                            mEditPresenter.saveInDB(name, iconId, balanceAmount);
+                        } else {
+                            ToastUtil.showShort(R.string.initial_balance_is_too_large, ToastMode.WARNING);
+                        }
                     }
                 })
-                .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -289,12 +287,8 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
                 .setIcon(R.drawable.ic_dialog_warning)
                 .setMessage(R.string.delete_all_money_type_is_sure)
                 .setPositiveButton(R.string.sure, (dialog1, which) -> {
-                    // TODO: some bugs.
-                    mEditPresenter.deleteAllData();
-                    for (int i = mMoneyTypeFragment.mPOList.size() - 1; i >= 0; i--) {
-                        mMoneyTypeFragment.mPOList.remove(i);
-                        mMoneyTypeFragment.mAdapter.notifyItemRemoved(i);
-                    }
+                    mEditPresenter.deleteAll();
+                    EventBus.getDefault().post(GlobalConstant.DELETE_ALL_MONEY_TYPE);
                     ToastUtil.showShort(R.string.all_money_type_deleted, ToastMode.INFO);
                 })
                 .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
@@ -309,11 +303,8 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
                 .setIcon(R.drawable.ic_dialog_warning)
                 .setMessage(R.string.delete_all_money_repo_type_is_sure)
                 .setPositiveButton(R.string.sure, (dialog1, which) -> {
-                    mEditPresenter.deleteAllData();
-                    for (int i = mMoneyRepoTypeFragment.mPOList.size() - 1; i >= 0; i--) {
-                        mMoneyRepoTypeFragment.mPOList.remove(i);
-                        mMoneyRepoTypeFragment.mAdapter.notifyItemRemoved(i);
-                    }
+                    mEditPresenter.deleteAll();
+                    EventBus.getDefault().post(GlobalConstant.DELETE_ALL_REPO_TYPE);
                     ToastUtil.showShort(R.string.all_money_repo_type_deleted, ToastMode.INFO);
                 })
                 .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
@@ -330,15 +321,13 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
         return new TypeEditPresenter();
     }
 
-    private void initIconSpinnerDropDown() {
+    private void initSpinnerDropDown() {
         final int[] iconArray = {ic_internet_62, ic_love_02, ic_love_10, ic_love_13, ic_love_27,
                 ic_love_82, ic_love_83, ic_love_85, ic_office_03, ic_office_07, ic_office_102,
                 ic_office_104, ic_office_119, ic_office_12, ic_office_13, ic_office_20, ic_office_28,
                 ic_office_52, ic_office_54, ic_office_63, ic_office_73, ic_sport_22, ic_sport_96,
                 ic_transport_17, ic_transport_96 ,ic_travel_60};
         mSpinnerTypeIconList = new ArrayList<>();
-        for (int icon : iconArray) {
-            mSpinnerTypeIconList.add(new SpinnerTypeIcon("", icon));
-        }
+        for (int icon : iconArray) mSpinnerTypeIconList.add(new SpinnerTypeIcon("", icon));
     }
 }

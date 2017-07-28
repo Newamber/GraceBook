@@ -2,46 +2,50 @@ package com.newamber.gracebook.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
-import com.newamber.gracebook.GraceBookApplication;
+import com.newamber.gracebook.app.GraceBookApplication;
 
 import java.util.Set;
 
 /**
  * Description: Local storage manager util.<p>
+ *
  * Created by Newamber on 2017/6/28.
  */
 @SuppressWarnings("unused")
-public class LocalStorageUtil {
+public class LocalStorage {
 
     private static SharedPreferences sp = GraceBookApplication.getContext()
             .getSharedPreferences(GlobalConstant.PREFERENCE_FILE, Context.MODE_PRIVATE);
 
+    private static SharedPreferences.Editor sEditor = sp.edit();
 
-    public static void putBoolean(String key, boolean value) {
-        sp.edit().putBoolean(key, value).apply();
+    @SuppressWarnings("unchecked")
+    public static <T> void put(String key, T value) {
+        switch (value.getClass().getSimpleName()) {
+            case "Integer":
+                sEditor.putInt(key, (Integer) value).apply();
+                break;
+            case "Long":
+                sEditor.putLong(key, (Long) value).apply();
+                break;
+            case "Float":
+                sEditor.putFloat(key, (Float) value).apply();
+                break;
+            case "Boolean":
+                sEditor.putBoolean(key, (Boolean) value).apply();
+                break;
+            case "String":
+                sEditor.putString(key, (String) value).apply();
+                break;
+            case "Set":
+                sEditor.putStringSet(key, (Set<String>) value).apply();
+                break;
+            default:
+                break;
+        }
     }
-
-    public static void putInt(String key, int value) {
-        sp.edit().putInt(key, value).apply();
-    }
-
-    public static void putLong(String key, Long value) {
-        sp.edit().putLong(key, value).apply();
-    }
-
-    public static void putFloat(String key, float value) {
-        sp.edit().putFloat(key, value).apply();
-    }
-
-    public static void putString(String key, String value) {
-        sp.edit().putString(key, value).apply();
-    }
-
-    public static void putStringSet(String key, Set<String> values) {
-        sp.edit().putStringSet(key, values).apply();
-    }
-
 
     public static boolean getBoolean(String key, boolean defaultValue) {
         return sp.getBoolean(key, defaultValue);
@@ -59,16 +63,26 @@ public class LocalStorageUtil {
         return sp.getFloat(key, defaultValue);
     }
 
+    @NonNull
     public static String getString(String key, String defaultValue) {
         return sp.getString(key, defaultValue);
     }
 
+    @NonNull
     public static Set<String> getStringSet(String key, Set<String> defaultValues) {
         return sp.getStringSet(key, defaultValues);
     }
 
     public static boolean contains(String key) {
         return sp.contains(key);
+    }
+
+    public static void remove(String key) {
+        sEditor.remove(key).apply();
+    }
+
+    public static void removeAll() {
+        sEditor.clear().apply();
     }
 }
 

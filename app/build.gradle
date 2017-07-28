@@ -4,7 +4,7 @@ def dbflow_version = "4.0.4"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.newamber.gracebook"
         minSdkVersion 19
@@ -13,6 +13,11 @@ android {
         versionName "1.0"
         jackOptions.enabled = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [eventBusIndex: 'com.newamber.gracebook.util.EventBusIndex']
+            }
+        }
     }
     dexOptions {
         dexInProcess true
@@ -38,19 +43,24 @@ dependencies {
     })
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
 
-    compile 'com.tomer:fadingtextview:1.2'
-    compile 'com.github.GrenderG:Toasty:1.2.5'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
-    compile 'jp.wasabeef:recyclerview-animators:2.2.6'
 
+
+
+    compile 'com.github.GrenderG:Toasty:1.2.5'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.tomer:fadingtextview:1.8.1'
+    compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
+    compile 'org.jetbrains:annotations:15.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.6'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
     testCompile 'junit:junit:4.12'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
 }

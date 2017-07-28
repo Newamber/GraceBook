@@ -1,16 +1,71 @@
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.newamber.gracebook.view.fragment.FlowFragment">
+    android:orientation="vertical"
+    tools:context="com.newamber.gracebook.ui.fragment.FlowFragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout_stream"
-        android:layout_height="match_parent"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_typeEdit_moneyType"
         android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginEnd="@dimen/basic_margin"
+        android:layout_marginStart="@dimen/basic_margin"
+        android:layout_marginTop="@dimen/basic_margin"
+        app:cardBackgroundColor="@color/colorPrimaryLight"
+        app:cardCornerRadius="@dimen/radius_card_4"
+        app:cardElevation="@dimen/elevation_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageView_previous"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_previous_button"
+                tools:ignore="ContentDescription"/>
+
+            <TextView
+                android:id="@+id/textView_dateRange"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/colorWhiteTextOrIcon"
+                tools:text="2017-06-05   至   2017-08-06"/>
+
+            <ImageButton
+                android:id="@+id/imageView_next"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_next_button"
+                tools:ignore="ContentDescription"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <include layout="@layout/headerview_flow"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_stream"
@@ -18,6 +73,6 @@
             android:layout_height="match_parent"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

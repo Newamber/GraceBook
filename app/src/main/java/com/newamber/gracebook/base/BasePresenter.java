@@ -1,24 +1,24 @@
 package com.newamber.gracebook.base;
 
+import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
 /**
  * Description: BasePresenter which extracts some common operations.<br>
- * {@code V} means a view interface.<p>
+ * {@code V} means a view interface type.<p>
  *
  * Created by Newamber on 2017/4/24.
  */
-@SuppressWarnings("all")
 public abstract class BasePresenter<V> {
 
-    private WeakReference<V> attachedView;
+    private Reference<V> attachedView;
 
-    public void attachView(V view) {
+    void attachView(V view) {
         attachedView = new WeakReference<>(view);
     }
 
-    public void detachView() {
-        if (attachedView != null) {
+    void detachView() {
+        if (isAttached()) {
             attachedView.clear();
             attachedView = null;
         }
@@ -26,16 +26,17 @@ public abstract class BasePresenter<V> {
 
     /**
      * Get attached View and then you can invoke relevant method in presenter.
-     * Note, do not invoke this method to instantiate the BaseView reference field variable,
-     * You should invoke it at specific method.
+     * Note that do not invoke this method to instantiate the BaseView reference field variable,
+     * You should invoke it at specific method and then you can ensure the existence of presenter's
+     * attached View interface.
      *
-     * @return the attched View we need
+     * @return the attached View we need
      */
     protected V getView() {
         return attachedView.get();
     }
 
-    public boolean isViewAttached() {
+    private boolean isAttached() {
         return attachedView != null && attachedView.get() != null;
     }
 }

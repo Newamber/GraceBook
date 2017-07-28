@@ -9,6 +9,15 @@ public interface BaseView {
 
     interface AddAccountView {
 
+        void checkInput();
+
+        void showDatePicker();
+
+        void showMoneyRepoPicker();
+
+        void showMoneyTypePicker();
+
+        void setErrorHint();
     }
 
     interface TypeEditView {
@@ -20,5 +29,14 @@ public interface BaseView {
         void showTypeDeleteDialog();
 
         void showRepoTypeDeleteDialog();
+    }
+
+    interface MainView {
+
+        void showErrorDialog();
+    }
+
+    interface SearchView {
+
     }
 }
