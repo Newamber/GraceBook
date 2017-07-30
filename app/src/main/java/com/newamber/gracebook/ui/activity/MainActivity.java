@@ -70,14 +70,13 @@ public class MainActivity extends BaseActivity<BaseView.MainView, MainPresenter>
         mPresenter = getPresenter();
 
         // ----------------------------findViewByID-------------------------------------------------
-        Toolbar toolbarMain = (Toolbar) findViewById(R.id.toolbar_main);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
-        fabAdd = (FloatingActionButton) findViewById(R.id.fab_record);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager_main);
-        ImageView imageViewHeader = (ImageView) navigationView
-                .getHeaderView(0)
+        Toolbar toolbarMain = findView(R.id.toolbar_main);
+        mDrawerLayout = findView(R.id.drawer_layout);
+        NavigationView navigationView = findView(R.id.navigationView);
+        fabAdd = findView(R.id.fab_record);
+        TabLayout tabLayout = findView(R.id.tablayout_main);
+        mViewPager = findView(R.id.viewPager_main);
+        ImageView imageViewHeader = (ImageView) navigationView.getHeaderView(0)
                 .findViewById(R.id.imageview_navigation_header);
         Glide.with(this).load(R.drawable.bg_navigationview).into(imageViewHeader);
 
@@ -206,17 +205,18 @@ public class MainActivity extends BaseActivity<BaseView.MainView, MainPresenter>
             case 0:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(true);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(true);
-                menu.setGroupVisible(R.id.toolbar_group_stream, false);
+                menu.setGroupVisible(R.id.toolbar_group_flow, false);
                 break;
             case 1:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
-                menu.setGroupVisible(R.id.toolbar_group_stream, true);
+                menu.setGroupVisible(R.id.toolbar_group_flow, true);
                 break;
             case 2:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
-                menu.setGroupVisible(R.id.toolbar_group_stream, false);
+
+                menu.setGroupVisible(R.id.toolbar_group_flow, false);
                 break;
         }
         return super.onPrepareOptionsMenu(menu);

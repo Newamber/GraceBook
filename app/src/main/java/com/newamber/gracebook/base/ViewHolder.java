@@ -40,6 +40,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         mSubViewArray = new SparseArray<>();
     }
 
+    // Some auxiliary methods.
     public ViewHolder setText(@IdRes int viewId , CharSequence textContent) {
         View view = getSubView(viewId);
         if (view instanceof TextView) ((TextView) view).setText(textContent);
@@ -75,6 +76,26 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public ViewHolder setVisibility(@IdRes int viewId , int visibility) {
         getSubView(viewId).setVisibility(visibility);
+        return this;
+    }
+
+    public ViewHolder saveTag(Object tag) {
+        itemView.setTag(tag);
+        return this;
+    }
+
+    public ViewHolder getTag() {
+        itemView.getTag();
+        return this;
+    }
+
+    public ViewHolder saveSubTag(@IdRes int viewId, Object tag) {
+        getSubView(viewId).setTag(tag);
+        return this;
+    }
+
+    public ViewHolder getSubTag(@IdRes int viewId) {
+        getSubView(viewId).getTag();
         return this;
     }
 

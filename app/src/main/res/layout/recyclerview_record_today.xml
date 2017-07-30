@@ -19,7 +19,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textview_item_hourMinute"
+            android:id="@+id/textview_item_flow_hourMinute"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -30,7 +30,7 @@
             android:textSize="@dimen/text_main"/>
 
         <ImageView
-            android:id="@+id/imageView_item_moneyType"
+            android:id="@+id/imageView_item_flow_moneyType"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_gravity="center_vertical"
@@ -40,7 +40,7 @@
             tools:src="@drawable/ic_internet_62"/>
 
         <TextView
-            android:id="@+id/textView_item_moneyType"
+            android:id="@+id/textView_item_flow_moneyType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -53,7 +53,7 @@
             tools:text="@string/money_type_item"/>
 
         <TextView
-            android:id="@+id/textView_item_amount"
+            android:id="@+id/textView_item_flow_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

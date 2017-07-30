@@ -9,9 +9,10 @@ import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
 import com.newamber.gracebook.base.ViewHolder;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.impl.MoneyRepoTypeModel;
-import com.newamber.gracebook.util.NumericUtil;
 
 import java.util.List;
+
+import static com.newamber.gracebook.util.NumericUtil.formatCurrency;
 
 /**
  * Description: .<p>
@@ -41,7 +42,7 @@ public class MoneyRepoTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyRepoT
     protected void convertView(ViewHolder holder, MoneyRepoTypePO entity) {
         holder.setImageResource(R.id.imageView_typeEdit_moneyRepoType, entity.moneyRepoTypeImageId)
                 .setText(R.id.textView_typeEdit_moneyRepoType, entity.moneyRepoTypeName)
-                .setText(R.id.textView_typeEdit_initialAmount, "余额：" +
-                        NumericUtil.getCurrencyFormat(entity.balance));
+                .setText(R.id.textView_typeEdit_initialAmount, getContext()
+                        .getString(R.string.balance_colon) + formatCurrency(entity.balance));
     }
 }

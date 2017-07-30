@@ -60,34 +60,61 @@ public class DateUtil {
         return HOUR_MIN_FORMAT.format(calendar.getTime());
     }
 
-    public static Calendar getMondayThisWeek() {
+    public static Calendar getFirstDayThisWeek() {
         Calendar today = Calendar.getInstance();
-        today.setFirstDayOfWeek(Calendar.MONDAY);
-        /*int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
-        switch (dayOfWeek) {
-            case Calendar.MONDAY: 2
-            case Calendar.TUESDAY: 3 -4
-                today.add(Calendar.DAY_OF_MONTH, -1);
-                break;
-            case Calendar.WEDNESDAY: 4 -6
-                today.add(Calendar.DAY_OF_MONTH, -2);
-                break;
-            case Calendar.THURSDAY: 5 -8
-                today.add(Calendar.DAY_OF_MONTH, -3);
-                break;
-            case Calendar.FRIDAY: 6 -10
-                today.add(Calendar.DAY_OF_MONTH, -4);
-                break;
-            case Calendar.SATURDAY: 7 -12
-                today.add(Calendar.DAY_OF_MONTH, -5);
-                break;
-            case Calendar.SUNDAY: 1 -7
-                today.add(Calendar.DAY_OF_MONTH, -6);
-                break;
-            default:
-                break;
-        }*/
         today.set(Calendar.DAY_OF_WEEK, today.getActualMinimum(Calendar.DAY_OF_WEEK));
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.add(Calendar.DAY_OF_MONTH, - 6);
+
+        return today;
+    }
+
+    public static Calendar getLastDayThisWeek() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.DAY_OF_WEEK, today.getActualMaximum(Calendar.DAY_OF_WEEK));
+        today.set(Calendar.HOUR_OF_DAY, 23);
+        today.set(Calendar.MINUTE, 59);
+        today.set(Calendar.SECOND, 59);
+        today.add(Calendar.DAY_OF_MONTH, - 6);
+
+        return today;
+    }
+
+    public static Calendar getFirstDayThisMonth() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.DAY_OF_MONTH, today.getActualMinimum(Calendar.DAY_OF_MONTH));
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        return today;
+    }
+
+    public static Calendar getLastDayThisMonth() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.DAY_OF_MONTH, today.getActualMaximum(Calendar.DAY_OF_MONTH));
+        today.set(Calendar.HOUR_OF_DAY, 23);
+        today.set(Calendar.MINUTE, 59);
+        today.set(Calendar.SECOND, 59);
+        return today;
+    }
+
+    public static Calendar getFirstDayThisQuarter() {
+        Calendar today = Calendar.getInstance();
+        int month = today.get(Calendar.MONTH);
+
+        if (month == 0 || month == 1 || month == 2) {
+            today.set(Calendar.MONTH, Calendar.JANUARY);
+        } else if (month == 3 || month == 4 || month == 5) {
+            today.set(Calendar.MONTH, Calendar.APRIL);
+        } else if (month == 6 || month == 7 || month == 8) {
+            today.set(Calendar.MONTH, Calendar.JULY);
+        } else {
+            today.set(Calendar.MONTH, Calendar.OCTOBER);
+        }
+
+        today.set(Calendar.DAY_OF_MONTH, today.getActualMinimum(Calendar.DAY_OF_MONTH));
         today.set(Calendar.HOUR_OF_DAY, 0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
@@ -95,57 +122,49 @@ public class DateUtil {
         return today;
     }
 
-    public static Calendar getSundayThisWeek() {
+    public static Calendar getLastDayThisQuarter() {
         Calendar today = Calendar.getInstance();
-        today.setFirstDayOfWeek(Calendar.MONDAY);
-        /*int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
-        switch (dayOfWeek) {
-            case Calendar.MONDAY:
-                today.add(Calendar.DAY_OF_MONTH, 6);
-                break;
-            case Calendar.TUESDAY:
-                today.add(Calendar.DAY_OF_MONTH, 5);
-                break;
-            case Calendar.WEDNESDAY:
-                today.add(Calendar.DAY_OF_MONTH, 4);
-                break;
-            case Calendar.THURSDAY:
-                today.add(Calendar.DAY_OF_MONTH, 3);
-                break;
-            case Calendar.FRIDAY:
-                today.add(Calendar.DAY_OF_MONTH, 2);
-                break;
-            case Calendar.SATURDAY:
-                today.add(Calendar.DAY_OF_MONTH, 1);
-                break;
-            case Calendar.SUNDAY:
-            default:
-                break;
-        }*/
-        today.set(Calendar.DAY_OF_WEEK, today.getActualMaximum(Calendar.DAY_OF_WEEK));
+        int month = today.get(Calendar.MONTH);
+
+        if (month == 0 || month == 1 || month == 2) {
+            today.set(Calendar.MONTH, Calendar.MARCH);
+        } else if (month == 3 || month == 4 || month == 5) {
+            today.set(Calendar.MONTH, Calendar.JUNE);
+        } else if (month == 6 || month == 7 || month == 8) {
+            today.set(Calendar.MONTH, Calendar.SEPTEMBER);
+        } else {
+            today.set(Calendar.MONTH, Calendar.DECEMBER);
+        }
+
+        today.set(Calendar.DAY_OF_MONTH, today.getActualMaximum(Calendar.DAY_OF_MONTH));
         today.set(Calendar.HOUR_OF_DAY, 23);
         today.set(Calendar.MINUTE, 59);
-        today.set(Calendar.SECOND, 60);
+        today.set(Calendar.SECOND, 59);
 
         return today;
     }
 
-    public static Calendar getFirstDayofMonth() {
-        Calendar day = Calendar.getInstance();
-        day.set(Calendar.DAY_OF_MONTH, day.getActualMinimum(Calendar.DAY_OF_MONTH));
-        day.set(Calendar.HOUR_OF_DAY, 0);
-        day.set(Calendar.MINUTE, 0);
-        day.set(Calendar.SECOND, 0);
-        return day;
+    public static Calendar getFirstDayThisYear() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.MONTH, today.getActualMinimum(Calendar.MONTH));
+        today.set(Calendar.DAY_OF_MONTH, today.getActualMinimum(Calendar.DAY_OF_MONTH));
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+
+        return today;
     }
 
-    public static Calendar getLastDayOfMonth() {
-        Calendar day = Calendar.getInstance();
-        day.set(Calendar.DAY_OF_MONTH, day.getActualMaximum(Calendar.DAY_OF_MONTH));
-        day.set(Calendar.HOUR_OF_DAY, 23);
-        day.set(Calendar.MINUTE, 59);
-        day.set(Calendar.SECOND, 60);
-        return day;
+    public static Calendar getLastDayThisYear() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.MONTH, today.getActualMaximum(Calendar.MONTH));
+        today.set(Calendar.DAY_OF_MONTH, today.getActualMaximum(Calendar.DAY_OF_MONTH));
+        today.set(Calendar.HOUR_OF_DAY, 23);
+        today.set(Calendar.MINUTE, 59);
+        today.set(Calendar.SECOND, 59);
+
+        return today;
     }
+
 }
 

@@ -37,14 +37,15 @@ public class SettingsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        TextView textViewTypeEdit = (TextView) findViewById(R.id.textView_typeEdit);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
+        TextView textViewTypeEdit = (TextView) findView(R.id.textView_typeEdit);
+        Toolbar toolbar = (Toolbar) findView(R.id.toolbar_settings);
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
+
         textViewTypeEdit.setOnClickListener(this);
     }
 

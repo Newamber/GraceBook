@@ -35,8 +35,6 @@ import com.newamber.gracebook.util.LocalStorage;
 import com.newamber.gracebook.util.ToastUtil;
 import com.newamber.gracebook.util.ToastUtil.ToastMode;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,9 +87,9 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
         mEditPresenter = getPresenter();
 
         // -----------------------------findViewById------------------------------------------------
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_typeEdit);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout_typeEdit);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager_typeEdit);
+        Toolbar toolbar = findView(R.id.toolbar_typeEdit);
+        TabLayout tabLayout = findView(R.id.tabLayout_typeEdit);
+        mViewPager = findView(R.id.viewPager_typeEdit);
 
         // ---------------------------Toolbar-------------------------------------------------------
         setSupportActionBar(toolbar);
@@ -199,7 +197,7 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
                             LocalStorage.put(GlobalConstant.IS_EXIST_TYPE_NAME, false);
                             ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
                         }
-                        EventBus.getDefault().post(moneyTypePO);
+                        post(moneyTypePO);
                         mEditPresenter.saveInDB(name, iconId, 0);
                     }
                 })
@@ -267,7 +265,7 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
                                 ToastUtil.showShort(R.string.new_type_success, ToastMode.SUCCESS);
                             }
                             // update in memory
-                            EventBus.getDefault().post(moneyRepoTypePO);
+                            post(moneyRepoTypePO);
                             // update in DB
                             mEditPresenter.saveInDB(name, iconId, balanceAmount);
                         } else {
@@ -288,7 +286,7 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
                 .setMessage(R.string.delete_all_money_type_is_sure)
                 .setPositiveButton(R.string.sure, (dialog1, which) -> {
                     mEditPresenter.deleteAll();
-                    EventBus.getDefault().post(GlobalConstant.DELETE_ALL_MONEY_TYPE);
+                    post(GlobalConstant.DELETE_ALL_MONEY_TYPE);
                     ToastUtil.showShort(R.string.all_money_type_deleted, ToastMode.INFO);
                 })
                 .setNegativeButton(R.string.cancel, (dialog1, which) -> {})
@@ -304,7 +302,7 @@ public class TypeEditActivity extends BaseActivity<BaseView.TypeEditView, TypeEd
                 .setMessage(R.string.delete_all_money_repo_type_is_sure)
                 .setPositiveButton(R.string.sure, (dialog1, which) -> {
                     mEditPresenter.deleteAll();
-                    EventBus.getDefault().post(GlobalConstant.DELETE_ALL_REPO_TYPE);
+                    post(GlobalConstant.DELETE_ALL_REPO_TYPE);
                     ToastUtil.showShort(R.string.all_money_repo_type_deleted, ToastMode.INFO);
                 })
                 .setNegativeButton(R.string.cancel, (dialog1, which) -> {})

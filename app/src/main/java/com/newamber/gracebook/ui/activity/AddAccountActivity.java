@@ -1,11 +1,11 @@
 package com.newamber.gracebook.ui.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.animation.SpringAnimation;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.FloatingActionButton;
@@ -31,8 +31,6 @@ import com.newamber.gracebook.util.DateUtil;
 import com.newamber.gracebook.util.DeviceUtil;
 import com.newamber.gracebook.util.GlobalConstant;
 import com.newamber.gracebook.util.other.Rotate3dAnimation;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.Calendar;
 
@@ -60,8 +58,8 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
     private boolean isExpense = true;
 
     // data to save
-    String[] repoNameArray = new String[] {};
-    String[] moneyNameArray = new String[] {};
+    String[] repoNameArray;
+    String[] moneyNameArray;
     private Double amount;
     private String note, moneyRepoType, moneyType;
     private Calendar mCalendar = Calendar.getInstance();
@@ -110,17 +108,17 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
         repoNameArray = mPresenter.getTypeNameArray(false);
 
         // ----------------------------findViewByID-------------------------------------------------
-        mBudgetInputLayout = (TextInputLayout) findViewById(R.id.textInputLayout_amount);
-        mNoteInputLayout = (TextInputLayout) findViewById(R.id.textInputLayout_note);
-        CardView budgetCardView = (CardView) findViewById(R.id.cardview_budget_button);
-        mBudgetEditText = (EditText) findViewById(R.id.editText_amount);
-        mNoteEditText = (EditText) findViewById(R.id.editText_note);
-        mDateButton = (Button) findViewById(R.id.button_year_month_day);
-        mMoneyRepoButton = (Button) findViewById(R.id.button_moneyRepoTypes);
-        mMoneyTypeButton = (Button) findViewById(R.id.button_moneyTypes);
-        FloatingActionButton fabSave = (FloatingActionButton) findViewById(R.id.fab_save);
-        mTextViewBudget = (TextView) findViewById(R.id.textView_budget);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_addAccount);
+        mBudgetInputLayout = findView(R.id.textInputLayout_amount);
+        mNoteInputLayout = findView(R.id.textInputLayout_note);
+        mBudgetEditText = findView(R.id.editText_amount);
+        mNoteEditText = findView(R.id.editText_note);
+        mDateButton = findView(R.id.button_year_month_day);
+        mMoneyRepoButton = findView(R.id.button_moneyRepoTypes);
+        mMoneyTypeButton = findView(R.id.button_moneyTypes);
+        mTextViewBudget = findView(R.id.textView_budget);
+        FloatingActionButton fabSave = findView(R.id.fab_save);
+        CardView budgetCardView = findView(R.id.cardview_budget_button);
+        Toolbar toolbar = findView(R.id.toolbar_addAccount);
 
         // --------------------------------Toolbar--------------------------------------------------
         setSupportActionBar(toolbar);
@@ -146,6 +144,7 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
         mMoneyTypeButton.getPaint().setAntiAlias(true);
 
         // initialize default data
+        //mBudgetInputLayout.setHint(getString(R.string.expense));
         moneyRepoType = repoNameArray[FIRST_ITEM];
         moneyType = moneyNameArray[FIRST_ITEM];
         mDateButton.setText(DateUtil.getTodayInCHS());
@@ -247,14 +246,14 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
                 if (isAmountOverMax) mBudgetInputLayout.setError(getString(R.string.single_amount_is_too_large));
                 if (isAmountOverBalance) mBudgetInputLayout.setError(getString(R.string.amount_over_balance));
             }
-            startAnimator(mBudgetInputLayout, R.animator.anim_wrong_shake);
+            bounceAnim(mBudgetInputLayout);
         } else {
             mBudgetInputLayout.setError("");
         }
 
         if (!isNoteInLimit) {
             mNoteInputLayout.setError(getString(R.string.over_words_limit));
-            startAnimator(mNoteInputLayout, R.animator.anim_wrong_shake);
+            bounceAnim(mNoteInputLayout);
         } else {
             mNoteInputLayout.setError("");
         }
@@ -325,7 +324,7 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
         record.calendar = mCalendar;
         record.moneyTypeImageId = moneyTypeImageId;
         record.moneyRepoTypeImageId = moneyRepoTypeImageId;
-        EventBus.getDefault().postSticky(record);
+        postSticky(record);
     }
 
     @Override
@@ -352,7 +351,7 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
 
     @SuppressWarnings("deprecation")
     private void rotateView(View v) {
-        int duration = 1000;
+        int duration = 900;
         int centerX = v.getWidth() / 2;
         int centerY = v.getHeight() / 2;
         Interpolator interpolator = new AnticipateOvershootInterpolator();
@@ -364,23 +363,21 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
         Rotate3dAnimation animLeft = new Rotate3dAnimation(360f, 0f, centerX, centerY, 0, true);
         animLeft.setDuration(duration);
         animLeft.setInterpolator(interpolator);
-        // alpha
-        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_show_budget);
-        animator.setTarget(mTextViewBudget);
 
         if (isExpense) {
             v.startAnimation(animRight);
             mTextViewBudget.setText(R.string.income);
-            animator.start();
+            //mBudgetInputLayout.setHint(getString(R.string.income));
             setGradientColor(v, R.color.colorRedButton, R.color.colorGreenButton, duration);
             isExpense = false;
         } else {
             v.startAnimation(animLeft);
             mTextViewBudget.setText(R.string.expense);
-            animator.start();
+            //mBudgetInputLayout.setHint(getString(R.string.expense));
             setGradientColor(v, R.color.colorGreenButton, R.color.colorRedButton, duration);
             isExpense = true;
         }
+        startAnimator(mTextViewBudget, R.animator.anim_show_budget);
     }
 
     // TODO: useless
@@ -390,5 +387,18 @@ public class AddAccountActivity extends BaseActivity<BaseView.AddAccountView, Ad
         if (view != null) {
             im.hideSoftInputFromInputMethod(view.getWindowToken(), 0);
         }
+    }
+
+    private void bounceAnim(View v) {
+        // offset
+        startAnimator(v, R.animator.anim_wrong_shake);
+        // bounce
+        new Handler().postDelayed(() -> {
+            SpringAnimation bounceAnim = new SpringAnimation(v, SpringAnimation.TRANSLATION_X, 0);
+            bounceAnim.getSpring().setDampingRatio(0.07f);
+            bounceAnim.getSpring().setStiffness(1400f);
+            bounceAnim.setStartValue(DeviceUtil.dp2Px(-15));
+            bounceAnim.start();
+        }, 200);
     }
 }

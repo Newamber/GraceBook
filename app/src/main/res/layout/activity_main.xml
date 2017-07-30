@@ -17,6 +17,7 @@
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBarLayout_main"
+            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -41,17 +42,17 @@
                 app:tabSelectedTextColor="@color/colorWhiteTextOrIcon"
                 app:tabIndicatorColor="@color/colorWhite"
                 app:tabTextColor="@color/colorWhiteSecondaryText"
-                app:tabIndicatorHeight="3dp">
+                app:tabIndicatorHeight="2.5dp">
             </android.support.design.widget.TabLayout>
 
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:elevation="0dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:id="@+id/viewPager_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:elevation="0dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_record"
@@ -62,27 +63,16 @@
             android:src="@drawable/ic_fab_add"
             app:fabSize="normal"
             app:elevation="@dimen/elevation_fab"
+            app:layout_behavior="com.newamber.gracebook.util.other.FABVerticalBehavior"
             app:backgroundTintMode="multiply"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
             app:rippleColor="@color/colorAccentRipple"/>
-
-        <!--<android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_backToTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/standard_margin"
-            android:src="@drawable/ic_fab_back_to_top"
-            android:visibility="gone"
-            app:fabSize="normal"
-            app:elevation="6dp"
-            app:backgroundTintMode="multiply"
-            app:rippleColor="@color/colorAccentRipple"/>-->
 
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigationView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"

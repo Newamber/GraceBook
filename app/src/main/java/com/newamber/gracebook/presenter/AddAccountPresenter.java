@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class AddAccountPresenter extends BasePresenter<BaseView.AddAccountView> {
 
-    private static final int TIME_DELAY = 60;
+    private static final int TIME_DELAY = 55;
 
     //private BaseView.AddAccountView mView;
     private BaseDataModel.TypeModel typeModel;

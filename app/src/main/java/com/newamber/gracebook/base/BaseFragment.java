@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.AnimatorRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -171,10 +172,31 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
 
     protected abstract  @LayoutRes int getLayoutId();
 
+    @SuppressWarnings("unchecked")
+    protected <V extends View> V findView(@IdRes int viewId) {
+        return (V) getRootView().findViewById(viewId);
+    }
+
     protected void startAnimator(View target, @AnimatorRes int animId) {
         Animator animator = AnimatorInflater.loadAnimator(mHostActivity, animId);
         animator.setTarget(target);
         animator.start();
+    }
+
+    protected void post(Object event) {
+        EventBus.getDefault().post(event);
+    }
+
+    protected void postSticky(Object event) {
+        EventBus.getDefault().postSticky(event);
+    }
+
+    protected  void cancelEventDelivery(Object event) {
+        EventBus.getDefault().cancelEventDelivery(event);
+    }
+
+    protected void removeStickyEvent(Object event) {
+        EventBus.getDefault().removeStickyEvent(event);
     }
 
     protected void setEasyItemAnimatorAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {

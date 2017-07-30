@@ -5,11 +5,11 @@ import android.support.annotation.DrawableRes;
 import com.newamber.gracebook.base.BaseDataModel;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO_Table;
-import com.newamber.gracebook.util.NumericUtil;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
 
+import static com.newamber.gracebook.util.NumericUtil.add;
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
@@ -127,7 +127,7 @@ public class MoneyRepoTypeModel implements BaseDataModel.TypeModel<MoneyRepoType
     public void updateBalance(String name, Double budget) {
         MoneyRepoTypePO record = queryByName(name);
         assert record != null;
-        record.balance = NumericUtil.add(record.balance, budget);
+        record.balance = add(record.balance, budget);
         record.update();
     }
 

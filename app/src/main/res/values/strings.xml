@@ -94,6 +94,8 @@
     <string name="total_income">总收入：</string>
     <string name="total_expense">总支出：</string>
     <string name="total_surplus">总结余：</string>
+    <string name="balance_colon">余额：</string>
+    <string name="select_period">选择时段</string>
 
     <!--MainViewPager Title-->
     <string-array name="main_viewpager_title">
@@ -106,6 +108,14 @@
     <string-array name="typeEdit_viewpager_title">
         <item>收支类型</item>
         <item>钱库类型</item>
+    </string-array>
+
+    <string-array name="flow_period_list">
+        <item>每周</item>
+        <item>每月</item>
+        <item>每季度</item>
+        <item>每年</item>
+        <item>自定义</item>
     </string-array>
 
 </resources>

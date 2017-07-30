@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="240dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:fitsSystemWindows="true" >
 
     <ImageView
@@ -12,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:fitsSystemWindows="true"
         tools:src="@drawable/bg_navigationview"
         tools:ignore="ContentDescription"/>
 
@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/standard_margin"
-        android:textColor="@color/colorWhiteTextOrIcon"
         android:textSize="14sp"
         android:text="@string/remind_time"/>
 

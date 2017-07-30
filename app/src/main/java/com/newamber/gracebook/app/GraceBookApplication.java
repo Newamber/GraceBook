@@ -45,6 +45,7 @@ public class GraceBookApplication extends Application {
         // Initialize DBFlow.
         FlowManager.init(this);
 
+        // TODO: bugs
         if (LocalStorage.getBoolean(GlobalConstant.IS_FIRST_ENTER_APP, true))
         LocalStorage.put(GlobalConstant.IS_FIRST_ENTER_APP, false);
     }

@@ -25,7 +25,7 @@
         android:visible="false"
         app:showAsAction="ifRoom" />
 
-    <group android:id="@+id/toolbar_group_stream">
+    <group android:id="@+id/toolbar_group_flow">
         <item
             android:id="@+id/toolbar_main_search"
             android:icon="@drawable/ic_toolbar_search"

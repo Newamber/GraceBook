@@ -13,13 +13,15 @@ import com.newamber.gracebook.model.entity.AccountPO;
 import com.newamber.gracebook.presenter.MainPresenter;
 import com.newamber.gracebook.util.ColorUtil;
 import com.newamber.gracebook.util.DateUtil;
-import com.newamber.gracebook.util.NumericUtil;
 import com.tomer.fadingtextview.FadingTextView;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
+
+import static com.newamber.gracebook.util.NumericUtil.add;
+import static com.newamber.gracebook.util.NumericUtil.formatCurrency;
+import static com.newamber.gracebook.util.NumericUtil.subtract;
 
 /**
  * DayFragment which show the account item of every day.
@@ -29,28 +31,25 @@ import java.util.List;
 public class DayFragment extends BaseFragment<MainPresenter> {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.fragment_day;
-    private static final @LayoutRes int ITEM_LAYOUT_ID = R.layout.recyclerview_record_card;
+    private static final @LayoutRes int ITEM_LAYOUT_ID = R.layout.recyclerview_record_today;
 
-    TextView textViewIncome;
-    TextView textViewExpense;
-    TextView textViewSurplus;
+    TextView mTextViewIncome;
+    TextView mTextViewExpense;
+    TextView mTextViewSurplus;
 
     private String[] message;
     private List<AccountPO> POList;
     private AccountTodayAdapter mAdapter;
 
-    boolean greaterThanZero;
-    Double income, expense, surplus;
-
     @Override
     public void initView() {
         // findViewById
-        CardView todayCardView = (CardView) getRootView().findViewById(R.id.cardview_big);
-        FadingTextView fadingTextView = (FadingTextView) getRootView().findViewById(R.id.fadeTextView_today);
-        RecyclerView recyclerView = (RecyclerView) getRootView().findViewById(R.id.recyclerview_day);
-        textViewIncome = (TextView) getRootView().findViewById(R.id.textview_today_income);
-        textViewExpense = (TextView) getRootView().findViewById(R.id.textview_today_expense);
-        textViewSurplus = (TextView) getRootView().findViewById(R.id.textview_today_surplus);
+        CardView todayCardView = findView(R.id.cardview_big);
+        FadingTextView fadingTextView = findView(R.id.fadeTextView_today);
+        RecyclerView recyclerView = findView(R.id.recyclerview_day);
+        mTextViewIncome = findView(R.id.textview_today_income);
+        mTextViewExpense = findView(R.id.textview_today_expense);
+        mTextViewSurplus = findView(R.id.textview_today_surplus);
 
         // data source
         message = new String[] {
@@ -60,6 +59,10 @@ public class DayFragment extends BaseFragment<MainPresenter> {
         };
         POList = getHostPresenter().getRecordToday();
         mAdapter = new AccountTodayAdapter(POList, ITEM_LAYOUT_ID);
+        mAdapter.setOnLongClickListener((view, entity, position) -> {
+            //post();
+
+        });
 
         // show view
         if (!mAdapter.isEmpty()) message[1] = getString(R.string.keep_accounting_is_important);
@@ -85,7 +88,7 @@ public class DayFragment extends BaseFragment<MainPresenter> {
         mAdapter.add(record);
         message[1] = getString(R.string.keep_accounting_is_important);
         updateBigCard();
-        EventBus.getDefault().removeStickyEvent(record);
+        removeStickyEvent(record);
     }
 
     @Override
@@ -94,28 +97,28 @@ public class DayFragment extends BaseFragment<MainPresenter> {
     }
 
     private void updateBigCard() {
-        expense = 0d;
-        income = 0d;
-        surplus = 0d;
+        Double expense = 0d;
+        Double income = 0d;
+        Double surplus;
         for(AccountPO record : POList) {
             if (record.budget)
-                expense = NumericUtil.add(expense, record.amount);
+                expense = add(expense, record.amount);
             else
-                income =  NumericUtil.add(income, record.amount);
+                income =  add(income, record.amount);
         }
-        greaterThanZero = NumericUtil.subtract(income, expense) >= 0;
-        surplus = Math.abs(NumericUtil.subtract(income, expense));
+        boolean greaterThanZero = subtract(income, expense) >= 0;
+        surplus = Math.abs(subtract(income, expense));
 
-        textViewIncome.setText(NumericUtil.getCurrencyFormat(income));
-        textViewExpense.setText(NumericUtil.getCurrencyFormat(expense));
-        textViewSurplus.setText(NumericUtil.getCurrencyFormat(surplus));
+        mTextViewIncome.setText(formatCurrency(income));
+        mTextViewExpense.setText(formatCurrency(expense));
+        mTextViewSurplus.setText(formatCurrency(surplus));
         if (greaterThanZero)
-            textViewSurplus.setTextColor(ColorUtil.getColor(R.color.colorTodayIncome));
+            mTextViewSurplus.setTextColor(ColorUtil.getColor(R.color.colorTodayIncome));
         else
-            textViewSurplus.setTextColor(ColorUtil.getColor(R.color.colorTodayExpense));
+            mTextViewSurplus.setTextColor(ColorUtil.getColor(R.color.colorTodayExpense));
 
-        startAnimator(textViewIncome, R.animator.anim_upward_show);
-        startAnimator(textViewExpense, R.animator.anim_upward_show);
-        startAnimator(textViewSurplus, R.animator.anim_upward_show);
+        startAnimator(mTextViewIncome, R.animator.anim_upward_show);
+        startAnimator(mTextViewExpense, R.animator.anim_upward_show);
+        startAnimator(mTextViewSurplus, R.animator.anim_upward_show);
     }
 }

@@ -34,7 +34,7 @@ public class AccountPO extends BaseModel {
     public Calendar calendar;       // the calendar of the money's record
 
     public @DrawableRes
-    int  moneyTypeImageId;           // the round icon of the money type
+    int  moneyTypeImageId;          // the round icon of the money type
 
     public @DrawableRes
     int moneyRepoTypeImageId;       // the round icon of the money type

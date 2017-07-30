@@ -58,6 +58,8 @@ public interface BaseDataModel {
 
         void saveRecord();
 
+        void deleteAllRecord();
+
         List<E> getAllRecord();
 
         List<E> getRecordByDate(Calendar startDate, Calendar endDate);

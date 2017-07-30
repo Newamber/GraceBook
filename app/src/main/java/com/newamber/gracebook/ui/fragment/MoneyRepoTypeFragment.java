@@ -13,7 +13,6 @@ import com.newamber.gracebook.util.GlobalConstant;
 import com.newamber.gracebook.util.LocalStorage;
 import com.newamber.gracebook.util.other.EditTypeItemCallback;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class MoneyRepoTypeFragment extends BaseFragment<TypeEditPresenter> {
         getHostPresenter().isMoneyType = false;
         // data source
         List<MoneyRepoTypePO> POList = getHostPresenter().getAll();
-        RecyclerView recyclerView = (RecyclerView) getRootView().findViewById(R.id.recyclerView_moneyRepoType);
+        RecyclerView recyclerView = findView(R.id.recyclerView_moneyRepoType);
         mAdapter = new MoneyRepoTypeItemAdapter(POList, ITEM_LAYOUT_ID);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemCallback(mAdapter, false));
@@ -61,14 +60,14 @@ public class MoneyRepoTypeFragment extends BaseFragment<TypeEditPresenter> {
         } else {
             mAdapter.add(record);
         }
-        EventBus.getDefault().cancelEventDelivery(record);
+        cancelEventDelivery(record);
     }
 
     @Subscribe
     public void onDeleteMoneyRepoType(String deleteMessage) {
         if (deleteMessage.equals(GlobalConstant.DELETE_ALL_REPO_TYPE)) {
             mAdapter.removeAll();
-            EventBus.getDefault().cancelEventDelivery(deleteMessage);
+            cancelEventDelivery(deleteMessage);
         }
     }
 }

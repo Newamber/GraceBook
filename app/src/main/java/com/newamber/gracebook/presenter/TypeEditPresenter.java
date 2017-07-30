@@ -83,6 +83,7 @@ public class TypeEditPresenter extends BasePresenter<BaseView.TypeEditView> {
         return (List<M>) typeModel.getAllRecord();
     }
 
+    // -----------------------------------private API-----------------------------------------------
     private BaseDataModel.TypeModel getTypeModel() {
         return isMoneyType ? new MoneyTypeModel() : new MoneyRepoTypeModel();
     }

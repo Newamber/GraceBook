@@ -24,10 +24,6 @@ import java.util.List;
 public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<ViewHolder>
         implements ItemTouchActionHelper {
 
-    public static final int TYPE_FIRST_ITEM = 1;
-    public static final int TYPE_CONTENT_WITH_SECTION = 2;
-    public static final int TYPE_CONTENT_NO_HEADER = 3;
-
     private Context mContext;
     private List<E> mEntityList;
     private @LayoutRes int mLayoutId;
@@ -62,8 +58,6 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
         initSubItemClickListener(holder);
 
         convertView(holder, mEntityList.get(position));
-
-
     }
 
     @Override
@@ -134,8 +128,20 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
         notifyItemChanged(position);
     }
 
+    public Context getContext() {
+        return mContext;
+    }
+
     public boolean isEmpty() {
         return getItemCount() == 0;
+    }
+
+    protected int getPosition(E entity) {
+        return mEntityList.indexOf(entity);
+    }
+
+    protected E getEntity(int position) {
+        return mEntityList.get(position);
     }
 
     public void setOnClickListener(OnItemClickListener clickListener) {
@@ -169,7 +175,6 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
 
     // A auxiliary method to initialize (long) click listener.
     private void initOnItemClickListener(ViewHolder holder) {
-        // TODO: reduce codes
         if (mClickListener != null) {
             holder.itemView.setOnClickListener(v -> {
                 E entity = mEntityList.get(holder.getLayoutPosition());

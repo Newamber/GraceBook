@@ -62,13 +62,18 @@ public class AddAccountModel implements BaseDataModel.AccountModel<AccountPO> {
     }
 
     @Override
+    public void deleteAllRecord() {
+        SQLite.delete().from(AccountPO.class).execute();
+    }
+
+    @Override
     public List<AccountPO> getRecordByDate(Calendar startDate, Calendar endDate) {
         startDate.set(Calendar.HOUR_OF_DAY, 0);
         startDate.set(Calendar.MINUTE, 0);
         startDate.set(Calendar.SECOND, 0);
         endDate.set(Calendar.HOUR_OF_DAY, 23);
         endDate.set(Calendar.MINUTE, 59);
-        endDate.set(Calendar.SECOND, 60);
+        endDate.set(Calendar.SECOND, 59);
 
         return SQLite.select()
                 .from(AccountPO.class)

@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.AnimatorRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -21,10 +22,10 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
-import android.view.animation.OvershootInterpolator;
 
 import com.newamber.gracebook.util.ActivityCollectorUtil;
 import com.newamber.gracebook.util.DeviceUtil;
@@ -40,6 +41,7 @@ import static com.newamber.gracebook.util.DeviceUtil.aboveAndroid_5;
  *
  * Created by Newamber on 2017/4/24.
  */
+@SuppressWarnings("unused")
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity
         implements View.OnClickListener {
 
@@ -49,13 +51,9 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (aboveAndroid_5()) {
-            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        }
+        if (aboveAndroid_5()) getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(getLayoutId());
-        if (aboveAndroid_5()) {
-            setTransitionAnim();
-        }
+        if (aboveAndroid_5()) setTransitionAnim();
 
         mPresenter = createPresenter();
         if (mPresenter != null) mPresenter.attachView((V) this);
@@ -151,14 +149,19 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         return null;
     }
 
+    @SuppressWarnings("unchecked")
+    protected <Sub extends View> Sub findView(@IdRes int viewId) {
+        return (Sub) findViewById(viewId);
+    }
+
     /**
      * Override it in specific sub class if you need different Transition effect.
      * Following is default.
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setTransitionAnim() {
-        int duration = 600;
-        Interpolator interpolator = new OvershootInterpolator();
+        int duration = 450;
+        Interpolator interpolator = new AccelerateDecelerateInterpolator();
 
         // default
         Explode explode = new Explode();
@@ -243,8 +246,25 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         animator.start();
     }
 
+    // EventBus
     protected boolean isEnabledEventBus() {
         return false;
+    }
+
+    protected void post(Object event) {
+        EventBus.getDefault().post(event);
+    }
+
+    protected void postSticky(Object event) {
+        EventBus.getDefault().postSticky(event);
+    }
+
+    protected void cancelEventDelivery(Object event) {
+        EventBus.getDefault().cancelEventDelivery(event);
+    }
+
+    protected void removeStickyEvent(Object event) {
+        EventBus.getDefault().removeStickyEvent(event);
     }
 
     @Override

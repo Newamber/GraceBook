@@ -15,7 +15,7 @@ import java.text.DecimalFormat;
 public class NumericUtil {
 
     private static final  int NUMERIC_PRECISION = 5;
-    // CHS is the abbreviation of Chinese Simplified .
+    // CHS is the abbreviation of Chinese Simplified.
     private static final String CURRENCY_PATTERN_CHS = ",##0.00";
 
     // operator
@@ -51,11 +51,10 @@ public class NumericUtil {
                 .doubleValue();
     }
 
-    public static String getCurrencyFormat(Double number) {
+    public static String formatCurrency(Double number) {
         DecimalFormat decimalFormat = new DecimalFormat(CURRENCY_PATTERN_CHS);
         decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
         return GlobalConstant.CURRENCY_SYMBOL + decimalFormat.format(number);
     }
-
 
 }
