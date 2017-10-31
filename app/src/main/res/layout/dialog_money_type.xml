@@ -8,19 +8,19 @@
 
     <ImageView
         android:id="@+id/imageView_iconSelected"
-        android:layout_height="48dp"
-        android:layout_width="48dp"
+        android:layout_height="@dimen/normal_size"
+        android:layout_width="@dimen/normal_size"
         android:layout_marginBottom="@dimen/basic_margin"
         android:layout_marginEnd="@dimen/basic_margin"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/wide_margin"
         android:layout_gravity="center_vertical"
         tools:src="@drawable/ic_love_10"
         tools:ignore="ContentDescription"/>
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner_typeEdit_moneyType"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="28dp"
+        android:layout_height="wrap_content"
         android:dropDownSelector="?android:attr/selectableItemBackground"
         android:layout_gravity="center_vertical"/>
 
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_margin"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="@dimen/wide_margin"
         android:layout_marginBottom="@dimen/standard_margin"
         android:hint="@string/money_type_name"
         app:errorEnabled="true"

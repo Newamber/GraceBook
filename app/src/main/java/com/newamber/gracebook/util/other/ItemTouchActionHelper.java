@@ -7,7 +7,6 @@ import com.newamber.gracebook.base.ViewHolder;
  * Description: .<p>
  * Created by Newamber on 2017/5/4.
  */
-
 public interface ItemTouchActionHelper {
     /**
      * Called when an item has been dragged far enough to trigger a move. This is called every time

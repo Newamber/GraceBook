@@ -4,7 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 
 import com.newamber.gracebook.R;
-import com.newamber.gracebook.base.BaseDataModel;
+import com.newamber.gracebook.base.IBaseModel;
 import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
 import com.newamber.gracebook.base.ViewHolder;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
@@ -20,7 +20,7 @@ import static com.newamber.gracebook.util.NumericUtil.formatCurrency;
  */
 public class MoneyRepoTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyRepoTypePO> {
 
-    private BaseDataModel.TypeModel mModel = new MoneyRepoTypeModel();
+    private IBaseModel.TypeModel mModel = new MoneyRepoTypeModel();
 
     public MoneyRepoTypeItemAdapter(@NonNull List<MoneyRepoTypePO> entityList, @LayoutRes int layoutId) {
         super(entityList, layoutId);
@@ -29,18 +29,18 @@ public class MoneyRepoTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyRepoT
     @Override
     public void onItemSwipeDismiss(int position) {
         super.onItemSwipeDismiss(position);
-        mModel.deleteRecordById(position + 1);
+        new Thread(() -> mModel.deleteRecordById(position + 1)).start();
     }
 
     @Override
     public void onItemDragMove(int fromPosition, int toPosition) {
         super.onItemDragMove(fromPosition, toPosition);
-        mModel.dragSwap(fromPosition + 1, toPosition + 1);
+        new Thread(() -> mModel.dragToSwap(fromPosition + 1, toPosition + 1)).start();
     }
 
     @Override
     protected void convertView(ViewHolder holder, MoneyRepoTypePO entity) {
-        holder.setImageResource(R.id.imageView_typeEdit_moneyRepoType, entity.moneyRepoTypeImageId)
+        holder.setImage(R.id.imageView_typeEdit_moneyRepoType, entity.moneyRepoTypeImageId)
                 .setText(R.id.textView_typeEdit_moneyRepoType, entity.moneyRepoTypeName)
                 .setText(R.id.textView_typeEdit_initialAmount, getContext()
                         .getString(R.string.balance_colon) + formatCurrency(entity.balance));

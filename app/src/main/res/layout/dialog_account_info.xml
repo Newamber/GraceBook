@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView_accountInfo_bg"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/bg_account_expense"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/imageView_accountInfo_source"
+        android:layout_width="@dimen/little_size"
+        android:layout_height="@dimen/little_size"
+        android:layout_below="@id/imageView_accountInfo_bg"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:src="@drawable/ic_swap_source"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView_accountInfo_bg"
+        android:layout_toEndOf="@id/imageView_accountInfo_source"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/money_flow_direction"/>
+
+    <TextView
+        android:id="@+id/textView_accountInfo_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageView_accountInfo_bg"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:textColor="@color/colorBlackSecondaryText"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        tools:text="2017年08月16日，16:46"/>
+
+    <TextView
+        android:id="@+id/textView_accountInfo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginBottom="@dimen/basic_margin"
+        android:layout_above="@id/textView_accountInfo_date"
+        android:textColor="@color/colorBlackSecondaryText"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        tools:text="@string/account"/>
+
+    <ImageView
+        android:id="@+id/imageView_accountInfo_moneyType"
+        android:layout_width="@dimen/normal_size"
+        android:layout_height="@dimen/normal_size"
+        android:layout_below="@id/imageView_accountInfo_source"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        tools:src="@drawable/ic_internet_62"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/textView_accountInfo_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView_accountInfo_source"
+        android:layout_toEndOf="@id/imageView_accountInfo_moneyType"
+        android:layout_marginTop="@dimen/basic_margin"
+        android:text="@string/arrow"
+        android:textSize="54sp"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/imageView_accountInfo_moneyRepoType"
+        android:layout_width="@dimen/normal_size"
+        android:layout_height="@dimen/normal_size"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:layout_below="@id/imageView_accountInfo_source"
+        android:layout_toEndOf="@+id/textView_accountInfo_arrow"
+        android:layout_marginStart="@dimen/standard_margin"
+        tools:src="@drawable/ic_love_83"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/imageView_accountInfo_specific"
+        android:layout_width="@dimen/little_size"
+        android:layout_height="@dimen/little_size"
+        android:layout_below="@id/imageView_accountInfo_moneyType"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:src="@drawable/ic_account_info"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView_accountInfo_moneyType"
+        android:layout_toEndOf="@id/imageView_accountInfo_specific"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/account_info"/>
+
+    <TextView
+        android:id="@+id/textView_accountInfo_textInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="@dimen/wide_margin"
+        android:layout_marginBottom="@dimen/basic_margin"
+        android:layout_below="@+id/imageView_accountInfo_specific"
+        android:lineSpacingMultiplier="1.5"
+        android:textSize="16sp"
+        tools:text="从“支付宝”取出￥500 用于“网购”。\n摘要：无内容"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_edit_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/imageView_accountInfo_bg"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/ic_account_edit"
+        app:fabSize="normal"
+        app:elevation="@dimen/elevation_fab"/>
+
+</RelativeLayout>

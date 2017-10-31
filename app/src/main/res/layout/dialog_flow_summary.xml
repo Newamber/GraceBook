@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView_flow_title"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_summary"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/textView_flow_summary_tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/summary_report"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhiteTextOrIcon"
+        android:layout_alignBottom="@id/imageView_flow_title"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginBottom="@dimen/standard_margin"/>
+
+    <ImageView
+        android:id="@+id/imageView_icon_date"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/imageView_flow_title"
+        android:layout_marginTop="@dimen/wide_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:src="@drawable/ic_flow_date"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/textView_date_tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/period"
+        android:layout_below="@id/imageView_flow_title"
+        android:layout_toEndOf="@id/imageView_icon_date"
+        android:textColor="@color/colorBlackSecondaryText"
+        android:layout_marginTop="22dp"/>
+
+    <TextView
+        android:id="@+id/textView_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/imageView_icon_date"
+        android:textColor="@color/colorBlackSecondaryText"
+        android:layout_marginStart="@dimen/wide_margin"
+        tools:text="2017年10月"/>
+
+    <ImageView
+        android:id="@+id/imageView_icon_summary"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/textView_date_text"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:src="@drawable/ic_flow_note"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/textView_summary_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/assessment"
+        android:textStyle="bold"
+        android:layout_below="@id/textView_date_text"
+        android:layout_toEndOf="@id/imageView_icon_summary"
+        android:layout_alignBaseline="@id/imageView_icon_summary"
+        android:textColor="@color/colorBlackSecondaryText"
+        android:layout_marginTop="14dp"/>
+
+    <TextView
+        android:id="@+id/textView_summary_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/imageView_icon_summary"
+        android:lineSpacingMultiplier="1.5"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginEnd="@dimen/wide_margin"
+        android:layout_marginBottom="@dimen/basic_margin"
+        android:textColor="@color/colorBlackSecondaryText"
+        tools:text="在此期间，共收入￥2,564，支出200元，结余2364元。其中收入56笔，支出5笔。涉及6种收支类型，3种钱库类型。"/>
+
+</RelativeLayout>

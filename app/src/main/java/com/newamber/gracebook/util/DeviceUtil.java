@@ -16,7 +16,8 @@ import org.jetbrains.annotations.Contract;
 //@SuppressWarnings("unused")
 public class DeviceUtil {
 
-    private static long lastClickTime;
+    private static long sLastClickTime;
+    private static final int NORMAL_CLICK_INTERVAL_TIME = 750;
 
     public static int dp2Px(float dpValue) {
         final float scale = GraceBookApplication.getContext().getResources().getDisplayMetrics().density;
@@ -49,14 +50,18 @@ public class DeviceUtil {
     public static boolean isSlowlyClick(int interval) {
         boolean flag;
         long currentClickTime = System.currentTimeMillis();
-        if ((currentClickTime - lastClickTime) >= interval) {
+        if ((currentClickTime - sLastClickTime) >= interval) {
             flag = true;
         } else {
             flag = false;
             ToastUtil.showShort(R.string.click_too_fast, ToastUtil.ToastMode.INFO);
         }
-        lastClickTime = currentClickTime;
+        sLastClickTime = currentClickTime;
         return flag;
+    }
+
+    public static boolean isNormalClickSpeed() {
+        return isSlowlyClick(NORMAL_CLICK_INTERVAL_TIME);
     }
 
 }

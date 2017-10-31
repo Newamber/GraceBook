@@ -1,14 +1,15 @@
 package com.newamber.gracebook.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.view.View;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseActivity;
-import com.newamber.gracebook.base.BaseView;
+import com.newamber.gracebook.base.IBaseView;
 import com.newamber.gracebook.presenter.SearchPresenter;
 
-public class SearchActivity extends BaseActivity<BaseView.SearchView, SearchPresenter> {
+public class SearchActivity extends BaseActivity<IBaseView.SearchView, SearchPresenter> {
 
     private final static int LAYOUT_ID = R.layout.activity_search;
 
@@ -18,7 +19,7 @@ public class SearchActivity extends BaseActivity<BaseView.SearchView, SearchPres
     }
 
     @Override
-    public void initView() {
+    public void initViews() {
 
     }
 
@@ -33,7 +34,7 @@ public class SearchActivity extends BaseActivity<BaseView.SearchView, SearchPres
     }
 
     @Override
-    protected int getLayoutId() {
+    protected @LayoutRes int getLayoutId() {
         return LAYOUT_ID;
     }
 }

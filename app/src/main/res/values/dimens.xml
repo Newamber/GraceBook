@@ -6,7 +6,6 @@
     <dimen name="wide_margin">24dp</dimen>
     <!--Special AddAccount-->
     <dimen name="text_add_account_padding">5dp</dimen>
-
     
     <!--View Size-->
     <dimen name="little_size">24dp</dimen>
@@ -20,9 +19,9 @@
     <dimen name="title_little">16sp</dimen>
     <dimen name="text_add_account">18sp</dimen>
     <dimen name="title_appbar">20sp</dimen>
-    <dimen name="title_big">24sp</dimen>
     <dimen name="money_today">20sp</dimen>
-    
+    <dimen name="title_big">24sp</dimen>
+
     <!--Elevation-->
     <dimen name="elevation_min">1dp</dimen>
     <dimen name="elevation_appbar">2dp</dimen>
@@ -36,6 +35,6 @@
     <dimen name="radius_card_2">2dp</dimen>
     <dimen name="radius_card_4">4dp</dimen>
     <dimen name="radius_budget_button">25dp</dimen>
-
+    <dimen name="min_margin">4dp</dimen>
 
 </resources>

@@ -11,7 +11,6 @@ import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.presenter.TypeEditPresenter;
 import com.newamber.gracebook.util.GlobalConstant;
 import com.newamber.gracebook.util.LocalStorage;
-import com.newamber.gracebook.util.ToastUtil;
 import com.newamber.gracebook.util.other.EditTypeItemCallback;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -38,34 +37,19 @@ public class MoneyTypeFragment extends BaseFragment<TypeEditPresenter> {
         // data source
         List<MoneyTypePO> POList = getHostPresenter().getAll();
         // TODO: set empty view.
-        RecyclerView recyclerView = findView(R.id.recyclerView_moneyType);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_moneyType);
         mAdapter = new MoneyTypeItemAdapter(POList, ITEM_LAYOUT_ID);
 
         // item animator
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemCallback(mAdapter, true));
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        mAdapter.setOnClickListener((view, entity, position) -> {
-            int pos = position + 1;
-            if (entity instanceof MoneyTypePO)
-            ToastUtil.showShort("你点击了位置为"+ pos + "的ViewHolder，" + "其id为 " +
-                            ((MoneyTypePO) entity).id, ToastUtil.ToastMode.WARNING);
-        });
         setEasyItemAnimatorAdapter(recyclerView, mAdapter);
     }
 
-    @Override
-    protected int getLayoutId() {
-        return LAYOUT_ID;
-    }
-
-    @Override
-    protected boolean isEnabledEventBus() {
-        return true;
-    }
-
+    // -------------------------------------event---------------------------------------------------
     @Subscribe
     public void onNewMoneyType(MoneyTypePO record) {
-        if (LocalStorage.getBoolean(GlobalConstant.IS_EXIST_TYPE_NAME, false)) {
+        if (LocalStorage.getBoolean(GlobalConstant.IS_EXIST_TYPE_NAMES, false)) {
             mAdapter.replace(record.id - 1, record);
         } else {
             mAdapter.add(record);
@@ -74,10 +58,21 @@ public class MoneyTypeFragment extends BaseFragment<TypeEditPresenter> {
     }
 
     @Subscribe
-    public void onDeleteMoneyType(String deleteMessage) {
-        if (deleteMessage.equals(GlobalConstant.DELETE_ALL_MONEY_TYPE)) {
+    public void onDeleteMoneyType(String message) {
+        if (message.equals(GlobalConstant.DELETE_ALL_MONEY_TYPES)) {
             mAdapter.removeAll();
-            cancelEventDelivery(deleteMessage);
+            cancelEventDelivery(message);
         }
+    }
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected boolean isEventBusEnabled() {
+        return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return LAYOUT_ID;
     }
 }

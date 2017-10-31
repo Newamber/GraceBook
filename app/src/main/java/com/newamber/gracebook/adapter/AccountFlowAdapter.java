@@ -12,8 +12,9 @@ import com.newamber.gracebook.model.entity.AccountPO;
 
 import java.util.List;
 
-import static com.newamber.gracebook.util.DateUtil.getHourMin;
-import static com.newamber.gracebook.util.DateUtil.getYearMonthDay;
+import static com.newamber.gracebook.util.DateUtil.formatHourMin;
+import static com.newamber.gracebook.util.DateUtil.formatYearMonthDay;
+import static com.newamber.gracebook.util.DateUtil.formatMonthDayForFlow;
 import static com.newamber.gracebook.util.NumericUtil.formatCurrency;
 
 /**
@@ -26,8 +27,8 @@ import static com.newamber.gracebook.util.NumericUtil.formatCurrency;
 public class AccountFlowAdapter extends BaseRecyclerViewAdapter<AccountPO> {
 
     private static final int TYPE_FIRST_ITEM = 1;
-    public static final int TYPE_CONTENT_WITH_SECTION = 2;
-    public static final int TYPE_CONTENT_NO_SECTION = 3;
+    public  static final int TYPE_CONTENT_WITH_SECTION = 2;
+    public  static final int TYPE_CONTENT_NO_SECTION = 3;
 
     public AccountFlowAdapter(@NonNull List<AccountPO> entityList, @LayoutRes int layoutId) {
         super(entityList, layoutId);
@@ -36,13 +37,15 @@ public class AccountFlowAdapter extends BaseRecyclerViewAdapter<AccountPO> {
     @Override
     protected void convertView(ViewHolder holder, AccountPO entity) {
         int position = getPosition(entity);
-        holder.setText(R.id.textview_item_flow_hourMinute, getHourMin(entity.calendar))
-                .setText(R.id.textView_header_flow, getYearMonthDay(entity.calendar))
+        String sectionHeaderText = formatMonthDayForFlow(entity.calendar);
+
+        holder.setText(R.id.textview_item_flow_hourMinute, formatHourMin(entity.calendar))
+                .setText(R.id.textView_header_flow, sectionHeaderText)
                 .setText(R.id.textView_item_flow_moneyType, entity.moneyType)
                 .setText(R.id.textView_item_flow_amount, formatCurrency(entity.amount))
-                .setImageResource(R.id.imageView_item_flow_moneyType, entity.moneyTypeImageId);
+                .setImage(R.id.imageView_item_flow_moneyType, entity.moneyTypeImageId);
 
-        if (entity.budget)
+        if (entity.isExpense)
             holder.setTextColor(R.id.textView_item_flow_amount, R.color.colorExpense);
         else
             holder.setTextColor(R.id.textView_item_flow_amount, R.color.colorIncome);
@@ -51,8 +54,8 @@ public class AccountFlowAdapter extends BaseRecyclerViewAdapter<AccountPO> {
             holder.setVisibility(R.id.cardview_header_flow, View.VISIBLE);
             holder.saveTag(TYPE_FIRST_ITEM);
         } else {
-            AccountPO preEntity = getEntity(position - 1);
-            boolean isEqual = TextUtils.equals(getYearMonthDay(entity.calendar), getYearMonthDay(preEntity.calendar));
+            AccountPO preEntity =  getEntity(position - 1);
+            boolean isEqual = TextUtils.equals(formatYearMonthDay(entity.calendar), formatYearMonthDay(preEntity.calendar));
             if (isEqual) {
                 holder.setVisibility(R.id.cardview_header_flow, View.GONE);
                 holder.saveTag(TYPE_CONTENT_NO_SECTION);
@@ -62,7 +65,6 @@ public class AccountFlowAdapter extends BaseRecyclerViewAdapter<AccountPO> {
             }
         }
 
-        holder.itemView.setContentDescription(getYearMonthDay(entity.calendar));
+        holder.itemView.setContentDescription(sectionHeaderText);
     }
-
 }

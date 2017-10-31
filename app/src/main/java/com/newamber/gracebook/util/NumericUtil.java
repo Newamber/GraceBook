@@ -17,8 +17,10 @@ public class NumericUtil {
     private static final  int NUMERIC_PRECISION = 5;
     // CHS is the abbreviation of Chinese Simplified.
     private static final String CURRENCY_PATTERN_CHS = ",##0.00";
+    private static final String CURRENCY_PATTERN_CHART = ",##0.0";
+    private static final String AMOUNT_PATTERN = "0.00";
 
-    // operator
+
     // equals  "+"
     @NonNull
     public static Double add(Double num_1, Double num_2) {
@@ -54,7 +56,21 @@ public class NumericUtil {
     public static String formatCurrency(Double number) {
         DecimalFormat decimalFormat = new DecimalFormat(CURRENCY_PATTERN_CHS);
         decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
-        return GlobalConstant.CURRENCY_SYMBOL + decimalFormat.format(number);
+        String currencySymbol = LocalStorage.getString(GlobalConstant.CURRENCY_SYMBOL,
+                GlobalConstant.CURRENCY_SYMBOL_CHS);
+        return currencySymbol + decimalFormat.format(number);
+    }
+
+    public static String formatCurrencyForChart(Double number) {
+        DecimalFormat decimalFormat = new DecimalFormat(CURRENCY_PATTERN_CHART);
+        decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
+        return decimalFormat.format(number);
+    }
+
+    public static String formatAmount(Double number) {
+        DecimalFormat decimalFormat = new DecimalFormat(AMOUNT_PATTERN);
+        decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
+        return decimalFormat.format(number);
     }
 
 }

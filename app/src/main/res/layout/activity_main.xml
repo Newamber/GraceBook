@@ -64,9 +64,7 @@
             app:fabSize="normal"
             app:elevation="@dimen/elevation_fab"
             app:layout_behavior="com.newamber.gracebook.util.other.FABVerticalBehavior"
-            app:backgroundTintMode="multiply"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:rippleColor="@color/colorAccentRipple"/>
+            app:layout_scrollFlags="scroll|enterAlways|snap"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

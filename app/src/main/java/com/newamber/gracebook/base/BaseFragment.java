@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.AnimatorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -19,7 +20,9 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.newamber.gracebook.util.DeviceUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,10 +36,9 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
  *
  * Created by Newamber on 2017/4/24.
  */
+@SuppressWarnings("unused")
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment
         implements View.OnClickListener {
-
-    // private T mPresenter;
 
     // A reference which points to an RootView attached by this Fragment.
     private View mRootView;
@@ -70,7 +72,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
     @Override
     public void onStart() {
         super.onStart();
-        if (isEnabledEventBus()) EventBus.getDefault().register(this);
+        if (isEventBusEnabled()) EventBus.getDefault().register(this);
     }
 
     @Override
@@ -82,7 +84,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
     @Override
     public void onStop() {
         super.onStop();
-        if (isEnabledEventBus()) EventBus.getDefault().unregister(this);
+        if (isEventBusEnabled()) EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -110,7 +112,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
         return mHostActivity;
     }
 
-    protected boolean isEnabledEventBus() {
+    protected boolean isEventBusEnabled() {
         return false;
     }
 
@@ -121,49 +123,20 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
      */
     protected void processClick(View v) {}
 
+    protected void bindOnClickListener(View... views) {
+        for (View v : views) {
+            v.setOnClickListener(this);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     protected T getHostPresenter() {
         return (T) mHostActivity.getPresenter();
     }
 
-    /*
-     * Get a presenter that implements BasePresenter.
-     *
-     * @deprecated In my Project, I decide to use Activity
-     * Presenter to manage all Fragments, so this method is useless
-     * but I still want to show how a MVP Fragment should be. Hence, I
-     * would not like to delete this method.
-     *
-     * @see BaseFragment#getHostPresenter()
-     *
-     * @return A presenter that implements BasePresenter.
-     */
-
-
-    /*
-     * Get the presenter attaching to relevant View.
-     *
-     * @deprecated In my Project, I decide to use Activity
-     * Presenter to manage all Fragments, so this method is useless
-     * but I still want to show how a MVP Fragment should be. Hence, I
-     * would not like to delete this method.
-     *
-     * @return the presenter
-     */
-
     protected View getRootView() {
         return mRootView;
     }
-
-    /*@Deprecated
-    @SuppressWarnings({"unused", "deprecation"})
-    protected T getPresenter() {
-        return mPresenter;
-    }*/
-    /*@Deprecated
-    protected T createPresenter() {
-        return null;
-    }*/
 
     @Override
     public void onClick(View v) {
@@ -172,15 +145,28 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
 
     protected abstract  @LayoutRes int getLayoutId();
 
+    protected void setImageByGlide(ImageView view, @DrawableRes int drawableId) {
+        Glide.with(this).load(drawableId).into(view);
+    }
+
     @SuppressWarnings("unchecked")
-    protected <V extends View> V findView(@IdRes int viewId) {
-        return (V) getRootView().findViewById(viewId);
+    protected <V extends View> V findViewById(@IdRes int viewId) {
+        return getRootView().findViewById(viewId);
     }
 
     protected void startAnimator(View target, @AnimatorRes int animId) {
         Animator animator = AnimatorInflater.loadAnimator(mHostActivity, animId);
+
         animator.setTarget(target);
         animator.start();
+    }
+
+    protected void startAnimators(@AnimatorRes int animId, View... targets) {
+        for (View v : targets) {
+            Animator animator = AnimatorInflater.loadAnimator(mHostActivity, animId);
+            animator.setTarget(v);
+            animator.start();
+        }
     }
 
     protected void post(Object event) {

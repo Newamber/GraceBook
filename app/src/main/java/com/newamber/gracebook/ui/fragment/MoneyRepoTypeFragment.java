@@ -15,8 +15,6 @@ import com.newamber.gracebook.util.other.EditTypeItemCallback;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.List;
-
 /**
  * Description: .<p>
  * Created by Newamber on 2017/5/2.
@@ -32,10 +30,10 @@ public class MoneyRepoTypeFragment extends BaseFragment<TypeEditPresenter> {
     @Override
     public void initView() {
         getHostPresenter().isMoneyType = false;
+
         // data source
-        List<MoneyRepoTypePO> POList = getHostPresenter().getAll();
-        RecyclerView recyclerView = findView(R.id.recyclerView_moneyRepoType);
-        mAdapter = new MoneyRepoTypeItemAdapter(POList, ITEM_LAYOUT_ID);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_moneyRepoType);
+        mAdapter = new MoneyRepoTypeItemAdapter(getHostPresenter().getAll(), ITEM_LAYOUT_ID);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemCallback(mAdapter, false));
         itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -43,19 +41,10 @@ public class MoneyRepoTypeFragment extends BaseFragment<TypeEditPresenter> {
         setEasyItemAnimatorAdapter(recyclerView, mAdapter);
     }
 
-    @Override
-    protected int getLayoutId() {
-        return LAYOUT_ID;
-    }
-
-    @Override
-    protected boolean isEnabledEventBus() {
-        return true;
-    }
-
+    // --------------------------------------event--------------------------------------------------
     @Subscribe
     public void onNewMoneyRepoType(MoneyRepoTypePO record) {
-        if (LocalStorage.getBoolean(GlobalConstant.IS_EXIST_REPO_TYPE_NAME, false)) {
+        if (LocalStorage.getBoolean(GlobalConstant.IS_EXIST_REPO_TYPE_NAMES, false)) {
             mAdapter.replace(record.id - 1, record);
         } else {
             mAdapter.add(record);
@@ -65,9 +54,20 @@ public class MoneyRepoTypeFragment extends BaseFragment<TypeEditPresenter> {
 
     @Subscribe
     public void onDeleteMoneyRepoType(String deleteMessage) {
-        if (deleteMessage.equals(GlobalConstant.DELETE_ALL_REPO_TYPE)) {
+        if (deleteMessage.equals(GlobalConstant.DELETE_ALL_REPO_TYPES)) {
             mAdapter.removeAll();
             cancelEventDelivery(deleteMessage);
         }
+    }
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected boolean isEventBusEnabled() {
+        return true;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return LAYOUT_ID;
     }
 }

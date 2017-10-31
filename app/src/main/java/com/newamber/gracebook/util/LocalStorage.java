@@ -3,6 +3,7 @@ package com.newamber.gracebook.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import com.newamber.gracebook.app.GraceBookApplication;
 
@@ -16,8 +17,8 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class LocalStorage {
 
-    private static SharedPreferences sp = GraceBookApplication.getContext()
-            .getSharedPreferences(GlobalConstant.PREFERENCE_FILE, Context.MODE_PRIVATE);
+    private static SharedPreferences sp = GraceBookApplication.getContext().getSharedPreferences
+            (GlobalConstant.PREFERENCE_FILE, Context.MODE_PRIVATE);
 
     private static SharedPreferences.Editor sEditor = sp.edit();
 
@@ -64,11 +65,18 @@ public class LocalStorage {
     }
 
     @NonNull
+    @SuppressWarnings("all")
     public static String getString(String key, String defaultValue) {
         return sp.getString(key, defaultValue);
     }
 
     @NonNull
+    @SuppressWarnings("all")
+    public static String getString(String key, @StringRes int defaultValue) {
+        return sp.getString(key, GraceBookApplication.getContext().getString(defaultValue));
+    }
+
+        @NonNull
     public static Set<String> getStringSet(String key, Set<String> defaultValues) {
         return sp.getStringSet(key, defaultValues);
     }

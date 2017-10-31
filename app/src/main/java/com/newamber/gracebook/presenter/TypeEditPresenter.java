@@ -3,9 +3,10 @@ package com.newamber.gracebook.presenter;
 import android.support.annotation.DrawableRes;
 
 import com.newamber.gracebook.R;
-import com.newamber.gracebook.base.BaseDataModel;
+import com.newamber.gracebook.base.IBaseModel;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.base.BaseView;
+import com.newamber.gracebook.base.IBaseView;
+import com.newamber.gracebook.model.impl.AddAccountModel;
 import com.newamber.gracebook.model.impl.MoneyRepoTypeModel;
 import com.newamber.gracebook.model.impl.MoneyTypeModel;
 import com.newamber.gracebook.util.ToastUtil;
@@ -19,22 +20,22 @@ import java.util.List;
  *
  * Created by Newamber on 2017/5/5.
  */
-public class TypeEditPresenter extends BasePresenter<BaseView.TypeEditView> {
+public class TypeEditPresenter extends BasePresenter<IBaseView.TypeEditView> {
 
     public boolean isMoneyType;
 
     // Only if this presenter is initialized, the mView can be got.
     // So do not invoke getView() here(after "mView").
-    private BaseView.TypeEditView mView;
-    private BaseDataModel.TypeModel typeModel;
+    private IBaseView.TypeEditView mView;
+    private IBaseModel.TypeModel typeModel;
 
-    public void showNewTypeDialog(int position) {
+    public void newType(int position) {
         mView = getView();
         if (position == 0) mView.showMoneyTypeDialog();
         else mView.showMoneyRepoTypeDialog();
     }
 
-    public void showDeleteAllDialog(int position) {
+    public void deleteAllTypes(int position) {
         mView = getView();
         if (position == 0) {
             if (isMoneyTypeEmpty())
@@ -59,6 +60,10 @@ public class TypeEditPresenter extends BasePresenter<BaseView.TypeEditView> {
     public void saveInDB(String name, @DrawableRes int imageId, double balance) {
         typeModel = isMoneyType ? new MoneyTypeModel(name, imageId) : new MoneyRepoTypeModel(name, imageId, balance);
         typeModel.saveRecord();
+        if (isExist(name)) {
+            IBaseModel.AccountModel accountModel = new AddAccountModel();
+            accountModel.updateImage(isMoneyType, imageId, name);
+        }
     }
 
     public boolean isExist(String typeName) {
@@ -74,27 +79,27 @@ public class TypeEditPresenter extends BasePresenter<BaseView.TypeEditView> {
 
     public void deleteAll() {
         typeModel = getTypeModel();
-        typeModel.deleteAllRecord();
+        typeModel.deleteAllRecords();
     }
 
     @SuppressWarnings("unchecked")
     public <M extends BaseModel> List<M> getAll() {
         typeModel = getTypeModel();
-        return (List<M>) typeModel.getAllRecord();
+        return (List<M>) typeModel.getAllRecords();
     }
 
     // -----------------------------------private API-----------------------------------------------
-    private BaseDataModel.TypeModel getTypeModel() {
+    private IBaseModel.TypeModel getTypeModel() {
         return isMoneyType ? new MoneyTypeModel() : new MoneyRepoTypeModel();
     }
 
     private boolean isMoneyTypeEmpty() {
         typeModel = new MoneyTypeModel();
-        return typeModel.getAllRecord().isEmpty();
+        return typeModel.getAllRecords().isEmpty();
     }
 
     private boolean isRepoTypeEmpty() {
         typeModel = new MoneyRepoTypeModel();
-        return typeModel.getAllRecord().isEmpty();
+        return typeModel.getAllRecords().isEmpty();
     }
 }

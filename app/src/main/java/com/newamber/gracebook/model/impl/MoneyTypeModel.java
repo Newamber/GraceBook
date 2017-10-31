@@ -2,7 +2,7 @@ package com.newamber.gracebook.model.impl;
 
 import android.support.annotation.DrawableRes;
 
-import com.newamber.gracebook.base.BaseDataModel;
+import com.newamber.gracebook.base.IBaseModel;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -13,12 +13,11 @@ import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * Description: The implementation of
- * {@link BaseDataModel.TypeModel}.<p>
+ * {@link IBaseModel.TypeModel}.<p>
  *
  * Created by Newamber on 2017/5/8.
  */
-
-public class MoneyTypeModel implements BaseDataModel.TypeModel<MoneyTypePO> {
+public class MoneyTypeModel implements IBaseModel.TypeModel<MoneyTypePO> {
 
     private String name;
     private @DrawableRes int imageId;
@@ -34,12 +33,12 @@ public class MoneyTypeModel implements BaseDataModel.TypeModel<MoneyTypePO> {
     public void saveRecord() {
         if (isExist(name)) {
             SQLite.update(MoneyTypePO.class)
-                    .set(MoneyTypePO_Table.moneyTypeImageId.eq(imageId))
+                    .set(MoneyTypePO_Table.moneyTypeImageId.is(imageId))
                     .where(MoneyTypePO_Table.moneyTypeName.is(name))
                     .execute();
         } else {
             MoneyTypePO record = new MoneyTypePO();
-            record.id = getAllRecord().size() + 1;
+            record.id = getAllRecords().size() + 1;
             record.moneyTypeName = name;
             record.moneyTypeImageId = imageId;
             record.save();
@@ -47,12 +46,12 @@ public class MoneyTypeModel implements BaseDataModel.TypeModel<MoneyTypePO> {
     }
 
     @Override
-    public void deleteAllRecord() {
+    public void deleteAllRecords() {
         SQLite.delete(MoneyTypePO.class).execute();
     }
 
     @Override
-    public List<MoneyTypePO> getAllRecord() {
+    public List<MoneyTypePO> getAllRecords() {
         return SQLite.select()
                 .from(MoneyTypePO.class)
                 .orderBy(MoneyTypePO_Table.id, true)
@@ -64,7 +63,6 @@ public class MoneyTypeModel implements BaseDataModel.TypeModel<MoneyTypePO> {
         SQLite.delete(MoneyTypePO.class)
                 .where(MoneyTypePO_Table.id.is(id))
                 .execute();
-        //ToastUtil.showShort("现在的删除的id是" + id, ToastUtil.ToastMode.INFO);
 
         List<MoneyTypePO> lists = select()
                 .from(MoneyTypePO.class)
@@ -79,14 +77,13 @@ public class MoneyTypeModel implements BaseDataModel.TypeModel<MoneyTypePO> {
     }
 
     @Override
-    public void dragSwap(int fromId, int toId) {
-        // TODO: ...solve
+    public void dragToSwap(int fromId, int toId) {
         MoneyTypePO fromData = queryById(fromId);
         assert fromData != null;
 
         if (fromId > toId) {
-            // I don't know why, the SQLite.update(...).set(...minus or plus ) doesn't work...
-            // So I use this clumsy method.
+            // I don't know why, the SQLite.update(...).set(...minus or plus )
+            // doesn't work... So I use this clumsy method.
             List<MoneyTypePO> recordList = SQLite.select()
                     .from(MoneyTypePO.class)
                     .where(MoneyTypePO_Table.id.greaterThanOrEq(toId))

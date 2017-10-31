@@ -2,7 +2,7 @@ package com.newamber.gracebook.model.impl;
 
 import android.support.annotation.DrawableRes;
 
-import com.newamber.gracebook.base.BaseDataModel;
+import com.newamber.gracebook.base.IBaseModel;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -13,12 +13,12 @@ import static com.newamber.gracebook.util.NumericUtil.add;
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
- * Description: The implementation of {@link BaseDataModel.TypeModel}.<p>
+ * Description: The implementation of {@link IBaseModel.TypeModel}.<p>
  *
  * Created by Newamber on 2017/5/8.
  */
 
-public class MoneyRepoTypeModel implements BaseDataModel.TypeModel<MoneyRepoTypePO> {
+public class MoneyRepoTypeModel implements IBaseModel.TypeModel<MoneyRepoTypePO> {
     private String name;
     private @DrawableRes int imageId;
     private double balance;
@@ -40,7 +40,7 @@ public class MoneyRepoTypeModel implements BaseDataModel.TypeModel<MoneyRepoType
                     .execute();
         } else {
             MoneyRepoTypePO record = new MoneyRepoTypePO();
-            record.id = getAllRecord().size() + 1;
+            record.id = getAllRecords().size() + 1;
             record.moneyRepoTypeName = name;
             record.moneyRepoTypeImageId = imageId;
             record.balance = balance;
@@ -49,12 +49,12 @@ public class MoneyRepoTypeModel implements BaseDataModel.TypeModel<MoneyRepoType
     }
 
     @Override
-    public void deleteAllRecord() {
+    public void deleteAllRecords() {
         SQLite.delete(MoneyRepoTypePO.class).execute();
     }
 
     @Override
-    public List<MoneyRepoTypePO> getAllRecord() {
+    public List<MoneyRepoTypePO> getAllRecords() {
         return SQLite.select()
                 .from(MoneyRepoTypePO.class)
                 .orderBy(MoneyRepoTypePO_Table.id, true)
@@ -66,7 +66,6 @@ public class MoneyRepoTypeModel implements BaseDataModel.TypeModel<MoneyRepoType
         SQLite.delete(MoneyRepoTypePO.class)
                 .where(MoneyRepoTypePO_Table.id.is(id))
                 .execute();
-        //ToastUtil.showShort("现在的删除的id是" + id, ToastUtil.ToastMode.INFO);
 
         List<MoneyRepoTypePO> lists = select()
                         .from(MoneyRepoTypePO.class)
@@ -81,7 +80,7 @@ public class MoneyRepoTypeModel implements BaseDataModel.TypeModel<MoneyRepoType
     }
 
     @Override
-    public void dragSwap(int fromId, int toId) {
+    public void dragToSwap(int fromId, int toId) {
         MoneyRepoTypePO fromData = queryById(fromId);
         assert fromData != null;
 
@@ -124,13 +123,15 @@ public class MoneyRepoTypeModel implements BaseDataModel.TypeModel<MoneyRepoType
                 .querySingle();
     }
 
-    public void updateBalance(String name, Double budget) {
+    public void updateBalance(String name, Double amount) {
         MoneyRepoTypePO record = queryByName(name);
-        assert record != null;
-        record.balance = add(record.balance, budget);
-        record.update();
+        if (record != null) {
+            record.balance = add(record.balance, amount);
+            record.update();
+        }
     }
 
+    // ----------------------------------private API------------------------------------------------
     private MoneyRepoTypePO queryById(int id) {
         return SQLite.select()
                 .from(MoneyRepoTypePO.class)

@@ -28,7 +28,8 @@ public class ColorUtil {
                 GraceBookApplication.getContext().getResources().getColor(colorId);
     }
 
-    public static void setGradientColor(View v, @ColorRes int startColor, @ColorRes int endColor, int duration) {
+    public static void setGradientColor(View v, @ColorRes int startColor, @ColorRes int endColor,
+                                        int duration) {
         ValueAnimator animator = ValueAnimator.ofObject(ColorEvaluator.getInstance()
                 , getColor(startColor), getColor(endColor));
         animator.setDuration(duration);
@@ -42,9 +43,12 @@ public class ColorUtil {
         });
     }
 
+    // --------------------------------private API--------------------------------------------------
     /**
      * This evaluator can be used to perform type interpolation between integer
      * values that represent ARGB colors.
+     *
+     * NOTE: This is a copy of {@code ArgbEvaluator.java}
      */
     private static class ColorEvaluator implements TypeEvaluator {
         private static final ColorEvaluator sInstance = new ColorEvaluator();
@@ -80,18 +84,18 @@ public class ColorUtil {
             int startInt = (Integer) startValue;
             int startA = (startInt >> 24) & 0xff;
             int startR = (startInt >> 16) & 0xff;
-            int startG = (startInt >> 8) & 0xff;
+            int startG = (startInt >> 8)  & 0xff;
             int startB = startInt & 0xff;
 
             int endInt = (Integer) endValue;
             int endA = (endInt >> 24) & 0xff;
             int endR = (endInt >> 16) & 0xff;
-            int endG = (endInt >> 8) & 0xff;
+            int endG = (endInt >> 8)  & 0xff;
             int endB = endInt & 0xff;
 
-            return (startA + (int)(fraction * (endA - startA))) << 24 |
+            return  (startA + (int)(fraction * (endA - startA))) << 24 |
                     (startR + (int)(fraction * (endR - startR))) << 16 |
-                    (startG + (int)(fraction * (endG - startG))) << 8 |
+                    (startG + (int)(fraction * (endG - startG))) << 8  |
                     (startB + (int)(fraction * (endB - startB)));
         }
     }

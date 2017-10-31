@@ -3,10 +3,9 @@ package com.newamber.gracebook.presenter;
 import android.os.Handler;
 import android.support.annotation.DrawableRes;
 
-import com.newamber.gracebook.R;
-import com.newamber.gracebook.base.BaseDataModel;
+import com.newamber.gracebook.base.IBaseModel;
 import com.newamber.gracebook.base.BasePresenter;
-import com.newamber.gracebook.base.BaseView;
+import com.newamber.gracebook.base.IBaseView;
 import com.newamber.gracebook.model.entity.MoneyRepoTypePO;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.impl.AddAccountModel;
@@ -14,8 +13,6 @@ import com.newamber.gracebook.model.impl.MoneyRepoTypeModel;
 import com.newamber.gracebook.model.impl.MoneyTypeModel;
 import com.newamber.gracebook.ui.activity.AddAccountActivity;
 import com.newamber.gracebook.ui.activity.MainActivity;
-import com.newamber.gracebook.util.ToastUtil;
-import com.newamber.gracebook.util.ToastUtil.ToastMode;
 
 import java.util.Calendar;
 import java.util.List;
@@ -25,26 +22,25 @@ import java.util.List;
  *
  * Created by Newamber on 2017/4/29.
  */
-public class AddAccountPresenter extends BasePresenter<BaseView.AddAccountView> {
+public class AddAccountPresenter extends BasePresenter<IBaseView.AddAccountView> {
 
-    private static final int TIME_DELAY = 55;
+    private static final int TIME_DELAY = 60;
 
-    //private BaseView.AddAccountView mView;
-    private BaseDataModel.TypeModel typeModel;
-    private BaseDataModel.AccountModel mAccountModel;
+    //private IBaseView.AddAccountView mView;
+    private IBaseModel.TypeModel typeModel;
 
     public void saveInDB(double amount,
                          String note,
                          String moneyRepoType,
                          String moneyType,
-                         boolean budget,
+                         boolean isExpense,
                          Calendar calendar,
                          @DrawableRes int moneyTypeImageId,
                          @DrawableRes int moneyRepoTypeImageId) {
 
-        mAccountModel = new AddAccountModel(amount, note, moneyRepoType, moneyType, budget, calendar,
-                moneyTypeImageId, moneyRepoTypeImageId);
-        mAccountModel.saveRecord();
+        IBaseModel.AccountModel accountModel = new AddAccountModel(amount, note, moneyRepoType,
+                moneyType, isExpense, calendar, moneyTypeImageId, moneyRepoTypeImageId);
+        accountModel.saveRecord();
     }
 
     public void pickDate() {
@@ -59,40 +55,45 @@ public class AddAccountPresenter extends BasePresenter<BaseView.AddAccountView> 
         new Handler().postDelayed(() ->  getView().showMoneyTypePicker(), TIME_DELAY);
     }
 
-    public void clickSaveButton() {
+    public void saveRecord() {
         AddAccountActivity activity = (AddAccountActivity) getView();
         getView().checkInput();
         if (activity.canSave) {
             activity.saveRecord();
-            activity.finish();
             activity.startTransitionActivity(MainActivity.class);
-            ToastUtil.showShort(R.string.new_account_success, ToastMode.SUCCESS);
+            activity.finish();
         } else {
-            getView().setErrorHint();
+            getView().showErrorHint();
         }
     }
 
     @SuppressWarnings("unchecked")
-    public String[] getTypeNameArray(boolean isMoneyType) {
+    public String[] getArrayOfTypeName(boolean isMoneyType) {
         String[] nameArray;
         typeModel = isMoneyType ? new MoneyTypeModel() : new MoneyRepoTypeModel();
         if (isMoneyType) {
-            List<MoneyTypePO> list1 = typeModel.getAllRecord();
+            List<MoneyTypePO> list1 = typeModel.getAllRecords();
             nameArray = new String[list1.size()];
             for (int i = 0; i < list1.size(); i++) nameArray[i] = list1.get(i).moneyTypeName;
             return nameArray;
         } else {
-            List<MoneyRepoTypePO> list2 = typeModel.getAllRecord();
+            List<MoneyRepoTypePO> list2 = typeModel.getAllRecords();
             nameArray = new String[list2.size()];
             for (int i = 0; i < list2.size(); i++) nameArray[i] = list2.get(i).moneyRepoTypeName;
             return nameArray;
         }
     }
 
+    public int getTypePosition(String typeName, String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (typeName.equals(array[i])) return i;
+        }
+        return 0;
+    }
+
     public @DrawableRes int getMoneyImageByName(String typeName) {
         typeModel = new MoneyTypeModel();
         MoneyTypePO record = (MoneyTypePO) typeModel.queryByName(typeName);
-        assert record != null;
         return record.moneyTypeImageId;
     }
 
@@ -110,8 +111,12 @@ public class AddAccountPresenter extends BasePresenter<BaseView.AddAccountView> 
         return record.balance;
     }
 
-    public void updateRepoBalance(String name, Double expense) {
+    public void updateRepoBalance(String repoName, Double expense) {
         typeModel = new MoneyRepoTypeModel();
-        ((MoneyRepoTypeModel) typeModel).updateBalance(name, expense);
+        ((MoneyRepoTypeModel) typeModel).updateBalance(repoName, expense);
+    }
+
+    public void resetPage() {
+        getView().resetContent();
     }
 }

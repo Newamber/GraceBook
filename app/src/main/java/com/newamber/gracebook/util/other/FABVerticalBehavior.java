@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
 /**
- * Description:.<br>
- * <p>more specific...</p>
+ * Description: A copy of .<br>
+ * <p></p>
  * <p>
  * Created by Newamber at 2017/7/29.
  */
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public class FABVerticalBehavior extends FloatingActionButton.Behavior {
     private Interpolator mInterpolator = new FastOutSlowInInterpolator();
     private boolean isHideAnimating = false;

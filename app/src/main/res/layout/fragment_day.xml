@@ -11,7 +11,10 @@
         android:id="@+id/cardview_big"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/basic_margin"
+        android:layout_marginStart="@dimen/min_margin"
+        android:layout_marginEnd="@dimen/min_margin"
+        android:layout_marginTop="@dimen/min_margin"
+        android:layout_marginBottom="@dimen/basic_margin"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/colorBigCard"
@@ -49,7 +52,6 @@
                 android:id="@+id/textview_today_total_expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:textColor="@color/colorWhiteTextOrIcon"
                 android:layout_marginTop="@dimen/basic_margin"
                 android:layout_below="@id/textview_today_total_income"
@@ -73,10 +75,12 @@
                 android:id="@+id/textview_today_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/textview_today_total_income"
+                android:layout_below="@id/textview_today_total_budget"
                 android:layout_alignBaseline="@id/textview_today_total_income"
-                android:layout_margin="@dimen/basic_margin"
+                android:layout_marginTop="@dimen/wide_margin"
+                android:layout_marginStart="@dimen/basic_margin"
+                android:layout_marginBottom="@dimen/basic_margin"
                 android:textSize="@dimen/money_today"
                 android:textColor="@color/colorWhiteTextOrIcon"
                 tools:text="￥6000.5"/>
@@ -86,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/money_today"
+                android:layout_alignBaseline="@id/textview_today_total_expense"
                 android:textColor="@color/colorWhiteTextOrIcon"
                 android:layout_marginBottom="@dimen/basic_margin"
                 android:layout_below="@+id/textview_today_income"
@@ -99,6 +104,7 @@
                 android:textSize="@dimen/money_today"
                 android:textColor="@color/colorWhiteSecondaryText"
                 android:layout_below="@+id/textview_today_expense"
+                android:layout_alignBaseline="@id/textview_today_total_surplus"
                 android:layout_alignStart="@+id/textview_today_income"
                 tools:text="￥5800.5"/>
 
@@ -119,6 +125,7 @@
         android:id="@+id/recyclerview_day"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/min_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 

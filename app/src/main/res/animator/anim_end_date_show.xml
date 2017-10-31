@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="translationY"
+        android:valueFrom="-32.0dp"
+        android:valueTo="0.0dp"
+        android:valueType="floatType"
+        android:interpolator="@android:anim/anticipate_overshoot_interpolator"/>
+    <objectAnimator
+        android:duration="400"
+        android:propertyName="alpha"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        android:valueType="floatType"
+        android:interpolator="@android:anim/accelerate_interpolator"/>
+</set>

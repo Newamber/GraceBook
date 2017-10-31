@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Grace Book</string>
+    <string name="app_name">简帐</string>
 
     <string name="hello_blank_fragment">图表，待添加</string>
 
@@ -8,7 +8,7 @@
     <string name="day_banner_text_1">今天您还没记账哦</string>
     <string name="day_banner_text_2">祝您生活愉快</string>
     <string name="lack_of_condition">缺少条件</string>
-    <string name="no_type_no_recording">没有“收支类型”或者“钱库类型”无法记账，点击“前往”按钮前去编辑界面新建您自定义的类型。</string>
+    <string name="no_type_no_recording">没有“收支类型”或者“钱库类型”无法记账，点击“前往”前去编辑界面新建您自定义的类型。</string>
     <string name="go">前往</string>
     <string name="keep_accounting_is_important">记账贵在坚持</string>
     <!--Toolbar Main-->
@@ -20,18 +20,44 @@
     <string name="exit_app">退出程序</string>
     <string name="delete">删除</string>
     <string name="all_select">全选</string>
+    <string name="delete_current_page_account">删除当前页面账目</string>
+    <string name="back_to_current_period">回到当前时段</string>
     <!-- NavigationView-->
     <string name="like">好评</string>
     <string name="share">分享</string>
     <string name="settings">设置</string>
     <string name="about">关于</string>
     <string name="donation">捐赠</string>
-    <string name="remind_time">上次记账时间：</string>
+    <string name="last_record_time">上次记账时间：</string>
     <!--Account List Item Today-->
-    <string name="hour_minute">16:57</string>
-    <string name="money_type_item">网购类型哦</string>
-    <string name="note_list_item">买了三件衣服啊..</string>
-    <string name="amount_item">￥123,456,789.5</string>
+    <string name="to_with_space">&#160;&#160;&#160;至&#160;&#160;&#160;</string>
+    <string name="custom_date_range">自定义时段</string>
+    <string name="select_period">选择时段</string>
+    <string name="first_quarter">第一季度</string>
+    <string name="second_quarter">第二季度</string>
+    <string name="third_quarter">第三季度</string>
+    <string name="fourth_quarter">第四季度</string>
+    <string name="period">时段</string>
+    <string name="summary_report">结算报告</string>
+    <string name="assessment">评估</string>
+    <string name="current_page_no_accounts">当前时段已经没有任何账目</string>
+    <string name="all_accounts_deleted">已经没有任何账目了</string>
+    <string name="sure_delete_all_accounts">您确定要删除<b>已经记录的</b>所有账目吗？该操作将无法撤销。</string>
+    <string name="sure_delete_current_page_accounts">您确定要删除<b>当前页面</b>所列出的所有账目吗？该操作将无法撤销。</string>
+    <string name="edit_account">编辑账目</string>
+    <string name="wish_you_prosperity">祝您财源滚滚</string>
+    <string name="update_account_success">更新账目成功</string>
+    <string name="query_single_day">查询单日</string>
+    <string name="start_date">起始日期：</string>
+    <string name="end_date">结束日期：</string>
+    <string name="query">查询</string>
+    <string name="single_day">单日日期：</string>
+    <string name="error_can_not_choose_year_before_1975">很抱歉，由于某些原因，不能选择1975年之前的时间</string>
+    <string name="query_single_day_hint">请注意，查询自定义时段的内容是一次性的，并不能保存到下次您打开应用的时候</string>
+    <string name="end_date_later_than_start_date">结束日期必须比起始日期大</string>
+    <string name="start_date_earlier_than_end_date">起始日期必须比结束日期小</string>
+    <string name="custom_date_is_current_date">自定义时段已是当前时段</string>
+    <string name="new_name">新名称</string>
 
     <!--AddAccountActivity-->
     <string name="record_an_account">记一笔账</string>
@@ -42,20 +68,18 @@
     <string name="money_type">种类：</string>
     <string name="income">收入</string>
     <string name="expense">支出</string>
-    <string name="_2017_4_23"><u>2017年4月23日</u></string>
-    <string name="wechat_charge"><u>微信零钱</u></string>
-    <string name="online_shopping"><u>网购</u></string>
     <string name="select_budget_type">选择收支类型</string>
     <string name="select_repo_type">选择钱库类型</string>
     <string name="no_amount_input">您没有输入数额</string>
     <string name="amount_can_not_be_zero">数额不能为零</string>
     <string name="plz_input_number">请您输入数字</string>
-    <string name="single_amount_is_too_large">单笔金额过大，必须小于十亿</string>
+    <string name="single_amount_is_too_large">单笔金额必须小于十亿</string>
     <string name="over_words_limit">超出字数限制</string>
     <string name="new_account_success">新增一条账目</string>
-    <string name="amount_over_balance">所选钱库余额不足</string>
+    <string name="amount_over_balance">钱库余额不足</string>
     <string name="click_too_fast">您点击过快了</string>
-    <string name="over_repo_balance_and_over_single_max">所选钱库余额不足，且超出单笔记账金额</string>
+    <string name="over_repo_balance_and_over_single_max">钱库余额不足，且超出记账额度</string>
+    <string name="clear">清空</string>
 
     <!--SettingsActivity-->
     <string name="setting_record">记账设置</string>
@@ -72,7 +96,8 @@
     <string name="new_type">新建类型</string>
     <string name="delete_allType">删除全部类型</string>
     <string name="money_type_name">收支名称</string>
-    <string name="sure">确定</string>
+    <string name="no">不了</string>
+    <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="caution">注意</string>
     <string name="new_repo_type">新建钱库</string>
@@ -91,11 +116,19 @@
     <string name="all_money_repo_type_deleted">所有“钱库类型”已经被删除</string>
     <string name="update_type_success">更新类型图标成功</string>
     <string name="initial_balance_is_too_large">初始金额过大，必须小于一万亿</string>
-    <string name="total_income">总收入：</string>
-    <string name="total_expense">总支出：</string>
-    <string name="total_surplus">总结余：</string>
+    <string name="total_income">收入：</string>
+    <string name="total_expense">支出：</string>
+    <string name="total_surplus">结余：</string>
     <string name="balance_colon">余额：</string>
-    <string name="select_period">选择时段</string>
+    <string name="comma_chs">，</string>
+    <string name="arrow">←</string>
+    <string name="account_info">账目细则</string>
+    <string name="money_flow_direction">资金流向</string>
+    <string name="account">账目</string>
+    <string name="change_book_name">更改账簿名称</string>
+    <string name="first_record_not_today_account_hint">您刚刚记下了一笔过去或者将来的账目，在今日界面无法查看，但可以到流水界面查看哦</string>
+
+    <string name="still_in_development">仍然在开发中(●\'◡\'●)</string>
 
     <!--MainViewPager Title-->
     <string-array name="main_viewpager_title">
@@ -110,12 +143,11 @@
         <item>钱库类型</item>
     </string-array>
 
-    <string-array name="flow_period_list">
+    <string-array name="period_list">
         <item>每周</item>
         <item>每月</item>
         <item>每季度</item>
         <item>每年</item>
-        <item>自定义</item>
     </string-array>
 
 </resources>

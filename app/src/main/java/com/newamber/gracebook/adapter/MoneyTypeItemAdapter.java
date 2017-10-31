@@ -4,7 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 
 import com.newamber.gracebook.R;
-import com.newamber.gracebook.base.BaseDataModel;
+import com.newamber.gracebook.base.IBaseModel;
 import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
 import com.newamber.gracebook.base.ViewHolder;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MoneyTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyTypePO> {
 
-    private BaseDataModel.TypeModel mModel = new MoneyTypeModel();
+    private IBaseModel.TypeModel mModel = new MoneyTypeModel();
 
     public MoneyTypeItemAdapter(@NonNull List<MoneyTypePO> entityList, @LayoutRes int layoutId) {
         super(entityList, layoutId);
@@ -28,18 +28,18 @@ public class MoneyTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyTypePO> {
     @Override
     public void onItemSwipeDismiss(int position) {
         super.onItemSwipeDismiss(position);
-        mModel.deleteRecordById(position + 1);
+        new Thread(() -> mModel.deleteRecordById(position + 1)).start();
     }
 
     @Override
     public void onItemDragMove(int fromPosition, int toPosition) {
         super.onItemDragMove(fromPosition, toPosition);
-        mModel.dragSwap(fromPosition + 1, toPosition + 1);
+        new Thread(() -> mModel.dragToSwap(fromPosition + 1, toPosition + 1)).start();
     }
 
     @Override
     protected void convertView(ViewHolder holder, MoneyTypePO entity) {
-        holder.setImageResource(R.id.imageView_typeEdit_moneyType, entity.moneyTypeImageId)
+        holder.setImage(R.id.imageView_typeEdit_moneyType, entity.moneyTypeImageId)
                 .setText(R.id.textView_typeEdit_moneyType, entity.moneyTypeName);
     }
 }

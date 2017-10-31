@@ -66,7 +66,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    public ViewHolder setImageResource(@IdRes int viewId , @DrawableRes int drawableId) {
+    public ViewHolder setImage(@IdRes int viewId , @DrawableRes int drawableId) {
         View view = getSubView(viewId);
         if (view instanceof ImageView) {
             Glide.with(mContext).load(drawableId).into((ImageView) view);

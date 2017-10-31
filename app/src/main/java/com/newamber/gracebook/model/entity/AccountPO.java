@@ -29,7 +29,7 @@ public class AccountPO extends BaseModel {
 
     public String moneyType;        // for example, shopping, eating and so on
 
-    public boolean budget;          // income(false) or expense(true)
+    public boolean isExpense;       // income(false) or expense(true)
 
     public Calendar calendar;       // the calendar of the money's record
 

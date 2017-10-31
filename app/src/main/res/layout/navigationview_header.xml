@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="240dp"
+    android:layout_height="180dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:fitsSystemWindows="true" >
 
@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/standard_margin"
-        android:textSize="14sp"
-        android:text="@string/remind_time"/>
+        android:textColor="@color/colorWhiteTextOrIcon"
+        android:textSize="@dimen/text_main"
+        android:text="@string/last_record_time"/>
 
 </RelativeLayout>

@@ -8,7 +8,9 @@ import android.view.animation.Transformation;
 
 /**
  * An animation that rotates the view on the Y axis between two specified angles.
- * This animation also adds a translation on the Z axis (depth) to improve the effect.
+ * This animation also adds a translation on the Z axis (depth) to improve the effect.<p>
+ *
+ * NOTE: This is a copy of official demo.
  */
 public class Rotate3dAnimation extends Animation {
     private final float mFromDegrees;

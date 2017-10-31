@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
+import com.newamber.gracebook.R;
 import com.newamber.gracebook.app.GraceBookApplication;
 
 import es.dmoral.toasty.Toasty;
@@ -13,54 +14,10 @@ import es.dmoral.toasty.Toasty;
  *
  * Created by Newamber on 2017/5/23.
  */
-@SuppressWarnings("unused")
 public class ToastUtil {
 
-    public static void show(CharSequence text, int duration, ToastMode modeEnum) {
-        Context context = GraceBookApplication.getContext();
-        switch (modeEnum) {
-            case NORMAL:
-                Toasty.normal(context, text, duration).show();
-                break;
-            case INFO:
-                Toasty.info(context, text, duration).show();
-                break;
-            case WARNING:
-                Toasty.warning(context, text, duration).show();
-                break;
-            case SUCCESS:
-                Toasty.success(context, text, duration).show();
-                break;
-            case ERROR:
-                Toasty.error(context, text, duration).show();
-                break;
-            default:
-                break;
-        }
-    }
-
-    public static void show(@StringRes int stringId, int duration, ToastMode modeEnum) {
-        Context context = GraceBookApplication.getContext();
-        String text = context.getString(stringId);
-        switch (modeEnum) {
-            case NORMAL:
-                Toasty.normal(context, text, duration).show();
-                break;
-            case INFO:
-                Toasty.info(context, text, duration).show();
-                break;
-            case WARNING:
-                Toasty.warning(context, text, duration).show();
-                break;
-            case SUCCESS:
-                Toasty.success(context, text, duration).show();
-                break;
-            case ERROR:
-                Toasty.error(context, text, duration).show();
-                break;
-            default:
-                break;
-        }
+    public static void inDevelopment() {
+        showShort(R.string.still_in_development, ToastMode.INFO);
     }
 
     public static void showShort(CharSequence text, ToastMode modeEnum) {

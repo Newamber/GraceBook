@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:layout_marginTop="@dimen/basic_margin"
-    android:layout_marginStart="@dimen/basic_margin"
-    android:layout_marginEnd="@dimen/basic_margin"
+    android:layout_marginStart="@dimen/min_margin"
+    android:layout_marginEnd="@dimen/min_margin"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -19,18 +19,17 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textview_item_flow_hourMinute"
+            android:id="@+id/textview_item_today_hourMinute"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/basic_margin"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/hour_minute"
             android:textSize="@dimen/text_main"/>
 
         <ImageView
-            android:id="@+id/imageView_item_flow_moneyType"
+            android:id="@+id/imageView_item_today_moneyType"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_gravity="center_vertical"
@@ -40,7 +39,7 @@
             tools:src="@drawable/ic_internet_62"/>
 
         <TextView
-            android:id="@+id/textView_item_flow_moneyType"
+            android:id="@+id/textView_item_today_moneyType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -50,17 +49,17 @@
             android:paddingStart="@dimen/basic_margin"
             android:textColor="@color/colorBlackTextOrIcon"
             android:textSize="@dimen/text_main"
-            tools:text="@string/money_type_item"/>
+            tools:text="网购类型哦"/>
 
         <TextView
-            android:id="@+id/textView_item_flow_amount"
+            android:id="@+id/textView_item_today_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="3"
             android:gravity="end"
             android:paddingEnd="@dimen/standard_margin"
-            android:text="@string/amount_item"
+            tools:text="￥123,456,789.5"
             android:textColor="@color/colorExpense"
             android:textSize="@dimen/text_main"/>
 

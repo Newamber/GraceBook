@@ -11,7 +11,11 @@
         android:visible="false"
         android:title="@string/settings"
         app:showAsAction="never" />
-
+    <item
+        android:id="@+id/toolbar_main_exit"
+        android:visible="true"
+        android:title="@string/exit_app"
+        app:showAsAction="never" />
     <item
         android:id="@+id/toolbar_main_delete"
         android:title="@string/delete"
@@ -33,15 +37,26 @@
             android:title="@string/search"
             app:showAsAction="ifRoom" />
         <item
+            android:id="@+id/toolbar_main_summary"
+            android:icon="@drawable/ic_flow_summary"
+            android:visible="false"
+            android:title="@string/summary_report"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/toolbar_main_delete_current"
+            android:title="@string/delete_current_page_account"
+            android:visible="false"
+            app:showAsAction="never" />
+        <item
             android:id="@+id/toolbar_main_delete_all"
             android:title="@string/delete_all"
             android:visible="false"
             app:showAsAction="never" />
+        <item
+            android:id="@+id/toolbar_main_resume"
+            android:title="@string/back_to_current_period"
+            android:visible="false"
+            app:showAsAction="never" />
     </group>
 
-    <item
-        android:id="@+id/toolbar_main_exit"
-        android:visible="true"
-        android:title="@string/exit_app"
-        app:showAsAction="never" />
 </menu>

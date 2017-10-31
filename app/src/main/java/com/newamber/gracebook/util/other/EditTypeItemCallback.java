@@ -12,7 +12,6 @@ import android.view.View;
  *
  * Created by Newamber on 2017/5/4.
  */
-
 public class EditTypeItemCallback extends ItemTouchHelper.Callback {
 
     private ItemTouchActionHelper mItemTouchActionHelper;
@@ -62,9 +61,6 @@ public class EditTypeItemCallback extends ItemTouchHelper.Callback {
         final View itemContainer = viewHolder.itemView;
         itemContainer.setAlpha(ALPHA_FULL);
         itemContainer.setTranslationX(0);
-        //itemContainer.setBackgroundColor(Color.WHITE);
-        /*((ViewHolder) viewHolder).setGradientBackgroundColor(R.id.cardView_typeEdit_moneyType
-                , R.color.colorAccent, R.color.colorWhite);*/
     }
 
     @Override
@@ -77,9 +73,6 @@ public class EditTypeItemCallback extends ItemTouchHelper.Callback {
             float viewWidth = itemContainer.getWidth();
             float ratio = swipeDistance / viewWidth;
             final float alpha = ALPHA_FULL - ratio;
-            //@ColorInt int tempColor = Color.WHITE - (int) (ratio * (Color.WHITE - Color.parseColor("#FFE51C23")));
-            //((ViewHolder) viewHolder).setGradientColor(itemContainer, tempColor);
-
             itemContainer.setAlpha(alpha);
         }
     }

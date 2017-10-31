@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout_accountName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wide_margin"
+        android:layout_marginEnd="@dimen/wide_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:hint="@string/new_name"
+        app:errorEnabled="true"
+        app:hintAnimationEnabled="true">
+
+        <EditText
+            android:id="@+id/editText_accountName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textShortMessage"
+            android:labelFor="@id/editText_accountName"
+            android:maxLines="1"/>
+
+    </android.support.design.widget.TextInputLayout>
+</FrameLayout>

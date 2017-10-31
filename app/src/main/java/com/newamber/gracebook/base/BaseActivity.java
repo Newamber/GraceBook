@@ -10,7 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.AnimatorRes;
-import android.support.annotation.IdRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -22,16 +22,19 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 
-import com.newamber.gracebook.util.ActivityCollectorUtil;
+import com.bumptech.glide.Glide;
+import com.newamber.gracebook.util.ActivityUtil;
 import com.newamber.gracebook.util.DeviceUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import static com.newamber.gracebook.util.ActivityUtil.addActivity;
 import static com.newamber.gracebook.util.DeviceUtil.aboveAndroid_5;
 
 /**
@@ -51,25 +54,22 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (aboveAndroid_5()) getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        if (aboveAndroid_5()) {
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            setTransitionAnim();
+        }
         setContentView(getLayoutId());
-        if (aboveAndroid_5()) setTransitionAnim();
 
         mPresenter = createPresenter();
         if (mPresenter != null) mPresenter.attachView((V) this);
-        ActivityCollectorUtil.addActivity(this);
-        initView();
+        addActivity(this);
+        initViews();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (isEnabledEventBus()) EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        processClick(v);
+        if (isEventBusEnabled()) EventBus.getDefault().register(this);
     }
 
     public void startTransitionActivity(Class<? extends Activity> targetActivity) {
@@ -82,7 +82,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     // startActivity if need pass data
-    @SuppressWarnings("unused")
     public void startTransitionActivity(Intent intent) {
         if (aboveAndroid_5()) {
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -101,7 +100,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     // startActivity if need postpone
-    @SuppressWarnings("unused")
     public void startTransitionActivity(Intent intent, int timeDelay) {
         if (aboveAndroid_5()) {
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -114,7 +112,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      * Initializing Views here.
      *
      */
-    public abstract void initView();
+    public abstract void initViews();
 
     /**
      * Get the presenter attaching to relevant View.
@@ -149,9 +147,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         return null;
     }
 
-    @SuppressWarnings("unchecked")
-    protected <Sub extends View> Sub findView(@IdRes int viewId) {
-        return (Sub) findViewById(viewId);
+    protected void bindOnClickListener(View... views) {
+        for (View v : views) {
+            v.setOnClickListener(this);
+        }
     }
 
     /**
@@ -160,8 +159,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setTransitionAnim() {
-        int duration = 450;
-        Interpolator interpolator = new AccelerateDecelerateInterpolator();
+        int duration = 500;
+        Interpolator interpolator = new OvershootInterpolator();
 
         // default
         Explode explode = new Explode();
@@ -180,13 +179,13 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         // B's transition.
         getWindow().setEnterTransition(slide);
         // A's transition.
-        getWindow().setExitTransition(explode);
+        getWindow().setExitTransition(slide);
 
         // B.onBackPressed() -> A
         // B's transition.
         getWindow().setReturnTransition(slide);
         // A's transition.
-        getWindow().setReenterTransition(explode);
+        getWindow().setReenterTransition(slide);
     }
 
     /**
@@ -197,6 +196,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      * @param views view array
      */
     protected void setCompressEffect(boolean isUpward, View... views) {
+        Interpolator aInterpolator = new AccelerateInterpolator();
+        Interpolator dInterpolator = new DecelerateInterpolator();
         for (View v : views) {
             if (isUpward) {
                 v.setOnTouchListener((view, event) -> {
@@ -204,14 +205,14 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
                         case MotionEvent.ACTION_DOWN:
                             ObjectAnimator downAnim = ObjectAnimator.ofFloat(view, "translationZ", DeviceUtil.dp2Px(8));
                             downAnim.setDuration(200);
-                            downAnim.setInterpolator(new DecelerateInterpolator());
+                            downAnim.setInterpolator(dInterpolator);
                             downAnim.start();
                             break;
                         case MotionEvent.ACTION_UP:
                         case MotionEvent.ACTION_CANCEL:
                             ObjectAnimator upAnim = ObjectAnimator.ofFloat(view, "translationZ", 0);
                             upAnim.setDuration(200);
-                            upAnim.setInterpolator(new AccelerateInterpolator());
+                            upAnim.setInterpolator(aInterpolator);
                             upAnim.start();
                             break;
                     }
@@ -223,14 +224,14 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
                         case MotionEvent.ACTION_DOWN:
                             ObjectAnimator downAnim = ObjectAnimator.ofFloat(view, "translationZ", 0);
                             downAnim.setDuration(200);
-                            downAnim.setInterpolator(new DecelerateInterpolator());
+                            downAnim.setInterpolator(dInterpolator);
                             downAnim.start();
                             break;
                         case MotionEvent.ACTION_UP:
                         case MotionEvent.ACTION_CANCEL:
                             ObjectAnimator upAnim = ObjectAnimator.ofFloat(view, "translationZ", DeviceUtil.dp2Px(8));
                             upAnim.setDuration(200);
-                            upAnim.setInterpolator(new AccelerateInterpolator());
+                            upAnim.setInterpolator(aInterpolator);
                             upAnim.start();
                             break;
                     }
@@ -246,11 +247,26 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         animator.start();
     }
 
-    // EventBus
-    protected boolean isEnabledEventBus() {
-        return false;
+    protected void startAnimator(View target, @AnimatorRes int animId, int delay) {
+        Animator animator = AnimatorInflater.loadAnimator(this, animId);
+        animator.setStartDelay(delay);
+        animator.setTarget(target);
+        animator.start();
     }
 
+    protected void startAnimators(@AnimatorRes int animId, View... targets) {
+        for (View v : targets) {
+            Animator animator = AnimatorInflater.loadAnimator(this, animId);
+            animator.setTarget(v);
+            animator.start();
+        }
+    }
+
+    protected void setImageByGlide(ImageView view, @DrawableRes int drawableId) {
+        Glide.with(this).load(drawableId).into(view);
+    }
+
+    // --------------------------------EventBus-----------------------------------------------------
     protected void post(Object event) {
         EventBus.getDefault().post(event);
     }
@@ -267,16 +283,26 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         EventBus.getDefault().removeStickyEvent(event);
     }
 
+    protected boolean isEventBusEnabled() {
+        return false;
+    }
+    // ---------------------------------------------------------------------------------------------
+
     @Override
     protected void onStop() {
         super.onStop();
-        if (isEnabledEventBus()) EventBus.getDefault().unregister(this);
+        if (isEventBusEnabled()) EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        processClick(v);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollectorUtil.removeActivity(this);
+        ActivityUtil.removeActivity(this);
 
         // Detach the presenter from this Activity.
         if (mPresenter != null) mPresenter.detachView();
