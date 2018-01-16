@@ -27,9 +27,10 @@ public class EditTypeItemCallback extends ItemTouchHelper.Callback {
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager ||
                 recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
-            final int dragFlags =
-                    ItemTouchHelper.UP | ItemTouchHelper.DOWN |
-                    ItemTouchHelper.END | ItemTouchHelper.START;
+            final int dragFlags = ItemTouchHelper.UP
+                    | ItemTouchHelper.DOWN
+                    | ItemTouchHelper.END
+                    | ItemTouchHelper.START;
             final int swipeFlags = 0;
             return makeMovementFlags(dragFlags, swipeFlags);
         } else {
@@ -40,11 +41,9 @@ public class EditTypeItemCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder
-            , RecyclerView.ViewHolder target) {
-        if (viewHolder.getItemViewType() != target.getItemViewType()) {
-            return false;
-        }
+    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                          RecyclerView.ViewHolder target) {
+        if (viewHolder.getItemViewType() != target.getItemViewType()) return false;
         // Notify the adapter of the move.
         mItemTouchActionHelper.onItemDragMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
         return true;

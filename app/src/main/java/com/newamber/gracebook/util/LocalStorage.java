@@ -17,6 +17,8 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class LocalStorage {
 
+    private LocalStorage() {}
+
     private static SharedPreferences sp = GraceBookApplication.getContext().getSharedPreferences
             (GlobalConstant.PREFERENCE_FILE, Context.MODE_PRIVATE);
 

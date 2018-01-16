@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">简帐</string>
+    <string name="app_name">琥珀记帐</string>
 
     <string name="hello_blank_fragment">图表，待添加</string>
 
@@ -129,6 +129,7 @@
     <string name="first_record_not_today_account_hint">您刚刚记下了一笔过去或者将来的账目，在今日界面无法查看，但可以到流水界面查看哦</string>
 
     <string name="still_in_development">仍然在开发中(●\'◡\'●)</string>
+    <string name="no_income_or_expense">没有任何收入或者支出...</string>
 
     <!--MainViewPager Title-->
     <string-array name="main_viewpager_title">

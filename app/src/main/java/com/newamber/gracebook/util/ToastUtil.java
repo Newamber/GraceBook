@@ -16,6 +16,8 @@ import es.dmoral.toasty.Toasty;
  */
 public class ToastUtil {
 
+    private ToastUtil() {}
+
     public static void inDevelopment() {
         showShort(R.string.still_in_development, ToastMode.INFO);
     }

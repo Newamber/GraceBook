@@ -16,6 +16,8 @@ import org.jetbrains.annotations.Contract;
 //@SuppressWarnings("unused")
 public class DeviceUtil {
 
+    private DeviceUtil() {}
+
     private static long sLastClickTime;
     private static final int NORMAL_CLICK_INTERVAL_TIME = 750;
 

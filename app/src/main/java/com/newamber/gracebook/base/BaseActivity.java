@@ -3,6 +3,7 @@ package com.newamber.gracebook.base;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -21,7 +22,6 @@ import android.transition.Slide;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -55,8 +55,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (aboveAndroid_5()) {
-            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            setTransitionAnim();
+            //getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            //setTransitionAnim();
         }
         setContentView(getLayoutId());
 
@@ -148,9 +148,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     protected void bindOnClickListener(View... views) {
-        for (View v : views) {
-            v.setOnClickListener(this);
-        }
+        for (View v : views) v.setOnClickListener(this);
     }
 
     /**
@@ -195,6 +193,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      *                 and false show the compression physical effect just is alike real life
      * @param views view array
      */
+    @SuppressLint("ClickableViewAccessibility")
     protected void setCompressEffect(boolean isUpward, View... views) {
         Interpolator aInterpolator = new AccelerateInterpolator();
         Interpolator dInterpolator = new DecelerateInterpolator();

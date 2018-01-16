@@ -185,7 +185,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
         EventBus.getDefault().removeStickyEvent(event);
     }
 
-    protected void setEasyItemAnimatorAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+    protected void setEasyItemAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         int duration = 500;
         recyclerView.setHasFixedSize(true);
 

@@ -10,6 +10,8 @@ import android.view.animation.LinearInterpolator;
 
 import com.newamber.gracebook.app.GraceBookApplication;
 
+import org.jetbrains.annotations.Contract;
+
 import static com.newamber.gracebook.util.DeviceUtil.aboveAndroid_6;
 
 /**
@@ -18,10 +20,10 @@ import static com.newamber.gracebook.util.DeviceUtil.aboveAndroid_6;
  * <p>
  * Created by Newamber at 2017/7/20.
  */
-
 public class ColorUtil {
 
-    @SuppressWarnings("deprecation")
+    private ColorUtil() {}
+
     public static @ColorInt int getColor(@ColorRes int colorId) {
         return aboveAndroid_6() ?
                 GraceBookApplication.getContext().getResources().getColor(colorId, null):
@@ -30,8 +32,8 @@ public class ColorUtil {
 
     public static void setGradientColor(View v, @ColorRes int startColor, @ColorRes int endColor,
                                         int duration) {
-        ValueAnimator animator = ValueAnimator.ofObject(ColorEvaluator.getInstance()
-                , getColor(startColor), getColor(endColor));
+        ValueAnimator animator = ValueAnimator.ofObject(ColorEvaluator.getInstance(),
+                getColor(startColor), getColor(endColor));
         animator.setDuration(duration);
         animator.setInterpolator(new LinearInterpolator());
         animator.start();
@@ -43,10 +45,10 @@ public class ColorUtil {
         });
     }
 
-    // --------------------------------private API--------------------------------------------------
+    // ----------------------------------private API------------------------------------------------
     /**
      * This evaluator can be used to perform type interpolation between integer
-     * values that represent ARGB colors.
+     * values that represent ARGB colors.<br>
      *
      * NOTE: This is a copy of {@code ArgbEvaluator.java}
      */
@@ -54,12 +56,13 @@ public class ColorUtil {
         private static final ColorEvaluator sInstance = new ColorEvaluator();
 
         /**
-         * Returns an instance of <code>ColorEvaluator</code> that may be used in
+         * Returns an instance of <code>ArgbEvaluator</code> that may be used in
          * {@link ValueAnimator#setEvaluator(TypeEvaluator)}. The same instance may
          * be used in multiple <code>Animator</code>s because it holds no state.
-         * @return An instance of <code>ColorEvaluator</code>.
          *
+         * @return An instance of <code>ArgbEvaluator</code>.
          */
+        @Contract(pure = true)
         static ColorEvaluator getInstance() {
             return sInstance;
         }
@@ -82,21 +85,42 @@ public class ColorUtil {
          */
         public Object evaluate(float fraction, Object startValue, Object endValue) {
             int startInt = (Integer) startValue;
-            int startA = (startInt >> 24) & 0xff;
-            int startR = (startInt >> 16) & 0xff;
-            int startG = (startInt >> 8)  & 0xff;
-            int startB = startInt & 0xff;
+            float startA = ((startInt >> 24) & 0xff) / 255.0f;
+            float startR = ((startInt >> 16) & 0xff) / 255.0f;
+            float startG = ((startInt >>  8) & 0xff) / 255.0f;
+            float startB = ( startInt        & 0xff) / 255.0f;
 
             int endInt = (Integer) endValue;
-            int endA = (endInt >> 24) & 0xff;
-            int endR = (endInt >> 16) & 0xff;
-            int endG = (endInt >> 8)  & 0xff;
-            int endB = endInt & 0xff;
+            float endA = ((endInt >> 24) & 0xff) / 255.0f;
+            float endR = ((endInt >> 16) & 0xff) / 255.0f;
+            float endG = ((endInt >>  8) & 0xff) / 255.0f;
+            float endB = ( endInt        & 0xff) / 255.0f;
 
-            return  (startA + (int)(fraction * (endA - startA))) << 24 |
-                    (startR + (int)(fraction * (endR - startR))) << 16 |
-                    (startG + (int)(fraction * (endG - startG))) << 8  |
-                    (startB + (int)(fraction * (endB - startB)));
+            // convert from sRGB to linear
+            startR = (float) Math.pow(startR, 2.2);
+            startG = (float) Math.pow(startG, 2.2);
+            startB = (float) Math.pow(startB, 2.2);
+
+            endR = (float) Math.pow(endR, 2.2);
+            endG = (float) Math.pow(endG, 2.2);
+            endB = (float) Math.pow(endB, 2.2);
+
+            // compute the interpolated color in linear space
+            float a = startA + fraction * (endA - startA);
+            float r = startR + fraction * (endR - startR);
+            float g = startG + fraction * (endG - startG);
+            float b = startB + fraction * (endB - startB);
+
+            // convert back to sRGB in the [0..255] range
+            a = a * 255.0f;
+            r = (float) Math.pow(r, 1.0 / 2.2) * 255.0f;
+            g = (float) Math.pow(g, 1.0 / 2.2) * 255.0f;
+            b = (float) Math.pow(b, 1.0 / 2.2) * 255.0f;
+
+            return Math.round(a) << 24
+                    | Math.round(r) << 16
+                    | Math.round(g) << 8
+                    | Math.round(b);
         }
     }
 }

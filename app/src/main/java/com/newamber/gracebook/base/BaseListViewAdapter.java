@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,6 +132,7 @@ public abstract class BaseListViewAdapter<T> extends BaseAdapter {
             return (T) view;
         }
 
+        @Contract(pure = true)
         private View getItemView() {
             return item;
         }

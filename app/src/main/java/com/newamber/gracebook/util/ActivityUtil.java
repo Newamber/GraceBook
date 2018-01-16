@@ -12,6 +12,9 @@ import java.util.List;
  */
 
 public class ActivityUtil {
+
+    private ActivityUtil() {}
+
     private static List<Activity> sActivityList = new ArrayList<>();
 
     /**

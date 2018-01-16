@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
-import com.newamber.gracebook.base.ViewHolder;
+import com.newamber.gracebook.base.BaseViewHolder;
 import com.newamber.gracebook.model.entity.AccountPO;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class AccountFlowAdapter extends BaseRecyclerViewAdapter<AccountPO> {
     }
 
     @Override
-    protected void convertView(ViewHolder holder, AccountPO entity) {
+    protected void convertView(BaseViewHolder holder, AccountPO entity) {
         int position = getPosition(entity);
         String sectionHeaderText = formatMonthDayForFlow(entity.calendar);
 

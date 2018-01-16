@@ -1,7 +1,7 @@
 package com.newamber.gracebook.util.other;
 
 import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
-import com.newamber.gracebook.base.ViewHolder;
+import com.newamber.gracebook.base.BaseViewHolder;
 
 /**
  * Description: .<p>
@@ -19,7 +19,7 @@ public interface ItemTouchActionHelper {
      * @param fromPosition The start position of the moved item.
      * @param toPosition   Then resolved position of the moved item.
      *
-     * @see ViewHolder#getAdapterPosition()
+     * @see BaseViewHolder#getAdapterPosition()
      */
     void onItemDragMove(int fromPosition, int toPosition);
 
@@ -32,7 +32,7 @@ public interface ItemTouchActionHelper {
      *
      * @param position The position of the item dismissed.
      *
-     * @see ViewHolder#getAdapterPosition()
+     * @see BaseViewHolder#getAdapterPosition()
      */
     void onItemSwipeDismiss(int position);
 }

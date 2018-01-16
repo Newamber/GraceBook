@@ -43,7 +43,7 @@ public class MoneyTypeFragment extends BaseFragment<TypeEditPresenter> {
         // item animator
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditTypeItemCallback(mAdapter, true));
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        setEasyItemAnimatorAdapter(recyclerView, mAdapter);
+        setEasyItemAdapter(recyclerView, mAdapter);
     }
 
     // -------------------------------------event---------------------------------------------------

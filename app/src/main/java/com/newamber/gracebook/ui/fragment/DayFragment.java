@@ -71,7 +71,7 @@ public class DayFragment extends BaseFragment<MainPresenter> {
         updateBigCard();
         fadingTextView.setTexts(message);
 
-        setEasyItemAnimatorAdapter(recyclerView, mAdapter);
+        setEasyItemAdapter(recyclerView, mAdapter);
         setCompressEffect(false, todayCardView);
     }
 
@@ -131,18 +131,15 @@ public class DayFragment extends BaseFragment<MainPresenter> {
         Double income = 0d;
         Double surplus;
         for(AccountPO record : mAdapter.getEntityList()) {
-            if (record.isExpense)
-                expense = add(expense, record.amount);
-            else
-                income =  add(income, record.amount);
+            if (record.isExpense) expense = add(expense, record.amount);
+            else income =  add(income, record.amount);
         }
-        boolean greaterThanZero = subtract(income, expense) >= 0;
+        boolean greaterThanOrEqualZero = subtract(income, expense) >= 0;
         surplus = Math.abs(subtract(income, expense));
-
         mTextViewIncome.setText(formatCurrency(income));
         mTextViewExpense.setText(formatCurrency(expense));
         mTextViewSurplus.setText(formatCurrency(surplus));
-        if (greaterThanZero)
+        if (greaterThanOrEqualZero)
             mTextViewSurplus.setTextColor(getColor(R.color.colorTodayIncome));
         else
             mTextViewSurplus.setTextColor(getColor(R.color.colorTodayExpense));

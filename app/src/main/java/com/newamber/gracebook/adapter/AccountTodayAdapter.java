@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.newamber.gracebook.R;
 import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
-import com.newamber.gracebook.base.ViewHolder;
+import com.newamber.gracebook.base.BaseViewHolder;
 import com.newamber.gracebook.model.entity.AccountPO;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class AccountTodayAdapter extends BaseRecyclerViewAdapter<AccountPO> {
     }
 
     @Override
-    protected void convertView(ViewHolder holder, AccountPO entity) {
+    protected void convertView(BaseViewHolder holder, AccountPO entity) {
 
         holder.setText(R.id.textview_item_today_hourMinute, formatHourMin(entity.calendar))
                 .setText(R.id.textView_item_today_moneyType, entity.moneyType)

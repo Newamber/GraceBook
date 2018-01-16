@@ -199,11 +199,11 @@ public class TypeEditActivity extends BaseActivity<IBaseView.TypeEditView, TypeE
         @SuppressLint("InflateParams")
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_money_type, null);
 
-        EditText editText = (EditText) dialogView.findViewById(R.id.editText_moneyTypeName);
-        ImageView imageViewIcon = (ImageView) dialogView.findViewById(R.id.imageView_iconSelected);
-        TextInputLayout textInputLayout = (TextInputLayout) dialogView
+        EditText editText = dialogView.findViewById(R.id.editText_moneyTypeName);
+        ImageView imageViewIcon = dialogView.findViewById(R.id.imageView_iconSelected);
+        TextInputLayout textInputLayout = dialogView
                 .findViewById(R.id.textInputLayout_moneyTypeName);
-        AppCompatSpinner spinnerMoneyType = (AppCompatSpinner) dialogView
+        AppCompatSpinner spinnerMoneyType = dialogView
                 .findViewById(R.id.spinner_typeEdit_moneyType);
 
         spinnerMoneyType.setAdapter(adapterType);
@@ -259,13 +259,11 @@ public class TypeEditActivity extends BaseActivity<IBaseView.TypeEditView, TypeE
         @SuppressLint("InflateParams")
         View dialogView =  LayoutInflater.from(this).inflate(R.layout.dialog_money_repo_type, null);
 
-        EditText editTextName = (EditText) dialogView.findViewById(R.id.editText_moneyRepoTypeName);
-        EditText editTextBalance = (EditText) dialogView.findViewById(R.id.editText_moneyRepoTypeBalance);
-        ImageView imageViewIcon = (ImageView) dialogView.findViewById(R.id.imageView_iconRepoSelected);
-        TextInputLayout textInputLayout = (TextInputLayout) dialogView
-                .findViewById(R.id.textInputLayout_moneyTypeRepoName);
-        AppCompatSpinner spinnerMoneyRepoType = (AppCompatSpinner) dialogView
-                .findViewById(R.id.spinner_typeEdit_moneyRepoType);
+        EditText editTextName = dialogView.findViewById(R.id.editText_moneyRepoTypeName);
+        EditText editTextBalance = dialogView.findViewById(R.id.editText_moneyRepoTypeBalance);
+        ImageView imageViewIcon = dialogView.findViewById(R.id.imageView_iconRepoSelected);
+        TextInputLayout textInputLayout = dialogView.findViewById(R.id.textInputLayout_moneyTypeRepoName);
+        AppCompatSpinner spinnerMoneyRepoType = dialogView.findViewById(R.id.spinner_typeEdit_moneyRepoType);
 
         spinnerMoneyRepoType.setAdapter(adapterRepo);
         spinnerMoneyRepoType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

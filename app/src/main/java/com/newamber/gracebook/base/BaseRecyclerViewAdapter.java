@@ -23,14 +23,13 @@ import java.util.List;
  * Created by Newamber on 2017/5/2.
  */
 @SuppressWarnings("unused")
-public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<ViewHolder>
+public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<BaseViewHolder>
         implements ItemTouchActionHelper {
 
-    @SuppressWarnings("all")
-    private final int ITEM_TYPE_NORMAL = 1;
-    private final int ITEM_TYPE_HEADER = 2;
-    private final int ITEM_TYPE_FOOTER = 3;
-    private final int ITEM_TYPE_EMPTY  = 4;
+    private static final int ITEM_TYPE_NORMAL = 1;
+    private static final int ITEM_TYPE_HEADER = 2;
+    private static final int ITEM_TYPE_FOOTER = 3;
+    private static final int ITEM_TYPE_EMPTY  = 4;
 
     private Context mContext;
     private List<E> mEntityList;
@@ -51,29 +50,28 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mContext == null) mContext = parent.getContext();
         switch (viewType) {
             case ITEM_TYPE_HEADER:
-                return new ViewHolder(mHeaderView, mContext);
+                return new BaseViewHolder(mHeaderView, mContext);
             case ITEM_TYPE_FOOTER:
-                return new ViewHolder(mFooterView, mContext);
+                return new BaseViewHolder(mFooterView, mContext);
             case ITEM_TYPE_EMPTY:
-                return new ViewHolder(mEmptyView, mContext);
+                return new BaseViewHolder(mEmptyView, mContext);
             default:
                 View view = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
-                return new ViewHolder(view, mContext);
+                return new BaseViewHolder(view, mContext);
         }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
         int itemType = getItemViewType(position);
         if (itemType == ITEM_TYPE_HEADER
                 || itemType == ITEM_TYPE_FOOTER
-                || itemType == ITEM_TYPE_EMPTY) {
-            return;
-        }
+                || itemType == ITEM_TYPE_EMPTY) return;
+
         // init OnItemClickListener
         initOnItemClickListener(holder);
         // init sub itemClickListener
@@ -83,15 +81,10 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
 
     @Override
     public int getItemViewType(int position) {
-        if (mHeaderView != null && position == 0) {
-            return ITEM_TYPE_HEADER;
-        }
-        if (mFooterView != null && position == getItemCount() - 1) {
-            return ITEM_TYPE_FOOTER;
-        }
-        if (mEmptyView != null && isEmpty()) {
-            return ITEM_TYPE_EMPTY;
-        }
+        if (mHeaderView != null && position == 0) return ITEM_TYPE_HEADER;
+        if (mFooterView != null && position == getItemCount() - 1) return ITEM_TYPE_FOOTER;
+        if (mEmptyView != null && isEmpty()) return ITEM_TYPE_EMPTY;
+
         return ITEM_TYPE_NORMAL;
     }
 
@@ -110,6 +103,7 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
         notifyItemInserted(0);
     }
 
+    // 0 is the position of HeaderView in list if it exists.
     public void removeHeaderView() {
         if (mHeaderView != null) {
             mHeaderView = null;
@@ -173,8 +167,12 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
 
     @SuppressWarnings("all")
     public void remove(int position) {
-        mEntityList.remove(position);
-        notifyItemRemoved(position);
+        try {
+            mEntityList.remove(position);
+            notifyItemRemoved(position);
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
     }
 
     public void remove(E entity) {
@@ -248,38 +246,31 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
      * @param holder the outer layer holder of sub items
      * @param entity the data source
      */
-    protected abstract void convertView(ViewHolder holder, E entity);
+    protected abstract void convertView(BaseViewHolder holder, E entity);
 
-    /**
-     * The item click listener interface of RecyclerView
-     * {@code T} means the type of entity, it should be the same with {@code E}
-     */
     @FunctionalInterface
     public interface OnItemClickListener {
         void onItemClick(View view, Object entity, int position) ;
     }
 
     @FunctionalInterface
-    @SuppressWarnings("all")
     public interface OnItemLongClickListener {
         void onItemLongClick(View view, Object entity, int position) ;
     }
 
     @FunctionalInterface
-    @SuppressWarnings("all")
     public interface OnSubItemClickListener {
         void onSubItemClick(View view, Object entity, int position) ;
     }
 
     @FunctionalInterface
-    @SuppressWarnings("all")
     public interface OnSubItemLongClickListener {
         void onSubItemLongClick(View view, Object entity, int position) ;
     }
 
     // ----------------------------------private API------------------------------------------------
     // An auxiliary method to initialize (long) click listener.
-    private void initOnItemClickListener(ViewHolder holder) {
+    private void initOnItemClickListener(BaseViewHolder holder) {
         if (mClickListener != null) {
             holder.itemView.setOnClickListener(v -> {
                 E entity = mEntityList.get(holder.getLayoutPosition());
@@ -297,7 +288,7 @@ public abstract class BaseRecyclerViewAdapter<E> extends RecyclerView.Adapter<Vi
     }
 
     // An auxiliary method to initialize (long) sub item click listener.
-    private void initSubItemClickListener(ViewHolder holder) {
+    private void initSubItemClickListener(BaseViewHolder holder) {
         if (mSubClickListener != null) {
             holder.itemView.findViewById(mSubViewId).setOnClickListener(v -> {
                 E entity = mEntityList.get(holder.getLayoutPosition());

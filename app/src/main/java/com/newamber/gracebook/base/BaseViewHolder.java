@@ -16,12 +16,12 @@ import com.bumptech.glide.Glide;
 import static com.newamber.gracebook.util.ColorUtil.getColor;
 
 /**
- * Description: A encapsulated common ViewHolder of RecyclerView .<p>
+ * Description: A encapsulated common BaseViewHolder of RecyclerView .<p>
  * <br>
  * Created by Newamber on 2017/5/2.
  */
 @SuppressWarnings("all")
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     private SparseArray<View> mSubViewArray;
 
@@ -29,26 +29,26 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     private Context mContext;
 
     /**
-     * the constructor of ViewHolder
+     * the constructor of BaseViewHolder
      *
      * @param itemView the outer layer layout of sub views of list item
-     * @param context the context of parent ViewGroup of our ViewHolder
+     * @param context the context of parent ViewGroup of our BaseViewHolder
      */
-    public ViewHolder(View itemView, Context context) {
+    public BaseViewHolder(View itemView, Context context) {
         super(itemView);
         mContext = context;
         mSubViewArray = new SparseArray<>();
     }
 
     // Some auxiliary methods.
-    public ViewHolder setText(@IdRes int viewId , CharSequence textContent) {
+    public BaseViewHolder setText(@IdRes int viewId , CharSequence textContent) {
         View view = getSubView(viewId);
         if (view instanceof TextView) ((TextView) view).setText(textContent);
         if (view instanceof Button) ((Button) view).setText(textContent);
         return this;
     }
 
-    public ViewHolder setTextColor(@IdRes int viewId, @ColorRes int colorId) {
+    public BaseViewHolder setTextColor(@IdRes int viewId, @ColorRes int colorId) {
         View view = getSubView(viewId);
         if (view instanceof TextView) {
             ((TextView) view).setTextColor(getColor(colorId));
@@ -60,13 +60,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    public ViewHolder setBackgroundColor(@IdRes int viewId, @ColorRes int colorId) {
+    public BaseViewHolder setBackgroundColor(@IdRes int viewId, @ColorRes int colorId) {
         View view = getSubView(viewId);
         view.setBackgroundColor(getColor(colorId));
         return this;
     }
 
-    public ViewHolder setImage(@IdRes int viewId , @DrawableRes int drawableId) {
+    public BaseViewHolder setImage(@IdRes int viewId , @DrawableRes int drawableId) {
         View view = getSubView(viewId);
         if (view instanceof ImageView) {
             Glide.with(mContext).load(drawableId).into((ImageView) view);
@@ -74,27 +74,27 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    public ViewHolder setVisibility(@IdRes int viewId , int visibility) {
+    public BaseViewHolder setVisibility(@IdRes int viewId , int visibility) {
         getSubView(viewId).setVisibility(visibility);
         return this;
     }
 
-    public ViewHolder saveTag(Object tag) {
+    public BaseViewHolder saveTag(Object tag) {
         itemView.setTag(tag);
         return this;
     }
 
-    public ViewHolder getTag() {
+    public BaseViewHolder getTag() {
         itemView.getTag();
         return this;
     }
 
-    public ViewHolder saveSubTag(@IdRes int viewId, Object tag) {
+    public BaseViewHolder saveSubTag(@IdRes int viewId, Object tag) {
         getSubView(viewId).setTag(tag);
         return this;
     }
 
-    public ViewHolder getSubTag(@IdRes int viewId) {
+    public BaseViewHolder getSubTag(@IdRes int viewId) {
         getSubView(viewId).getTag();
         return this;
     }

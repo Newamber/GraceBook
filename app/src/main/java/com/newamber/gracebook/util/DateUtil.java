@@ -18,6 +18,8 @@ import java.util.Locale;
 
 public class DateUtil {
 
+    private DateUtil() {}
+
     private static final SimpleDateFormat YEAR_MONTH_DAY_WEEK_CHS_FORMAT = new SimpleDateFormat
             ("yyyy年MM月dd日，EEEE", Locale.CHINA);
 
@@ -214,9 +216,8 @@ public class DateUtil {
         YEAR;
 
         public static DateRange valueOf(int ordinal) {
-            if (ordinal < 0 || ordinal >= values().length) {
+            if (ordinal < 0 || ordinal >= values().length)
                 throw new IndexOutOfBoundsException("Invalid ordinal");
-            }
             return values()[ordinal];
         }
     }

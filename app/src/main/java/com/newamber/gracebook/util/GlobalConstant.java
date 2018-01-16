@@ -6,14 +6,17 @@ package com.newamber.gracebook.util;
  * Created by Newamber on 2017/6/28.
  */
 public class GlobalConstant {
+
+    private GlobalConstant() {}
+
     // SharePreference local path.
     static final String PREFERENCE_FILE = "local_preference_file";
 
     // Currency
     static final String CURRENCY_SYMBOL = "currency_symbol";
     static final String CURRENCY_SYMBOL_CHS = "￥";
-    public static final Double MAX_BALANCE = 999999999999d;
-    public static final Double MAX_SINGLE_RECORD_AMOUNT = 999999999d;
+    public static final Double MAX_BALANCE = 9999_9999_9999d;
+    public static final Double MAX_SINGLE_RECORD_AMOUNT = 9_9999_9999d;
 
     public static final String ACCOUNT_BOOK_NAME = "account_book_name";
 

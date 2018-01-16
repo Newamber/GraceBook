@@ -3,6 +3,7 @@ package com.newamber.gracebook.presenter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -444,6 +445,7 @@ public class MainPresenter extends BasePresenter<IBaseView.MainView> {
         return entries;
     }
 
+    @NonNull
     private Entry getEntryByWeek(int week, List<AccountPO> list, boolean isExpense) {
         List<AccountPO> poList = new ArrayList<>();
         for (AccountPO record : list) {
@@ -463,6 +465,7 @@ public class MainPresenter extends BasePresenter<IBaseView.MainView> {
         return new Entry(week, (float) totalAmount);
     }
 
+    @NonNull
     private Entry getEntryByMonth(int dayOfMonth, List<AccountPO> list, boolean isExpense) {
         List<AccountPO> poList = new ArrayList<>();
         for (AccountPO record : list) {
@@ -478,6 +481,7 @@ public class MainPresenter extends BasePresenter<IBaseView.MainView> {
         return new Entry(dayOfMonth, (float) totalAmount);
     }
 
+    @NonNull
     private Entry getEntryByQuarter(int quarter, DateRange dateRange, boolean isExpense) {
         Calendar start = getFirstDay(dateRange);
         Calendar end = getLastDay(dateRange);
@@ -516,6 +520,7 @@ public class MainPresenter extends BasePresenter<IBaseView.MainView> {
         return new Entry(quarter, (float) totalAmount);
     }
 
+    @NonNull
     private Entry getEntryByYear(int month, List<AccountPO> list, boolean isExpense) {
         List<AccountPO> poList = new ArrayList<>();
         for (AccountPO record : list) {

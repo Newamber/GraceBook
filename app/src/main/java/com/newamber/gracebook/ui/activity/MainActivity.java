@@ -123,7 +123,7 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
                     ToastUtil.inDevelopment();
                     break;
                 case R.id.navigationView_settings:
-                    startTransitionActivity(SettingsActivity.class, 200);
+                    startTransitionActivity(SettingsActivity.class, 300);
                     break;
                 case R.id.navigationView_donation:
                     ToastUtil.inDevelopment();
@@ -220,6 +220,7 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
                 break;
             case R.id.toolbar_main_settings:
                 startTransitionActivity(SettingsActivity.class);
+                break;
             default:
                 break;
         }
@@ -270,9 +271,13 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
         setImageByGlide(titleBackground, R.drawable.bg_summary);
 
         textViewDate.setText(dateRangeText);
+        String totalRepoBalance = "\n\n钱库总余额：" + mPresenter.getTotalRepoBalance();
         String summary = "共收入 " + incomeCount + " 笔，总计 " + totalIncome +
                 "\n共支出 " + expenseCount + " 笔，总计 " + totalExpense + "\n结余 " + surplus +
-                "\n\n钱库总余额：" + mPresenter.getTotalRepoBalance();
+                totalRepoBalance;
+        if (incomeCount == 0 && expenseCount == 0) summary = getString(R.string.no_income_or_expense)
+                + totalRepoBalance;
+
         textViewSummary.setText(summary);
 
         startAnimator(titleBackground, R.animator.anim_alpha_show);
@@ -380,8 +385,7 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
                         .setTitle(R.string.caution)
                         .setIcon(R.drawable.ic_dialog_warning)
                         .setMessage(message)
-                        .setPositiveButton(R.string.go, (dialog1, which) ->
-                                startTransitionActivity(TypeEditActivity.class))
+                        .setPositiveButton(R.string.go, (dialog1, which) -> startTransitionActivity(TypeEditActivity.class))
                         .setNegativeButton(R.string.no, null)
                         .show();
             }
@@ -410,7 +414,6 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
         surplus = formatCurrency(mPresenter.getSurplus(poList));
         incomeCount = mPresenter.getIncomeCount(poList);
         expenseCount = mPresenter.getExpenseCount(poList);
-
         cancelEventDelivery(poList);
     }
 

@@ -4,9 +4,9 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 
 import com.newamber.gracebook.R;
+import com.newamber.gracebook.base.BaseViewHolder;
 import com.newamber.gracebook.base.IBaseModel;
 import com.newamber.gracebook.base.BaseRecyclerViewAdapter;
-import com.newamber.gracebook.base.ViewHolder;
 import com.newamber.gracebook.model.entity.MoneyTypePO;
 import com.newamber.gracebook.model.impl.MoneyTypeModel;
 
@@ -38,7 +38,7 @@ public class MoneyTypeItemAdapter extends BaseRecyclerViewAdapter<MoneyTypePO> {
     }
 
     @Override
-    protected void convertView(ViewHolder holder, MoneyTypePO entity) {
+    protected void convertView(BaseViewHolder holder, MoneyTypePO entity) {
         holder.setImage(R.id.imageView_typeEdit_moneyType, entity.moneyTypeImageId)
                 .setText(R.id.textView_typeEdit_moneyType, entity.moneyTypeName);
     }

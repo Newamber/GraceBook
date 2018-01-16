@@ -102,7 +102,7 @@ public class FlowFragment extends BaseFragment<MainPresenter> {
         View view = LayoutInflater.from(getHostActivity()).inflate(R.layout.flow_empty_view, mRecyclerView, false);
         mAdapter.setEmptyView(view);
         periodArray = getHostActivity().getResources().getStringArray(R.array.period_list);
-        setEasyItemAnimatorAdapter(mRecyclerView, mAdapter);
+        setEasyItemAdapter(mRecyclerView, mAdapter);
         setTopSection(mRecyclerView);
 
         mTextViewPeriodTitle.setText(periodArray[periodSelected]);
@@ -185,10 +185,8 @@ public class FlowFragment extends BaseFragment<MainPresenter> {
     @Subscribe
     public void onCurrentPageIsEmpty(String message) {
         if (message.equals(GlobalConstant.REQUEST_IS_CURRENT_PERIOD_EMPTY)) {
-            if (mAdapter.isEmpty())
-                post(GlobalConstant.CURRENT_PAGE_IS_EMPTY);
-            else
-                post(GlobalConstant.CURRENT_PAGE_IS_NOT_EMPTY);
+            if (mAdapter.isEmpty()) post(GlobalConstant.CURRENT_PAGE_IS_EMPTY);
+            else post(GlobalConstant.CURRENT_PAGE_IS_NOT_EMPTY);
             cancelEventDelivery(message);
         }
     }
@@ -316,9 +314,8 @@ public class FlowFragment extends BaseFragment<MainPresenter> {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 View firstItemView = recyclerView.getChildAt(0);
-                if (firstItemView != null && firstItemView.getContentDescription() != null) {
+                if (firstItemView != null && firstItemView.getContentDescription() != null)
                     mTextViewSectionHeader.setText(firstItemView.getContentDescription());
-                }
 
                 View secondItemView = recyclerView.findChildViewUnder(mCardViewSectionTop.getMeasuredWidth() / 2,
                         mCardViewSectionTop.getMeasuredHeight() + 4);
@@ -326,11 +323,10 @@ public class FlowFragment extends BaseFragment<MainPresenter> {
                     int flag = (int) secondItemView.getTag();
                     int deltaY = secondItemView.getTop() - mCardViewSectionTop.getMeasuredHeight();
 
-                    if (flag == AccountFlowAdapter.TYPE_CONTENT_WITH_SECTION) {
+                    if (flag == AccountFlowAdapter.TYPE_CONTENT_WITH_SECTION)
                         mCardViewSectionTop.setTranslationY(secondItemView.getTop() > 0 ? deltaY : 0);
-                    } else if (flag == AccountFlowAdapter.TYPE_CONTENT_NO_SECTION) {
+                    else if (flag == AccountFlowAdapter.TYPE_CONTENT_NO_SECTION)
                         mCardViewSectionTop.setTranslationY(0);
-                    }
                 }
             }
 

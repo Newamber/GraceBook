@@ -528,7 +528,7 @@ public class AddAccountActivity extends BaseActivity<IBaseView.AddAccountView, A
     // TODO: useless
     private void hideSoftKeyboard(EditText editText) {
         InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (im.isActive()) {
+        if (im != null && im.isActive()) {
             im.hideSoftInputFromInputMethod(editText.getWindowToken(), 0);
         }
     }
