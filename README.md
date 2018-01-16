@@ -1,6 +1,5 @@
 # GraceBook
 A simple App to help you keep accounts.
 
-## Feature
-* Simple and graceful but still powerful.
-* and so on...
+## Screenshot
+https://github.com/Newamber/GraceBook/tree/master/screenshot
