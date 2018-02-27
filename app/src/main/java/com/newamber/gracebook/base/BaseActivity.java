@@ -22,6 +22,7 @@ import android.transition.Slide;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -55,8 +56,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (aboveAndroid_5()) {
-            //getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            //setTransitionAnim();
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            setTransitionAnim();
         }
         setContentView(getLayoutId());
 
@@ -152,7 +153,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     /**
-     * Override it in specific sub class if you need different Transition effect.
+     * Override this method in specific sub class if you need different transition effect.
      * Following is default.
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

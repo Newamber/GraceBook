@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
 import es.dmoral.toasty.Toasty;
 
 /**
- * Description: Some global operations are relevant to this Application.<p>
+ * Description: Some global operations which are relevant to this Application.<p>
  *
  * Created by Newamber on 2017/4/24.
  */
