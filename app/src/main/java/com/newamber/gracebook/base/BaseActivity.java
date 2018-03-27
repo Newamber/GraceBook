@@ -111,7 +111,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
 
     /**
      * Initializing Views here.
-     *
      */
     public abstract void initViews();
 

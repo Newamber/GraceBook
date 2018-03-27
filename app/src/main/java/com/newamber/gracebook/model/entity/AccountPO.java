@@ -21,21 +21,21 @@ public class AccountPO extends BaseModel {
     @PrimaryKey(autoincrement = true)
     public int id;
 
-    public Double amount;           // amount waited to be recorded
+    public Double amount;              // amount waited to be recorded
 
-    public String note;             // note: the usage of the money
+    public String note;                // note: the usage of the money
 
-    public String moneyRepoType;    // bank card, wechat and so on
+    public String moneyRepoType;       // bank card, wechat and so on
 
-    public String moneyType;        // for example, shopping, eating and so on
+    public String moneyType;           // for example, shopping, eating and so on
 
-    public boolean isExpense;       // income(false) or expense(true)
+    public boolean isExpense;          // income(false) or expense(true)
 
-    public Calendar calendar;       // the calendar of the money's record
+    public Calendar calendar;          // the calendar of the money's record
 
-    public @DrawableRes
-    int  moneyTypeImageId;          // the round icon of the money type
+    @DrawableRes
+    public int moneyTypeImageId;       // the round icon of the money type
 
-    public @DrawableRes
-    int moneyRepoTypeImageId;       // the round icon of the money type
+    @DrawableRes
+    public int moneyRepoTypeImageId;   // the round icon of the money type
 }

@@ -3,6 +3,7 @@ package com.newamber.gracebook.base;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.AnimatorRes;
@@ -149,7 +150,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
         Glide.with(this).load(drawableId).into(view);
     }
 
-    @SuppressWarnings("unchecked")
     protected <V extends View> V findViewById(@IdRes int viewId) {
         return getRootView().findViewById(viewId);
     }
@@ -213,6 +213,8 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment
      *                 and false show the compression physical effect just is alike real life
      * @param views view array
      */
+
+    @SuppressLint("ClickableViewAccessibility")
     protected void setCompressEffect(boolean isUpward, View... views) {
         for (View v : views) {
             if (isUpward) {

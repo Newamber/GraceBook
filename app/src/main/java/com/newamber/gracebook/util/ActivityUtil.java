@@ -10,7 +10,6 @@ import java.util.List;
  *
  * Created by Newamber on 2017/4/26.
  */
-
 public class ActivityUtil {
 
     private ActivityUtil() {}
@@ -19,6 +18,7 @@ public class ActivityUtil {
 
     /**
      * No description.
+     *
      * @param activity need added Activity
      */
     public static void addActivity(Activity activity) {
@@ -27,6 +27,7 @@ public class ActivityUtil {
 
     /**
      * No description.
+     *
      * @param activity need deleted Activity
      */
     public static void removeActivity(Activity activity) {
@@ -39,8 +40,8 @@ public class ActivityUtil {
      */
     @SuppressWarnings("all")
     public static void finishAllActivity() {
-        for (Activity activity : sActivityList) {
-            if (! activity.isFinishing()) activity.finish();
-        }
+        sActivityList.forEach(activity -> {
+            if (!activity.isFinishing()) activity.finish();
+        });
     }
 }

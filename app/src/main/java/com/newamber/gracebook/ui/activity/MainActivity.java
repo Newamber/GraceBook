@@ -51,7 +51,10 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
         implements IBaseView.MainView {
 
     private static final @LayoutRes int LAYOUT_ID = R.layout.activity_main;
-    private final int MAX_ACCOUNT_BOOK_NAME_SIZE = 10;
+    private static final int FIRST_PAGE = 0;
+    private static final int SECOND_PAGE = 1;
+    private static final int THIRD_PAGE = 2;
+    private static final int MAX_ACCOUNT_BOOK_NAME_SIZE = 10;
 
     private ViewPager mViewPager;
     private DrawerLayout mDrawerLayout;
@@ -141,7 +144,7 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
             return false;
         });
 
-        // ------------------------------TabLayout & ViewPager----------------------------------------
+        // ------------------------------TabLayout & ViewPager--------------------------------------
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new DayFragment());
         fragmentList.add(new FlowFragment());
@@ -156,7 +159,7 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
+                if (position == FIRST_PAGE) {
                     startAnimator(fabAdd, R.animator.anim_bounce_show);
                     fabAdd.setCompatElevation(DeviceUtil.dp2Px(6.0f));
                     fabAdd.setVisibility(View.VISIBLE);
@@ -440,19 +443,19 @@ public class MainActivity extends BaseActivity<IBaseView.MainView, MainPresenter
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         switch (mViewPager.getCurrentItem()) {
-            case 0:
+            case FIRST_PAGE:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(true);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(true);
                 menu.findItem(R.id.toolbar_main_exit).setVisible(true);
                 menu.setGroupVisible(R.id.toolbar_group_flow, false);
                 break;
-            case 1:
+            case SECOND_PAGE:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
                 menu.findItem(R.id.toolbar_main_exit).setVisible(false);
                 menu.setGroupVisible(R.id.toolbar_group_flow, true);
                 break;
-            case 2:
+            case THIRD_PAGE:
                 menu.findItem(R.id.toolbar_main_editbookname).setVisible(false);
                 menu.findItem(R.id.toolbar_main_settings).setVisible(false);
                 menu.findItem(R.id.toolbar_main_exit).setVisible(false);

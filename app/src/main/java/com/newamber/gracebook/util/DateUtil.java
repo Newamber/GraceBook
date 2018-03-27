@@ -52,7 +52,7 @@ public class DateUtil {
         Context context = GraceBookApplication.getContext();
         String quarter;
         int month = calendar.get(Calendar.MONTH);
-        if (month == 0 || month == 1 || month == 2) {
+        /*if (month == 0 || month == 1 || month == 2) {
             quarter = context.getString(R.string.first_quarter);
         } else if (month == 3 || month == 4 || month == 5) {
             quarter = context.getString(R.string.second_quarter);
@@ -60,6 +60,20 @@ public class DateUtil {
             quarter = context.getString(R.string.third_quarter);
         } else {
             quarter = context.getString(R.string.fourth_quarter);
+        }*/
+        switch (month) {
+            case 0: case 1: case 2:
+                quarter = context.getString(R.string.first_quarter);
+                break;
+            case 3: case 4: case 5:
+                quarter = context.getString(R.string.second_quarter);
+                break;
+            case 6: case 7: case 8:
+                quarter = context.getString(R.string.third_quarter);
+                break;
+            default:
+                quarter = context.getString(R.string.fourth_quarter);
+                break;
         }
         return formatYearInCHS(calendar) + context.getString(R.string.comma_chs) + quarter;
     }
@@ -121,7 +135,7 @@ public class DateUtil {
                 break;
             case QUARTER:
                 int month = today.get(Calendar.MONTH);
-                if (month == 0 || month == 1 || month == 2) {
+                /*if (month == 0 || month == 1 || month == 2) {
                     today.set(Calendar.MONTH, Calendar.JANUARY);
                 } else if (month == 3 || month == 4 || month == 5) {
                     today.set(Calendar.MONTH, Calendar.APRIL);
@@ -129,6 +143,20 @@ public class DateUtil {
                     today.set(Calendar.MONTH, Calendar.JULY);
                 } else {
                     today.set(Calendar.MONTH, Calendar.OCTOBER);
+                }*/
+                switch (month) {
+                    case 0: case 1: case 2:
+                        today.set(Calendar.MONTH, Calendar.JANUARY);
+                        break;
+                    case 3: case 4: case 5:
+                        today.set(Calendar.MONTH, Calendar.APRIL);
+                        break;
+                    case 6: case 7: case 8:
+                        today.set(Calendar.MONTH, Calendar.JULY);
+                        break;
+                    default:
+                        today.set(Calendar.MONTH, Calendar.OCTOBER);
+                        break;
                 }
                 today.set(Calendar.DAY_OF_MONTH, today.getActualMinimum(Calendar.DAY_OF_MONTH));
                 break;
@@ -156,7 +184,7 @@ public class DateUtil {
                 break;
             case QUARTER:
                 int month = today.get(Calendar.MONTH);
-                if (month == 0 || month == 1 || month == 2) {
+                /*if (month == 0 || month == 1 || month == 2) {
                     today.set(Calendar.MONTH, Calendar.MARCH);
                 } else if (month == 3 || month == 4 || month == 5) {
                     today.set(Calendar.MONTH, Calendar.JUNE);
@@ -164,7 +192,22 @@ public class DateUtil {
                     today.set(Calendar.MONTH, Calendar.SEPTEMBER);
                 } else {
                     today.set(Calendar.MONTH, Calendar.DECEMBER);
+                }*/
+                switch (month) {
+                    case 0: case 1: case 2:
+                        today.set(Calendar.MONTH, Calendar.MARCH);
+                        break;
+                    case 3: case 4: case 5:
+                        today.set(Calendar.MONTH, Calendar.JUNE);
+                        break;
+                    case 6: case 7: case 8:
+                        today.set(Calendar.MONTH, Calendar.SEPTEMBER);
+                        break;
+                    default:
+                        today.set(Calendar.MONTH, Calendar.DECEMBER);
+                        break;
                 }
+
                 today.set(Calendar.DAY_OF_MONTH, today.getActualMaximum(Calendar.DAY_OF_MONTH));
                 break;
             case YEAR:

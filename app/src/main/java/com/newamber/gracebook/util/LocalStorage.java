@@ -19,8 +19,8 @@ public class LocalStorage {
 
     private LocalStorage() {}
 
-    private static SharedPreferences sp = GraceBookApplication.getContext().getSharedPreferences
-            (GlobalConstant.PREFERENCE_FILE, Context.MODE_PRIVATE);
+    private static SharedPreferences sp = GraceBookApplication.getContext()
+            .getSharedPreferences(GlobalConstant.PREFERENCE_FILE, Context.MODE_PRIVATE);
 
     private static SharedPreferences.Editor sEditor = sp.edit();
 
@@ -67,18 +67,16 @@ public class LocalStorage {
     }
 
     @NonNull
-    @SuppressWarnings("all")
     public static String getString(String key, String defaultValue) {
         return sp.getString(key, defaultValue);
     }
 
     @NonNull
-    @SuppressWarnings("all")
     public static String getString(String key, @StringRes int defaultValue) {
         return sp.getString(key, GraceBookApplication.getContext().getString(defaultValue));
     }
 
-        @NonNull
+    @NonNull
     public static Set<String> getStringSet(String key, Set<String> defaultValues) {
         return sp.getStringSet(key, defaultValues);
     }

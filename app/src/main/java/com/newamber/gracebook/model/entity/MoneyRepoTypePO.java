@@ -18,11 +18,10 @@ public class MoneyRepoTypePO extends BaseModel {
     public int id;
 
     @PrimaryKey
-    public String moneyRepoTypeName;    // defined by user, Repo is abbr of Repository
+    public String moneyRepoTypeName;               // defined by user, Repo is abbr of Repository
 
-    public @DrawableRes
-    int moneyRepoTypeImageId;           // defined by user
+    public @DrawableRes int moneyRepoTypeImageId;  // defined by user
 
-    public Double balance;              // the balance of MoneyRepo initialized by user
+    public Double balance;                         // the balance of MoneyRepo initialized by user
 
 }
